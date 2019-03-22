@@ -7,9 +7,11 @@ import com.academy.mdq.page.web.WebPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static com.academy.mdq.waits.Waits.isNotVisible;
+
 public class HomePage extends WebPage {
 
-    @FindBy (xpath = "//*[@id=\"header-container\"]/div[2]/div[8]")
+    @FindBy (css = ".site-header.site-header-secondary.site_70301.en_US")
     private WebElement navBar;
 
     private NavigationBar navigationBar;

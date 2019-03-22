@@ -3,14 +3,18 @@ package com.academy.mdq.pages;
 import com.academy.mdq.components.SearchHotelsForm;
 import com.academy.mdq.page.web.WebPage;
 import com.academy.mdq.waits.Waits;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import static com.academy.mdq.waits.Waits.isNotVisible;
 
 public class HotelsPage extends WebPage
 {
     @FindBy (id = "gcw-hotel-form-hlp")
     private WebElement searchContainer;
+
+    @FindBy(id="modalInterstitial")
+    private WebElement waitingSign;
 
     private SearchHotelsForm searchFormComponent;
 
@@ -24,9 +28,9 @@ public class HotelsPage extends WebPage
 
     public HotelsPage typeDestination (String destination)
     {
-
+        Waits.isClickable(searchFormComponent.getGoingToInput()).isEnabled();
         type(searchFormComponent.getGoingToInput(),destination);
-
+        click(searchFormComponent.getFirstOption());
         return this;
     }
 
@@ -38,6 +42,7 @@ public class HotelsPage extends WebPage
 
     public HotelsPage selectCheckOutDate (String checkOutDate)
     {
+        jsClear(searchFormComponent.getCheckOutInput());
         type(searchFormComponent.getCheckOutInput(),checkOutDate);
         return this;
     }
@@ -62,8 +67,8 @@ public class HotelsPage extends WebPage
 
     public SearchResultsPage clickOnSearchButton ()
     {
-        Waits.isVisible(searchFormComponent.getSearchButton());
         click(searchFormComponent.getSearchButton());
+        isNotVisible(waitingSign);
         return new SearchResultsPage();
     }
 

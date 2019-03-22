@@ -28,6 +28,9 @@ public class SearchHotelsForm extends WebComponent {
     @FindBy (id = "hotel-destination-hlp")
     private WebElement goingToInput;
 
+    @FindBy (id = "aria-option-0")
+    private WebElement firstOption;
+
     @FindBy (id = "hotel-checkin-hlp")
     private WebElement checkInInput;
 
@@ -58,7 +61,7 @@ public class SearchHotelsForm extends WebComponent {
     @FindBy (id = "hotel-add-car-checkbox-hlp")
     private WebElement addCarCheckBox;
 
-    @FindBy (xpath = "//*[@id=\"gcw-hotel-form-hlp\"]/div[8]/label/button")
+    @FindBy (css = "#gcw-hotel-form-hlp .search-btn-col button")
     private WebElement searchButton;
 
 
@@ -129,4 +132,6 @@ public class SearchHotelsForm extends WebComponent {
     public WebElement getSearchButton() {
         return searchButton;
     }
+
+    public WebElement getFirstOption () { return firstOption; }
 }
