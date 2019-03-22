@@ -59,4 +59,14 @@ public final class Waits {
     return getDriver().getWebDriverWait();
   }
 
+  public static boolean isNotVisible(WebElement webElement){
+    return waiting().until(invisibilityOf(webElement));
+  }
+
+  public static void waitASec() throws InterruptedException {
+      waiting().wait(1);
+  }
+
+
+
 }

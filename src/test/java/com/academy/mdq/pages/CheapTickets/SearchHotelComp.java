@@ -1,9 +1,9 @@
 package com.academy.mdq.pages.CheapTickets;
 
 import com.academy.mdq.page.web.WebComponent;
+import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import sun.awt.windows.WEmbeddedFrame;
 
 public class SearchHotelComp extends WebComponent {
 
@@ -13,6 +13,9 @@ public class SearchHotelComp extends WebComponent {
 
     @FindBy (id = "hotel-destination-hlp")
     private WebElement inputGoingTo;
+
+    @FindBy (id = "aria-option-0")
+    private WebElement clickOnFirstOption;
 
     @FindBy (id = "hotel-checkin-hlp")
     private WebElement inputCheckIn;
@@ -60,11 +63,18 @@ public class SearchHotelComp extends WebComponent {
     private WebElement headerText;
 
     @FindBy (id = "hotel-1-age-select-1-hlp")
-    private WebElement childrensYear;
+    private WebElement childrensYears;
+
+    @FindBy (id = "modalInterstitial")
+    private WebElement waitSearch;
 
 
     public WebElement getInputGoingTo() {
         return inputGoingTo;
+    }
+
+    public WebElement getClickOnFirstOption() {
+        return clickOnFirstOption;
     }
 
     public WebElement getInputCheckIn() {
@@ -127,8 +137,11 @@ public class SearchHotelComp extends WebComponent {
         return headerText;
     }
 
-    public WebElement getChildrensYear() {
-        return childrensYear;
+    public WebElement getChildrensYears() {
+        return childrensYears;
     }
 
+    public WebElement getWaitSearch() {
+        return waitSearch;
+    }
 }
