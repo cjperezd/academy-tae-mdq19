@@ -59,4 +59,8 @@ public final class Waits {
     return getDriver().getWebDriverWait();
   }
 
+  public static boolean waitForInvisibility(WebElement webElement){
+    return waiting().until(invisibilityOf(webElement));
+  }
+
 }

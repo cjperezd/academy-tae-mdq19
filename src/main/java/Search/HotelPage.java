@@ -1,72 +1,69 @@
 package Search;
 
-import com.academy.mdq.page.web.WebPage;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import Complements.Banner;
+import com.academy.mdq.waits.Waits;
 
-public class HotelPage extends WebPage {
+public class HotelPage extends Banner {
 
-        @FindBy(id = "hotel-destination-hlp")
-        private WebElement destinInput;
+  public HotelPage enterDestination(String destination) {
+    type(getDestinInput(), destination);
+    click(getDestinLi());
+    return this;
+  }
 
-        @FindBy(id = "aria-option-0")
-        private WebElement destinLi;
+  public HotelPage enterCheckIn(String dateIn) {
+    click(getCheckinInput());
+    type(getCheckinInput(), dateIn);
+    return this;
+  }
 
-        @FindBy(id = "hotel-checkin-hlp")
-        private WebElement checkinInput;
+  public HotelPage enterCheckOut(String dateOut) {
+    click(getCheckoutInput());
+    jsClear(getCheckoutInput());
+    type(getCheckoutInput(), dateOut);
+    return this;
+  }
 
-        @FindBy(id = "hotel-checkout-hlp")
-        private WebElement checkoutInput;
+  public HotelPage pickFirstDay() {
+    click(getCheckinInput());
+    getDatePicker().pickFirstDay();
+    return this;
+  }
 
-        @FindBy(id = "hotel-rooms-hlp")
-        private WebElement roomsSelect;
+  public HotelPage pickRandomLastDate() {
+    click(getCheckoutInput());
+    getDatePicker().pickRandomDay();
+    return this;
+  }
 
-        @FindBy(id = "hotel-1-adults-hlp")
-        private WebElement adultSelect;
+  public HotelPage pickDaysAfter(String date, long days) {
+    click(getCheckoutInput());
+    getDatePicker().pickDaysAfter(date, days);
+    return this;
+  }
 
-        @FindBy(id = "hotel-1-children-hlp")
-        private WebElement childrenSelect;
+  public HotelPage selectAdults(int num) {
+    selectByText(getAdultSelect(), String.valueOf(num));
+    return this;
+  }
 
-        @FindBy(id = "hotel-1-age-select-1-hlp")
-        private WebElement childrenAgeSelect;
+  public HotelPage selectChildren(int num) {
+    selectByText(getChildrenSelect(), String.valueOf(num));
+    return this;
+  }
 
-        @FindBy(css = "[data-gcw-change-submit-text='Search']")
-        private WebElement searchButton;
+  public HotelPage selectAge(int num) {
+    selectByText(getChildrenAgeSelectt(), String.valueOf(num));
+    return this;
+  }
 
-        public HotelPage enterDestination(String destination) {
-            type(destinInput, destination);
-            click(destinLi);
-            return this;
-        }
+  public HotelResults selectButton() {
+    click(getSearchButton());
+    return new HotelResults();
+  }
 
-        public HotelPage enterCheckin(String dateIn) {
-            type(checkinInput, dateIn);
-            return this;
-        }
-
-        public HotelPage enterCheckout(String dateOut) {
-            type(checkoutInput, dateOut);
-            return this;
-        }
-
-        public HotelPage selectAdults(int num) {
-            selectByText(adultSelect, String.valueOf(num));
-            return this;
-        }
-
-        public HotelPage selectChildren(int num) {
-            selectByText(childrenSelect, String.valueOf(num));
-            return this;
-        }
-
-        public HotelPage selectAge(int num) {
-            selectByText(childrenAgeSelect, String.valueOf(num));
-            return this;
-        }
-
-        public HotelResults selectButton() {
-            click(searchButton);
-            return new HotelResults();
-        }
+  public boolean isVisibleMethod() {
+    return Waits.isVisible(getDestinInput()).isDisplayed() && Waits.isVisible(getCheckinInput()).isDisplayed() && Waits.isVisible(getCheckoutInput()).isDisplayed() && Waits.isVisible(getSearchButton()).isDisplayed();
+  }
 
 }

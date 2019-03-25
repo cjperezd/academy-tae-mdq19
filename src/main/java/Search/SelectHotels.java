@@ -1,16 +1,11 @@
 package Search;
 
-import com.academy.mdq.page.web.WebPage;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import Complements.NavegationBar;
 
-public class SelectHotels extends WebPage {
-
-    @FindBy(id = "primary-header-hotel")
-    private WebElement hotelLink;
+public class SelectHotels extends NavegationBar {
 
     public HotelPage selectButton() {
-        hotelLink.click();
+        click(getHotelLink());
         return new HotelPage();
     }
 

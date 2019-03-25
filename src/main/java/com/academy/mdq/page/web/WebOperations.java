@@ -1,6 +1,7 @@
 package com.academy.mdq.page.web;
 
 import com.academy.mdq.page.CommonOperations;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -49,6 +50,12 @@ public abstract class WebOperations extends CommonOperations {
 
   private Select select(WebElement webElement) {
     return new Select(webElement);
+  }
+
+  public void jsClear(WebElement element){
+    JavascriptExecutor js = (JavascriptExecutor)getDriver().getWebDriver();
+    element.click();
+    js.executeScript("return arguments[0].value = '';", element);
   }
 
 }
