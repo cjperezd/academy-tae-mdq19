@@ -23,7 +23,7 @@ public class PageTest extends BaseTestSuite {
         Assert.assertEquals("All elements are visible", hotelPage.isVisibleMethod(), true);
 
         //enter date by click
-        HotelResults resultDest = hotelPage.enterDestination(destination).pickDaysAfter("03/30/2019", 10).selectAdults(4).selectChildren(1).selectAge(7).selectButton();
+        HotelResults resultDest = hotelPage.enterDestination(destination).enterCheckIn("03/30/2019").pickLastDay(10).selectAdults(4).selectChildren(1).selectAge(7).selectButton();
         //enter date by text
 //        HotelResults resultDest = hotelPage.enterDestination(destination).enterCheckIn("03/30/2019").enterCheckOut("04/17/2019").selectAdults(4).selectChildren(1).selectAge(7).selectButton();
 

@@ -14,6 +14,7 @@ public class HotelPage extends Banner {
   public HotelPage enterCheckIn(String dateIn) {
     click(getCheckinInput());
     type(getCheckinInput(), dateIn);
+    getDatePicker().pickFirstDayAvailable();
     return this;
   }
 
@@ -26,7 +27,7 @@ public class HotelPage extends Banner {
 
   public HotelPage pickFirstDay() {
     click(getCheckinInput());
-    getDatePicker().pickFirstDay();
+    getDatePicker().pickFirstDayAvailable();
     return this;
   }
 
@@ -36,9 +37,10 @@ public class HotelPage extends Banner {
     return this;
   }
 
-  public HotelPage pickDaysAfter(String date, long days) {
+  public HotelPage pickLastDay(int days) {
     click(getCheckoutInput());
-    getDatePicker().pickDaysAfter(date, days);
+    jsClear(getCheckoutInput());
+    getDatePicker().pickDaysAfter(days);
     return this;
   }
 
