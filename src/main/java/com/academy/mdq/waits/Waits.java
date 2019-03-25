@@ -63,10 +63,6 @@ public final class Waits {
     return waiting().until(invisibilityOf(webElement));
   }
 
-  public static void waitASec() throws InterruptedException {
-      waiting().wait(1);
-  }
-
 
 
 }

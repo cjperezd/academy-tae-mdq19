@@ -1,6 +1,8 @@
 package com.academy.mdq.pages.CheapTickets;
 
 import com.academy.mdq.page.web.WebPage;
+import com.academy.mdq.pages.CheapTickets.components.CalendarComp;
+import com.academy.mdq.pages.CheapTickets.components.SearchHotelComp;
 import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +12,11 @@ public class SearchHotelPage extends WebPage {
     @FindBy (className = "wizard-background")
     private WebElement searchHotelPage;
 
+    @FindBy (className = "datepicker-cal")
+    private WebElement wholeCalendar;
+
     SearchHotelComp searchHotelComp = new SearchHotelComp(searchHotelPage);
+    CalendarComp calendarComp = new CalendarComp(wholeCalendar);
 
 
     public SearchHotelPage writeOnHotelComp(String text) {
@@ -24,10 +30,10 @@ public class SearchHotelPage extends WebPage {
         return this;
     }
 
-    /*public CheapTickets clickOnFirstOption() {
+    public SearchHotelPage clickOnFirstOption() {
         click(searchHotelComp.getClickOnFirstOption());
         return this;
-    }*/
+    }
 
     public SearchHotelPage writeOnCheckOut(String text) {
         jsClear(searchHotelComp.getInputCheckOut());
@@ -54,6 +60,13 @@ public class SearchHotelPage extends WebPage {
         click(searchHotelComp.getSearchButton());
         return new SearchHotelPage();
     }
+
+
+    /*public void clickCheckInCalendarDay()
+    {
+        click(searchHotelComp.getInputCheckIn());
+        click(calendarComp.getCalendarDay());
+    }*/
 
 
 }

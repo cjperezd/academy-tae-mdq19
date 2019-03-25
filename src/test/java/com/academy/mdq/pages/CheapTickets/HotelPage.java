@@ -1,9 +1,12 @@
 package com.academy.mdq.pages.CheapTickets;
 
 import com.academy.mdq.page.web.WebPage;
+import com.academy.mdq.pages.CheapTickets.components.CardComponent;
+import com.academy.mdq.pages.CheapTickets.components.SecondSearchPageComp;
 import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Wait;
 
 public class HotelPage extends WebPage {
 
@@ -50,30 +53,38 @@ public class HotelPage extends WebPage {
     }
 
     public boolean cardImageVisible() {
+        Waits.isVisible(cardComponent.getCardImage());
+
         return cardComponent.getCardImage().isDisplayed();
     }
 
     public boolean cardHotelName() {
+        //Waits.isVisible(cardComponent.getHotelName());
         return cardComponent.getHotelName().isDisplayed();
     }
 
     public boolean cardCityName() {
+        //Waits.isVisible(cardComponent.getCityArea());
         return cardComponent.getCityArea().isDisplayed();
     }
 
     public boolean cardPhone() {
+        //Waits.isVisible(cardComponent.getPhone());
         return cardComponent.getPhone().isDisplayed();
     }
 
     public boolean cardStars() {
+        //Waits.isVisible(cardComponent.getStars());
         return cardComponent.getStars().isDisplayed();
     }
 
     public boolean cardRate() {
+        //Waits.isVisible(cardComponent.getRate());
         return cardComponent.getRate().isDisplayed();
     }
 
     public boolean cardNightlyClass() {
+        //Waits.isVisible(cardComponent.getActualPrice());
         return cardComponent.getActualPrice().isDisplayed();
     }
 

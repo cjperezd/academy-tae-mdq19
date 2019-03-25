@@ -1,4 +1,4 @@
-package com.academy.mdq.pages.CheapTickets;
+package com.academy.mdq.pages.CheapTickets.components;
 
 import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 public class SecondSearchPageComp extends WebComponent {
 
 
-    protected SecondSearchPageComp(WebElement container) {
+    public SecondSearchPageComp(WebElement container) {
         super(container);
     }
 

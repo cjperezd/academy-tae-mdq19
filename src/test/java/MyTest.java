@@ -1,8 +1,8 @@
 import com.academy.mdq.pages.CheapTickets.CheapTickets;
 import com.academy.mdq.pages.CheapTickets.HotelPage;
-import com.academy.mdq.pages.CheapTickets.SearchHotelComp;
 import com.academy.mdq.pages.CheapTickets.SearchHotelPage;
 import com.academy.mdq.testsuite.BaseTestSuite;
+
 import com.academy.mdq.waits.Waits;
 import org.junit.Test;
 
@@ -26,10 +26,11 @@ public class MyTest extends BaseTestSuite {
         String properties ="0";
         String hotelName = "Faena Hotel Miami Beach";
         home.clickOn();
-        searchHotelPage.writeOnHotelComp(text);
-        //home.clickOnFirstOption();
-        searchHotelPage.writeOnCheckIn(inDate)
-                .writeOnCheckOut(outDate)
+        searchHotelPage.writeOnHotelComp(text)
+                //.clickOnFirstOption()
+                .writeOnCheckIn(inDate);
+                //.clickCheckInCalendarDay();
+        searchHotelPage.writeOnCheckOut(outDate)
                 .writeAdults(adults)
                 .writeChildrens(childrens)
                 .writeChildrensYear(childrensYear)

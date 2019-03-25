@@ -1,4 +1,4 @@
-package com.academy.mdq.pages.CheapTickets;
+package com.academy.mdq.pages.CheapTickets.components;
 
 import com.academy.mdq.page.web.WebComponent;
 import com.academy.mdq.waits.Waits;
@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class SearchHotelComp extends WebComponent {
 
-    protected SearchHotelComp(WebElement container) {
+    public SearchHotelComp(WebElement container) {
         super(container);
     }
 

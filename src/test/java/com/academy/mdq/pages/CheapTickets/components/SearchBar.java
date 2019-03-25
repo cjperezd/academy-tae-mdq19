@@ -1,4 +1,4 @@
-package com.academy.mdq.pages.CheapTickets;
+package com.academy.mdq.pages.CheapTickets.components;
 
 import com.academy.mdq.page.web.WebComponent;
 import com.academy.mdq.page.web.WebPage;
@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class SearchBar extends WebComponent {
 
-    protected SearchBar(WebElement container) {
+    public SearchBar(WebElement container) {
         super(container);
     }
 
