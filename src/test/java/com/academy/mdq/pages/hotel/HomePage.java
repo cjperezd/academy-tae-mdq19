@@ -7,6 +7,8 @@ import com.academy.mdq.page.web.WebPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static com.academy.mdq.pages.commons.NavigationBar.Buttons.HOTELS;
+
 public class HomePage extends WebPage {
 
     @FindBy (css = ".site-header-secondary")
@@ -16,7 +18,7 @@ public class HomePage extends WebPage {
 
     public HotelSearch clickHotelsButton ()
     {
-        return navigationBar.clickHotelsButton();
+        return (HotelSearch) navigationBar.clickButton(HOTELS);
     }
 
 }

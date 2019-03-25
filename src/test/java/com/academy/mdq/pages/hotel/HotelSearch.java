@@ -30,15 +30,6 @@ public class HotelSearch extends WebPage
         return searchFormComponent.selectCheckOutDate(date, this);
     }
 
-    public HotelSearch selectCheckInDatePicker (String day, String month, String year){
-        //return searchFormComponent.selectCheckInDateByPicker(this);
-        return searchFormComponent.selectCheckInDateByPicker(this,day, month, year);
-    }
-
-    public HotelSearch selectCheckOutDatePicker (){
-        return searchFormComponent.selectCheckOutDateByPicker(this);
-    }
-
     public HotelSearch selectAdults (String adultsQuantity)
     {
         return searchFormComponent.selectAdults(adultsQuantity,this);

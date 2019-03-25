@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static com.academy.mdq.waits.Waits.*;
 import static com.academy.mdq.waits.Waits.isNotVisible;
 
 
@@ -42,21 +43,6 @@ public class HotelSearchForm extends WebComponent {
     @FindBy(id = "hotel-checkout-hlp")
     private WebElement checkOutInput;
 
-    //@FindBy(css = ".datepicker-cal-date.start[data-year=\"2019\"][data-month=\"5\"][data-day=\"20\"]")
-    private WebElement dayPickerCheckInButton;
-
-    //@FindBy(className = "datepicker-close-btn close btn-text")
-    //private WebElement checkInExitButton;
-
-    //@FindBy(css = ".datepicker-cal-date[data-year=\"2019\"][data-month=\"5\"][data-day=\"23\"]")
-    //private WebElement dayPickerCheckOutButton;
-
-    @FindBy (css = "tbody.datepicker-cal-dates")
-    private WebElement datePickerTable;
-
-    //@FindBy(className = "datepicker-close-btn close btn-text")
-    //private WebElement checkOutExitButton;
-
     @FindBy(id = "hotel-rooms-hlp")
     private WebElement roomsSelect;
 
@@ -78,7 +64,6 @@ public class HotelSearchForm extends WebComponent {
     @FindBy(css = "#gcw-hotel-form-hlp .search-btn-col button")
     private WebElement searchButton;
 
-    private CalendarPicker calPicker;
 
     public HotelSearchForm(WebElement container) {
         super(container);
@@ -87,8 +72,8 @@ public class HotelSearchForm extends WebComponent {
 
     public HotelSearch typeDestination (String destination, HotelSearch hotelSearch)
     {
-        Waits.isClickable(goingToInput).isEnabled();
-        Waits.isClickable(checkInInput);
+        isClickable(goingToInput).isEnabled();
+        click(goingToInput);
         type(goingToInput,destination);
         selectFirstOption();
         return hotelSearch;
@@ -100,25 +85,9 @@ public class HotelSearchForm extends WebComponent {
     }
 
 
-    public HotelSearch selectCheckInDateByPicker (HotelSearch hotelSearch, String day, String month, String year)
-    {
-        click(checkInInput);
-        //calPicker.findDay("30");
-        dayPickerCheckInButton = Drivers.getDriver().getWebDriver().findElement(By.cssSelector(".datepicker-cal-date.start[data-year=\""+ year + "\"][data-month=\"" + month + "\"][data-day=\"" + day + "\"]"));
-        click(dayPickerCheckInButton);
-        return hotelSearch;
-    }
-
     public HotelSearch selectCheckInDate (String checkInDate, HotelSearch hotelSearch)
     {
         type(checkInInput,checkInDate);
-        return hotelSearch;
-    }
-
-    public HotelSearch selectCheckOutDateByPicker (HotelSearch hotelSearch)
-    {
-        click(checkOutInput);
-        calPicker.findDay("30");
         return hotelSearch;
     }
 

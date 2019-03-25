@@ -1,10 +1,15 @@
 package com.academy.mdq.pages.hotel;
 
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.pages.PropertyResultPage;
 import com.academy.mdq.pages.commons.PopUp;
+import com.academy.mdq.pages.hotel.components.HotelResultCard;
+import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import static com.academy.mdq.waits.Waits.isNotVisible;
 import static com.academy.mdq.waits.Waits.isVisible;
@@ -27,15 +32,28 @@ public class HotelSearchResults extends WebPage {
     private WebElement waitingSign;
 
     @FindBy(id = "hotelResultTitle")
-    private WebElement propertyCountTitle;
+    private WebElement hotelResultsTitle;
 
-    @FindBy(id= "hotelResultTitle")
-    private WebElement hotelResultTitle;
+    @FindBy (className = "flex-link-wrap")
+    private List<WebElement> cardsContainer;
+
+    @FindBy (className = "neighborhoodTextLabel")
+    private Set <String> areas;
+
+    private final List<HotelResultCard> hotelResultCards = new ArrayList<>();
 
     private final PopUp popUpComponent = new PopUp(popUpContainer);
 
-    public String getPropertyTitle() {
-        return propertyCountTitle.getText();
+
+    public HotelSearchResults ()
+    {
+        super();
+        cardsContainer.forEach(card -> hotelResultCards.add(new HotelResultCard(card)));
+    }
+
+    public String getHotelResultsTitle() {
+        Waits.isVisible(hotelResultsTitle);
+        return hotelResultsTitle.getText();
     }
 
     public HotelSearchResults enterHotelName(String propertyName) {
@@ -45,19 +63,34 @@ public class HotelSearchResults extends WebPage {
         return this;
     }
 
-    public PropertyResultPage clickGoButton() {
+    public HotelSearchResults clickGoButton() {
         click(goButton);
         isNotVisible(waitingSign);
-        isVisible(hotelResultTitle);
-        return new PropertyResultPage();
+        Waits.areVisible(cardsContainer);
+        return new HotelSearchResults();
     }
 
     public String getTotalResults() {
-        return propertyCountTitle.getText().split(" ")[2];
+        return hotelResultsTitle.getText().split(" ")[2];
     }
 
-    public PropertyResultPage results(){
-      return new PropertyResultPage();
+    public Boolean areCardsFromNeighborhood(){
+
+        for(HotelResultCard card : hotelResultCards)
+        {
+            if (!areas.contains(card.getCityName()))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
+
+    public HotelResultCard selectCard(int card){
+        return hotelResultCards.get(card);
+    }
+
+
 
 }

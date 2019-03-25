@@ -39,10 +39,7 @@ public class HotelResultCard extends WebComponent {
         return hotelName.getText();
     }
 
-    public Boolean isDisplayed (WebElement cardContainer)
-    {
-        return isVisible(cardContainer).isDisplayed();
-    }
+    public String getCityName () { return cityName.getText();}
 
     public Boolean isNameEnabled ()
     {

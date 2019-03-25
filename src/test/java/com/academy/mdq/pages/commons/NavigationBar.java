@@ -2,7 +2,9 @@ package com.academy.mdq.pages.commons;
 
 
 import com.academy.mdq.page.web.WebComponent;
+import com.academy.mdq.page.web.WebPage;
 import com.academy.mdq.pages.hotel.HotelSearch;
+import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -48,10 +50,46 @@ public class NavigationBar extends WebComponent {
     @FindBy (id = "primary-header-all-in-header-shop-menu")
     private WebElement moreButton;
 
-    public HotelSearch clickHotelsButton ()
-    {
-        click(hotelsButton);
-        return new HotelSearch();
+
+    public enum Buttons {
+        HOME,VACATIONPACKAGES,HOTELS,CARS,CRUISES,EVENTTICKETS,ACTIVITIES,FLIGHTS,DEALS,MOBILE,CHEAPCASH,MORE
     }
+
+    public WebPage clickButton (Buttons buttonName)
+    {
+        switch(buttonName) {
+            case HOME:
+                break;
+            case VACATIONPACKAGES:
+                break;
+            case HOTELS:
+                click(hotelsButton);
+                return new HotelSearch();
+            case CARS:
+                break;
+            case CRUISES:
+                break;
+            case EVENTTICKETS:
+                break;
+            case ACTIVITIES:
+                break;
+            case FLIGHTS:
+                break;
+            case DEALS:
+                break;
+            case MOBILE:
+                break;
+            case CHEAPCASH:
+                break;
+            case MORE:
+                break;
+
+        }
+
+        return null;
+    }
+
+
+
 
 }

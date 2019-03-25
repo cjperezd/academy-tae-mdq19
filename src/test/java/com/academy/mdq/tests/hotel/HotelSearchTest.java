@@ -2,7 +2,6 @@ package com.academy.mdq.tests.hotel;
 
 
 import com.academy.mdq.pages.hotel.HomePage;
-import com.academy.mdq.pages.PropertyResultPage;
 import com.academy.mdq.pages.hotel.HotelSearchResults;
 import com.academy.mdq.testsuite.BaseTestSuite;
 
@@ -28,31 +27,30 @@ public class HotelSearchTest extends BaseTestSuite {
             .selectChildrenAge("7")
             .clickOnSearchButton();
 
-        assertNotEquals("0", resultsPage.getTotalResults());
-        // FIXME: Validate that every result is from an specific area inside Miami Beach
-        assertTrue(resultsPage.getPropertyTitle().contains(CITY));
+        assertTrue(resultsPage.getHotelResultsTitle().contains(CITY));
 
-        //selectOptionsHotel.selectCheckInDatePicker("20", "5", "2019");
-        //selectOptionsHotel.selectCheckOutDatePicker();
+        assertNotEquals("0", resultsPage.getTotalResults());
+
+        assertTrue(resultsPage.areCardsFromNeighborhood());
 
         resultsPage.enterHotelName("Faena Hotel Miami Beach");
 
-        PropertyResultPage propertyResults = resultsPage.clickGoButton();
+        HotelSearchResults propertyResults = resultsPage.clickGoButton();
 
-        assertTrue(propertyResults.isVisibleImage());
+        assertTrue(propertyResults.selectCard(0).isVisibleImage());
 
-        assertTrue(propertyResults.isNameEnabled());
+        assertTrue(propertyResults.selectCard(0).isNameEnabled());
 
-        assertEquals("Faena Hotel Miami Beach", propertyResults.getHotelName());
+        assertEquals("Faena Hotel Miami Beach", propertyResults.selectCard(0).getHotelName());
 
-        assertTrue(propertyResults.isVisibleCity());
+        assertTrue(propertyResults.selectCard(0).isVisibleCity());
 
-        assertTrue(propertyResults.isVisiblePhone());
+        assertTrue(propertyResults.selectCard(0).isVisiblePhone());
 
-        assertTrue(propertyResults.isVisibleStars());
+        assertTrue(propertyResults.selectCard(0).isVisibleStars());
 
-        assertTrue(propertyResults.isVisibleRate());
+        assertTrue(propertyResults.selectCard(0).isVisibleRate());
 
-        assertTrue(propertyResults.isVisibleNightlyPrice());
+        assertTrue(propertyResults.selectCard(0).isVisibleNightlyPrice());
     }
 }
