@@ -1,14 +1,11 @@
-package com.academy.mdq.pages;
+package com.academy.mdq.pages.hotel;
 
-import com.academy.mdq.components.SearchHotelsForm;
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.waits.Waits;
+import com.academy.mdq.pages.hotel.components.HotelSearchForm;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.academy.mdq.waits.Waits.isNotVisible;
-
-public class HotelsPage extends WebPage
+public class HotelSearch extends WebPage
 {
     @FindBy (id = "gcw-hotel-form-hlp")
     private WebElement searchContainer;
@@ -16,57 +13,49 @@ public class HotelsPage extends WebPage
     @FindBy(id="modalInterstitial")
     private WebElement waitingSign;
 
-    private SearchHotelsForm searchFormComponent;
+    private final HotelSearchForm searchFormComponent = new HotelSearchForm(searchContainer);
 
-    public HotelsPage ()
-    {
-        super();
-
-        searchFormComponent = new SearchHotelsForm(searchContainer);
-
-    }
-
-    public HotelsPage typeDestination (String destination)
+    public HotelSearch typeDestination (String destination)
     {
         return searchFormComponent.typeDestination(destination,this);
     }
 
-    public HotelsPage selectCheckInDate (String date)
+    public HotelSearch selectCheckInDate (String date)
     {
         return searchFormComponent.selectCheckInDate(date, this);
     }
 
-    public HotelsPage selectCheckOutDate (String date)
+    public HotelSearch selectCheckOutDate (String date)
     {
         return searchFormComponent.selectCheckOutDate(date, this);
     }
 
-    public HotelsPage selectCheckInDatePicker (String day, String month, String year){
+    public HotelSearch selectCheckInDatePicker (String day, String month, String year){
         //return searchFormComponent.selectCheckInDateByPicker(this);
         return searchFormComponent.selectCheckInDateByPicker(this,day, month, year);
     }
 
-    public HotelsPage selectCheckOutDatePicker (){
+    public HotelSearch selectCheckOutDatePicker (){
         return searchFormComponent.selectCheckOutDateByPicker(this);
     }
 
-    public  HotelsPage selectAdults (String adultsQuantity)
+    public HotelSearch selectAdults (String adultsQuantity)
     {
         return searchFormComponent.selectAdults(adultsQuantity,this);
 
     }
 
-    public  HotelsPage selectChildren (String childrenQuantity)
+    public HotelSearch selectChildren (String childrenQuantity)
     {
         return searchFormComponent.selectChildren(childrenQuantity, this);
     }
 
-    public  HotelsPage selectChildrenAge (String childrenAge)
+    public HotelSearch selectChildrenAge (String childrenAge)
     {
         return searchFormComponent.selectChildrenAge(childrenAge,this);
     }
 
-    public SearchResultsPage clickOnSearchButton ()
+    public HotelSearchResults clickOnSearchButton ()
     {
         return searchFormComponent.clickSearchButton(waitingSign);
     }

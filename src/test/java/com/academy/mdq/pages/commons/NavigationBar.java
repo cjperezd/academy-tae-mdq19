@@ -1,9 +1,8 @@
-package com.academy.mdq.components;
+package com.academy.mdq.pages.commons;
 
 
 import com.academy.mdq.page.web.WebComponent;
-import com.academy.mdq.pages.HomePage;
-import com.academy.mdq.pages.HotelsPage;
+import com.academy.mdq.pages.hotel.HotelSearch;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -49,10 +48,10 @@ public class NavigationBar extends WebComponent {
     @FindBy (id = "primary-header-all-in-header-shop-menu")
     private WebElement moreButton;
 
-    public HotelsPage clickHotelsButton ()
+    public HotelSearch clickHotelsButton ()
     {
         click(hotelsButton);
-        return new HotelsPage();
+        return new HotelSearch();
     }
 
 }

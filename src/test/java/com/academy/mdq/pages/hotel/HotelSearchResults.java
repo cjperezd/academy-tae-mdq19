@@ -1,14 +1,15 @@
-package com.academy.mdq.pages;
+package com.academy.mdq.pages.hotel;
 
-import com.academy.mdq.components.PopUp;
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.waits.Waits;
+import com.academy.mdq.pages.PropertyResultPage;
+import com.academy.mdq.pages.commons.PopUp;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.academy.mdq.waits.Waits.*;
+import static com.academy.mdq.waits.Waits.isNotVisible;
+import static com.academy.mdq.waits.Waits.isVisible;
 
-public class SearchResultsPage extends WebPage {
+public class HotelSearchResults extends WebPage {
 
     @FindBy(css = ".modal-body")
     private WebElement popUpContainer;
@@ -31,19 +32,13 @@ public class SearchResultsPage extends WebPage {
     @FindBy(id= "hotelResultTitle")
     private WebElement hotelResultTitle;
 
-    private PopUp popUpComponent;
+    private final PopUp popUpComponent = new PopUp(popUpContainer);
 
     public String getPropertyTitle() {
         return propertyCountTitle.getText();
     }
 
-    public SearchResultsPage() {
-        super();
-        popUpComponent = new PopUp(popUpContainer);
-    }
-
-    public SearchResultsPage enterHotelName(String propertyName) {
-        //popUpComponent.closePopUp(this, popUpContainer);
+    public HotelSearchResults enterHotelName(String propertyName) {
         type(searchByPropertyInput, propertyName);
         isVisible(firstOption).isEnabled();
         click(firstOption);
@@ -53,16 +48,16 @@ public class SearchResultsPage extends WebPage {
     public PropertyResultPage clickGoButton() {
         click(goButton);
         isNotVisible(waitingSign);
-        Waits.isVisible(hotelResultTitle);
+        isVisible(hotelResultTitle);
         return new PropertyResultPage();
     }
 
-    public String getPropertyQuantity() {
-        String result = propertyCountTitle.getText();
+    public String getTotalResults() {
+        return propertyCountTitle.getText().split(" ")[2];
+    }
 
-        String[] titleArray = result.split(" ");
-
-        return titleArray[2];
+    public PropertyResultPage results(){
+      return new PropertyResultPage();
     }
 
 }

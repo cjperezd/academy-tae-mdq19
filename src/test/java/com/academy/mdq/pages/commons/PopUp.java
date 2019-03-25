@@ -1,7 +1,7 @@
-package com.academy.mdq.components;
+package com.academy.mdq.pages.commons;
 
 import com.academy.mdq.page.web.WebComponent;
-import com.academy.mdq.pages.SearchResultsPage;
+import com.academy.mdq.pages.hotel.HotelSearchResults;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -22,10 +22,10 @@ public class PopUp extends WebComponent {
     private WebElement closeButton;
 
 
-    public SearchResultsPage closePopUp(SearchResultsPage searchResultsPage, WebElement popUpContainer) {
+    public HotelSearchResults closePopUp(HotelSearchResults hotelSearchResults, WebElement popUpContainer) {
         if (isVisible(popUpContainer).isDisplayed()) {
             click(closeButton);
         }
-        return searchResultsPage;
+        return hotelSearchResults;
     }
 }

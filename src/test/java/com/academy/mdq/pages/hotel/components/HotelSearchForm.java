@@ -1,9 +1,10 @@
-package com.academy.mdq.components;
+package com.academy.mdq.pages.hotel.components;
 
+import com.academy.mdq.pages.commons.CalendarPicker;
 import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.page.web.WebComponent;
-import com.academy.mdq.pages.HotelsPage;
-import com.academy.mdq.pages.SearchResultsPage;
+import com.academy.mdq.pages.hotel.HotelSearch;
+import com.academy.mdq.pages.hotel.HotelSearchResults;
 import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -12,7 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import static com.academy.mdq.waits.Waits.isNotVisible;
 
 
-public class SearchHotelsForm extends WebComponent {
+public class HotelSearchForm extends WebComponent {
 
     @FindBy(className = "wizard-tabs launch-page-title")
     private WebElement titleH1;
@@ -79,20 +80,18 @@ public class SearchHotelsForm extends WebComponent {
 
     private CalendarPicker calPicker;
 
-    public SearchHotelsForm(WebElement container) {
+    public HotelSearchForm(WebElement container) {
         super(container);
-        //calPicker = new CalendarPicker(datePickerTable);
-
     }
 
 
-    public HotelsPage typeDestination (String destination, HotelsPage hotelsPage)
+    public HotelSearch typeDestination (String destination, HotelSearch hotelSearch)
     {
         Waits.isClickable(goingToInput).isEnabled();
         Waits.isClickable(checkInInput);
         type(goingToInput,destination);
         selectFirstOption();
-        return hotelsPage;
+        return hotelSearch;
     }
 
     private void selectFirstOption ()
@@ -101,58 +100,58 @@ public class SearchHotelsForm extends WebComponent {
     }
 
 
-    public HotelsPage selectCheckInDateByPicker (HotelsPage hotelsPage, String day, String month, String year)
+    public HotelSearch selectCheckInDateByPicker (HotelSearch hotelSearch, String day, String month, String year)
     {
         click(checkInInput);
         //calPicker.findDay("30");
         dayPickerCheckInButton = Drivers.getDriver().getWebDriver().findElement(By.cssSelector(".datepicker-cal-date.start[data-year=\""+ year + "\"][data-month=\"" + month + "\"][data-day=\"" + day + "\"]"));
         click(dayPickerCheckInButton);
-        return hotelsPage;
+        return hotelSearch;
     }
 
-    public HotelsPage selectCheckInDate (String checkInDate, HotelsPage hotelsPage)
+    public HotelSearch selectCheckInDate (String checkInDate, HotelSearch hotelSearch)
     {
         type(checkInInput,checkInDate);
-        return hotelsPage;
+        return hotelSearch;
     }
 
-    public HotelsPage selectCheckOutDateByPicker (HotelsPage hotelsPage)
+    public HotelSearch selectCheckOutDateByPicker (HotelSearch hotelSearch)
     {
         click(checkOutInput);
         calPicker.findDay("30");
-        return hotelsPage;
+        return hotelSearch;
     }
 
-    public HotelsPage selectCheckOutDate (String checkOutDate, HotelsPage hotelsPage)
+    public HotelSearch selectCheckOutDate (String checkOutDate, HotelSearch hotelSearch)
     {
         jsClear(checkOutInput);
         type(checkOutInput,checkOutDate);
-        return hotelsPage;
+        return hotelSearch;
     }
 
-    public  HotelsPage selectAdults (String adultsQuantity, HotelsPage hotelsPage)
+    public HotelSearch selectAdults (String adultsQuantity, HotelSearch hotelSearch)
     {
-        type(adultsSelect,adultsQuantity);
-        return hotelsPage;
+        selectByText(adultsSelect, adultsQuantity);
+        return hotelSearch;
     }
 
-    public  HotelsPage selectChildren (String childrenQuantity, HotelsPage hotelsPage)
+    public HotelSearch selectChildren (String childrenQuantity, HotelSearch hotelSearch)
     {
-        type(childrenSelect,childrenQuantity);
-        return hotelsPage;
+        selectByText(childrenSelect, childrenQuantity);
+        return hotelSearch;
     }
 
-    public  HotelsPage selectChildrenAge (String childrenAge, HotelsPage hotelsPage)
+    public HotelSearch selectChildrenAge (String childrenAge, HotelSearch hotelSearch)
     {
-        type(childrenAgeSelect,childrenAge);
-        return hotelsPage;
+        selectByText(childrenAgeSelect, childrenAge);
+        return hotelSearch;
     }
 
-    public SearchResultsPage clickSearchButton (WebElement waitingSign)
+    public HotelSearchResults clickSearchButton (WebElement waitingSign)
     {
         click(searchButton);
         isNotVisible(waitingSign);
-        return new SearchResultsPage();
+        return new HotelSearchResults();
     }
 
 

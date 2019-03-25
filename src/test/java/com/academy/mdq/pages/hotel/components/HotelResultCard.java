@@ -1,4 +1,4 @@
-package com.academy.mdq.components;
+package com.academy.mdq.pages.hotel.components;
 
 import com.academy.mdq.page.web.WebComponent;
 import com.academy.mdq.waits.Waits;
@@ -7,11 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 import static com.academy.mdq.waits.Waits.isVisible;
 
-public class ResultCard extends WebComponent {
-
-    public ResultCard(WebElement container) {
-        super(container);
-    }
+public class HotelResultCard extends WebComponent {
 
     @FindBy (className = "hotel-thumbnail")
     private WebElement hotelImage;
@@ -34,6 +30,9 @@ public class ResultCard extends WebComponent {
     @FindBy (className = "hotel-price")
     private WebElement nightlyPrice;
 
+    public HotelResultCard(WebElement container) {
+        super(container);
+    }
 
     public String getHotelName ()
     {
