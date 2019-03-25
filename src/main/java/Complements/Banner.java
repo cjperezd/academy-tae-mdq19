@@ -18,9 +18,6 @@ public class Banner extends WebPage {
   @FindBy(id = "hotel-checkout-hlp")
   private WebElement checkoutInput;
 
-  @FindBy(id = "hotel-rooms-hlp")
-  private WebElement roomsSelect;
-
   @FindBy(id = "hotel-1-adults-hlp")
   private WebElement adultSelect;
 
@@ -52,10 +49,6 @@ public class Banner extends WebPage {
 
   public WebElement getCheckoutInput() {
     return checkoutInput;
-  }
-
-  public WebElement getRoomsSelect() {
-    return roomsSelect;
   }
 
   public WebElement getAdultSelect() {

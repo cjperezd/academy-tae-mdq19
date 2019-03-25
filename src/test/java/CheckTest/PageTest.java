@@ -25,7 +25,7 @@ public class PageTest extends BaseTestSuite {
         //enter date by click
         HotelResults resultDest = hotelPage.enterDestination(destination).enterCheckIn("03/30/2019").pickLastDay(10).selectAdults(4).selectChildren(1).selectAge(7).selectButton();
         //enter date by text
-//        HotelResults resultDest = hotelPage.enterDestination(destination).enterCheckIn("03/30/2019").enterCheckOut("04/17/2019").selectAdults(4).selectChildren(1).selectAge(7).selectButton();
+        //HotelResults resultDest = hotelPage.enterDestination(destination).enterCheckIn("03/30/2019").enterCheckOut("04/17/2019").selectAdults(4).selectChildren(1).selectAge(7).selectButton();
 
         PropertyResults resultProp = resultDest.verifyResults(destination).searchProperty("Faena").selectGo();
 

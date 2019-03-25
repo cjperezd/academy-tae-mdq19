@@ -20,10 +20,6 @@ public class PropertyResults extends ResultSidebar {
         return getHotelLi().getText().equals(property);
     }
 
-    public String getHotel() {
-       return getHotelLi().getText();
-    }
-
     public boolean isHotelLiEnable() {
         return getHotelLi().isEnabled();
     }

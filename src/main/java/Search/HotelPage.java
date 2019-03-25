@@ -11,6 +11,7 @@ public class HotelPage extends Banner {
     return this;
   }
 
+  //enter checkin manually and pick date in calendar
   public HotelPage enterCheckIn(String dateIn) {
     click(getCheckinInput());
     type(getCheckinInput(), dateIn);
@@ -18,6 +19,7 @@ public class HotelPage extends Banner {
     return this;
   }
 
+  //enter checkout manually
   public HotelPage enterCheckOut(String dateOut) {
     click(getCheckoutInput());
     jsClear(getCheckoutInput());
@@ -25,18 +27,21 @@ public class HotelPage extends Banner {
     return this;
   }
 
+  //pick first day available in calendar
   public HotelPage pickFirstDay() {
     click(getCheckinInput());
     getDatePicker().pickFirstDayAvailable();
     return this;
   }
 
+  //pick random checkout day in calendar
   public HotelPage pickRandomLastDate() {
     click(getCheckoutInput());
     getDatePicker().pickRandomDay();
     return this;
   }
 
+  //pick a number of days after the checkin
   public HotelPage pickLastDay(int days) {
     click(getCheckoutInput());
     jsClear(getCheckoutInput());
