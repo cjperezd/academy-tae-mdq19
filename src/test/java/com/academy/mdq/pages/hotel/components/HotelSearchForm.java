@@ -1,15 +1,13 @@
-package com.academy.mdq.pages.CheapTickets.components;
+package com.academy.mdq.pages.hotel.components;
 
 import com.academy.mdq.page.web.WebComponent;
-import com.academy.mdq.waits.Waits;
+import com.academy.mdq.pages.hotel.HotelSearchResult;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class SearchHotelComp extends WebComponent {
+import static com.academy.mdq.waits.Waits.isClickable;
 
-    public SearchHotelComp(WebElement container) {
-        super(container);
-    }
+public class HotelSearchForm extends WebComponent {
 
     @FindBy (id = "hotel-destination-hlp")
     private WebElement inputGoingTo;
@@ -68,80 +66,45 @@ public class SearchHotelComp extends WebComponent {
     @FindBy (id = "modalInterstitial")
     private WebElement waitSearch;
 
-
-    public WebElement getInputGoingTo() {
-        return inputGoingTo;
+    public HotelSearchForm(WebElement container) {
+        super(container);
     }
 
-    public WebElement getClickOnFirstOption() {
-        return clickOnFirstOption;
+    public HotelSearchForm typeGoingTo(String goingTo) {
+        isClickable(inputGoingTo);
+        type(inputGoingTo, goingTo);
+        return this;
     }
 
-    public WebElement getInputCheckIn() {
-        return inputCheckIn;
+    public HotelSearchForm typeCheckIn(String checkIn) {
+        type(inputCheckIn, checkIn);
+        return this;
     }
 
-    public WebElement getInputCheckOut() {
-        return inputCheckOut;
+    public HotelSearchForm typeCheckOut(String checkOut) {
+        jsClear(inputCheckOut);
+        type(inputCheckOut, checkOut);
+        return this;
     }
 
-    public WebElement getClickCalendarIn() {
-        return clickCalendarIn;
+    public HotelSearchForm selectAdults(String adults) {
+        selectByText(inputAdults, adults);
+        return this;
     }
 
-    public WebElement getClickCalendarOut() {
-        return clickCalendarOut;
+    public HotelSearchForm selectChildren(String children) {
+        selectByText(inputChildrens, children);
+        return this;
     }
 
-    public WebElement getInputRooms() {
-        return inputRooms;
+    public HotelSearchForm selectChildrenYear(String childrenYear) {
+        selectByText(childrensYears, childrenYear);
+        return this;
     }
 
-    public WebElement getInputAdults() {
-        return inputAdults;
+    public HotelSearchResult clickSearch() {
+        click(searchButton);
+        return new HotelSearchResult();
     }
 
-    public WebElement getInputChildrens() {
-        return inputChildrens;
-    }
-
-    public WebElement getClickAddAFlightCheckbox() {
-        return clickAddAFlightCheckbox;
-    }
-
-    public WebElement getClickAddCarCheckbox() {
-        return clickAddCarCheckbox;
-    }
-
-    public WebElement getSearchButton() {
-        return searchButton;
-    }
-
-    public WebElement getClickHotelOnly() {
-        return clickHotelOnly;
-    }
-
-    public WebElement getClickHotelFlight() {
-        return ClickHotelFlight;
-    }
-
-    public WebElement getClickHotelFlightCar() {
-        return clickHotelFlightCar;
-    }
-
-    public WebElement getClickHotelCar() {
-        return clickHotelCar;
-    }
-
-    public WebElement getHeaderText() {
-        return headerText;
-    }
-
-    public WebElement getChildrensYears() {
-        return childrensYears;
-    }
-
-    public WebElement getWaitSearch() {
-        return waitSearch;
-    }
 }

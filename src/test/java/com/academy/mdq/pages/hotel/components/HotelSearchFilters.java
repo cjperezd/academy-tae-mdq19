@@ -1,15 +1,10 @@
-package com.academy.mdq.pages.CheapTickets.components;
+package com.academy.mdq.pages.hotel.components;
 
 import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class SecondSearchPageComp extends WebComponent {
-
-
-    public SecondSearchPageComp(WebElement container) {
-        super(container);
-    }
+public class HotelSearchFilters extends WebComponent {
 
     @FindBy (id = "inpHotelNameMirror")
     private WebElement inputHotelName;
@@ -26,6 +21,9 @@ public class SecondSearchPageComp extends WebComponent {
     @FindBy (id = "modalInterstitial")
     private WebElement waitSearch;
 
+    public HotelSearchFilters(WebElement container) {
+        super(container);
+    }
 
     public WebElement getInputHotelName() {
 

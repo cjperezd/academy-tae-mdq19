@@ -1,9 +1,7 @@
-package com.academy.mdq.pages.CheapTickets.components;
+package com.academy.mdq.pages.common.components;
 import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import javax.xml.crypto.Data;
 
 public class CalendarComp extends WebComponent {
 
