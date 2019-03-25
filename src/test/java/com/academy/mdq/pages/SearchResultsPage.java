@@ -13,9 +13,6 @@ public class SearchResultsPage extends WebPage {
     @FindBy(css = ".modal-body")
     private WebElement popUpContainer;
 
-    @FindBy(css = ".site-content.cols-row cf")
-    private WebElement backgroundDiv;
-
     @FindBy(id = "inpHotelNameMirror")
     private WebElement searchByPropertyInput;
 
@@ -31,6 +28,9 @@ public class SearchResultsPage extends WebPage {
     @FindBy(id = "hotelResultTitle")
     private WebElement propertyCountTitle;
 
+    @FindBy(id= "hotelResultTitle")
+    private WebElement hotelResultTitle;
+
     private PopUp popUpComponent;
 
     public String getPropertyTitle() {
@@ -45,7 +45,7 @@ public class SearchResultsPage extends WebPage {
     public SearchResultsPage enterHotelName(String propertyName) {
         //popUpComponent.closePopUp(this, popUpContainer);
         type(searchByPropertyInput, propertyName);
-        isVisible(firstOption);
+        isVisible(firstOption).isEnabled();
         click(firstOption);
         return this;
     }
@@ -53,6 +53,7 @@ public class SearchResultsPage extends WebPage {
     public PropertyResultPage clickGoButton() {
         click(goButton);
         isNotVisible(waitingSign);
+        Waits.isVisible(hotelResultTitle);
         return new PropertyResultPage();
     }
 

@@ -59,4 +59,5 @@ public abstract class WebOperations extends CommonOperations {
     js.executeScript("return arguments[0].value = '';", element);
   }
 
+
 }

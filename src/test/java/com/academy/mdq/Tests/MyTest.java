@@ -21,6 +21,8 @@ public class MyTest extends BaseTestSuite {
         selectOptionsHotel.typeDestination("Miami Beach");
         selectOptionsHotel.selectCheckInDate("05/20/2019");
         selectOptionsHotel.selectCheckOutDate("05/23/2019");
+        //selectOptionsHotel.selectCheckInDatePicker("20", "5", "2019");
+        //selectOptionsHotel.selectCheckOutDatePicker();
         selectOptionsHotel.selectAdults("4");
         selectOptionsHotel.selectChildren("1");
         selectOptionsHotel.selectChildrenAge("7");

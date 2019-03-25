@@ -1,19 +1,18 @@
 package com.academy.mdq.components;
 
+import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.page.web.WebComponent;
 import com.academy.mdq.pages.HotelsPage;
 import com.academy.mdq.pages.SearchResultsPage;
 import com.academy.mdq.waits.Waits;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import static com.academy.mdq.waits.Waits.isNotVisible;
 
-public class SearchHotelsForm extends WebComponent {
 
-    public SearchHotelsForm(WebElement container) {
-        super(container);
-    }
+public class SearchHotelsForm extends WebComponent {
 
     @FindBy(className = "wizard-tabs launch-page-title")
     private WebElement titleH1;
@@ -39,14 +38,23 @@ public class SearchHotelsForm extends WebComponent {
     @FindBy(id = "hotel-checkin-hlp")
     private WebElement checkInInput;
 
-    @FindBy(className = "datepicker-close-btn close btn-text")
-    private WebElement checkInExitButton;
-
     @FindBy(id = "hotel-checkout-hlp")
     private WebElement checkOutInput;
 
-    @FindBy(className = "datepicker-close-btn close btn-text")
-    private WebElement checkOutExitButton;
+    //@FindBy(css = ".datepicker-cal-date.start[data-year=\"2019\"][data-month=\"5\"][data-day=\"20\"]")
+    private WebElement dayPickerCheckInButton;
+
+    //@FindBy(className = "datepicker-close-btn close btn-text")
+    //private WebElement checkInExitButton;
+
+    //@FindBy(css = ".datepicker-cal-date[data-year=\"2019\"][data-month=\"5\"][data-day=\"23\"]")
+    //private WebElement dayPickerCheckOutButton;
+
+    @FindBy (css = "tbody.datepicker-cal-dates")
+    private WebElement datePickerTable;
+
+    //@FindBy(className = "datepicker-close-btn close btn-text")
+    //private WebElement checkOutExitButton;
 
     @FindBy(id = "hotel-rooms-hlp")
     private WebElement roomsSelect;
@@ -69,10 +77,19 @@ public class SearchHotelsForm extends WebComponent {
     @FindBy(css = "#gcw-hotel-form-hlp .search-btn-col button")
     private WebElement searchButton;
 
+    private CalendarPicker calPicker;
+
+    public SearchHotelsForm(WebElement container) {
+        super(container);
+        //calPicker = new CalendarPicker(datePickerTable);
+
+    }
+
 
     public HotelsPage typeDestination (String destination, HotelsPage hotelsPage)
     {
         Waits.isClickable(goingToInput).isEnabled();
+        Waits.isClickable(checkInInput);
         type(goingToInput,destination);
         selectFirstOption();
         return hotelsPage;
@@ -83,9 +100,26 @@ public class SearchHotelsForm extends WebComponent {
         click(firstOption);
     }
 
+
+    public HotelsPage selectCheckInDateByPicker (HotelsPage hotelsPage, String day, String month, String year)
+    {
+        click(checkInInput);
+        //calPicker.findDay("30");
+        dayPickerCheckInButton = Drivers.getDriver().getWebDriver().findElement(By.cssSelector(".datepicker-cal-date.start[data-year=\""+ year + "\"][data-month=\"" + month + "\"][data-day=\"" + day + "\"]"));
+        click(dayPickerCheckInButton);
+        return hotelsPage;
+    }
+
     public HotelsPage selectCheckInDate (String checkInDate, HotelsPage hotelsPage)
     {
         type(checkInInput,checkInDate);
+        return hotelsPage;
+    }
+
+    public HotelsPage selectCheckOutDateByPicker (HotelsPage hotelsPage)
+    {
+        click(checkOutInput);
+        calPicker.findDay("30");
         return hotelsPage;
     }
 
