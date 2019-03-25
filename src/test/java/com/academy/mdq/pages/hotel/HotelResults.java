@@ -1,6 +1,6 @@
-package Search;
+package com.academy.mdq.pages.hotel;
 
-import Complements.ResultSidebar;
+import com.academy.mdq.pages.complements.ResultSidebar;
 import com.academy.mdq.waits.Waits;
 import org.junit.Assert;
 
@@ -30,9 +30,9 @@ public class HotelResults extends ResultSidebar {
         return this;
     }
 
-    public PropertyResults selectGo() {
+    public HotelResultCard selectGo() {
         click(getGoButton());
         Waits.waitForInvisibility(getWaitingDiv());
-        return new PropertyResults();
+        return new HotelResultCard();
     }
 }

@@ -1,13 +1,13 @@
-package Search;
+package com.academy.mdq.pages.hotel;
 
-import Complements.ResultSidebar;
+import com.academy.mdq.pages.complements.ResultSidebar;
 
 import static com.academy.mdq.waits.Waits.isVisible;
 import static com.academy.mdq.waits.Waits.waitForInvisibility;
 
-public class PropertyResults extends ResultSidebar {
+public class HotelResultCard extends ResultSidebar {
 
-    public PropertyResults waiting() {
+    public HotelResultCard waiting() {
         waitForInvisibility(getWaitingDiv());
         return this;
     }

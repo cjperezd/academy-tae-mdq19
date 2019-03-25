@@ -1,6 +1,6 @@
-package Complements;
+package com.academy.mdq.pages.complements;
 
-import Search.HotelPage;
+import com.academy.mdq.pages.hotel.HotelPage;
 import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
