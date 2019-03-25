@@ -48,5 +48,6 @@ public class MyTest extends BaseTestSuite {
         hotelPage.cardRate();
         hotelPage.cardStars();
         assertEquals(hotelName,hotelPage.getHotelTitle());
+
     }
 }

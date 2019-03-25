@@ -53,38 +53,37 @@ public class HotelPage extends WebPage {
     }
 
     public boolean cardImageVisible() {
-        Waits.isVisible(cardComponent.getCardImage());
-
+        cardIsVisible();
         return cardComponent.getCardImage().isDisplayed();
     }
 
     public boolean cardHotelName() {
-        //Waits.isVisible(cardComponent.getHotelName());
+        cardIsVisible();
         return cardComponent.getHotelName().isDisplayed();
     }
 
     public boolean cardCityName() {
-        //Waits.isVisible(cardComponent.getCityArea());
+        cardIsVisible();
         return cardComponent.getCityArea().isDisplayed();
     }
 
     public boolean cardPhone() {
-        //Waits.isVisible(cardComponent.getPhone());
+        cardIsVisible();
         return cardComponent.getPhone().isDisplayed();
     }
 
     public boolean cardStars() {
-        //Waits.isVisible(cardComponent.getStars());
+        cardIsVisible();
         return cardComponent.getStars().isDisplayed();
     }
 
     public boolean cardRate() {
-        //Waits.isVisible(cardComponent.getRate());
+        cardIsVisible();
         return cardComponent.getRate().isDisplayed();
     }
 
     public boolean cardNightlyClass() {
-        //Waits.isVisible(cardComponent.getActualPrice());
+        cardIsVisible();
         return cardComponent.getActualPrice().isDisplayed();
     }
 
@@ -98,4 +97,7 @@ public class HotelPage extends WebPage {
         click(secondSearchPageComp.getInputHotelName());
     }*/
 
+    private void cardIsVisible() {
+        Waits.isVisible(card);
+    }
 }

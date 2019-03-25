@@ -21,11 +21,13 @@ public class SearchHotelPage extends WebPage {
 
     public SearchHotelPage writeOnHotelComp(String text) {
         Waits.isClickable(searchHotelComp.getInputGoingTo());
+        searchIsVisible();
         type(searchHotelComp.getInputGoingTo(), text);
         return this;
     }
 
     public SearchHotelPage writeOnCheckIn(String text) {
+        searchIsVisible();
         type(searchHotelComp.getInputCheckIn(), text);
         return this;
     }
@@ -61,6 +63,9 @@ public class SearchHotelPage extends WebPage {
         return new SearchHotelPage();
     }
 
+    private void searchIsVisible() {
+        Waits.isVisible(searchHotelPage);
+    }
 
     /*public void clickCheckInCalendarDay()
     {
