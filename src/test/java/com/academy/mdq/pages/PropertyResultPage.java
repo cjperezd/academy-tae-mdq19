@@ -21,52 +21,46 @@ public class PropertyResultPage extends WebPage {
         resultCardComponent = new ResultCard(cardContainer);
     }
 
-    public WebElement getCardContainer() {
-        return cardContainer;
-    }
 
     public String getHotelName ()
     {
-        return resultCardComponent.getHotelName().getText();
+        return resultCardComponent.getHotelName();
     }
 
     public Boolean isDisplayed ()
     {
-        return Waits.isVisible(cardContainer).isDisplayed();
+        return resultCardComponent.isDisplayed(cardContainer);
     }
 
     public Boolean isNameEnabled ()
     {
-        return Waits.isVisible(resultCardComponent.getHotelName()).isEnabled();
+        return resultCardComponent.isNameEnabled();
     }
 
     public Boolean isVisibleImage ()
     {
-        return Waits.isVisible(resultCardComponent.getHotelImage()).isDisplayed();
+        return resultCardComponent.isVisibleImage();
     }
 
     public Boolean isVisibleCity ()
     {
-        return Waits.isVisible(resultCardComponent.getCityName()).isDisplayed();
+        return resultCardComponent.isVisibleCity();
     }
 
     public Boolean isVisiblePhone ()
     {
-        return Waits.isVisible(resultCardComponent.getHotelPhone()).isDisplayed();
+        return resultCardComponent.isVisiblePhone();
     }
 
     public Boolean isVisibleStars ()
     {
-        return Waits.isVisible(resultCardComponent.getReviewStars()).isDisplayed();
+        return resultCardComponent.isVisibleStars();
     }
 
-    public Boolean isVisibleRate ()
-    {
-        return Waits.isVisible(resultCardComponent.getHotelRate()).isDisplayed();
-    }
+    public Boolean isVisibleRate () { return resultCardComponent.isVisibleRate(); }
 
     public Boolean isVisibleNightlyPrice ()
     {
-        return Waits.isVisible(resultCardComponent.getNightlyPrice()).isDisplayed();
+        return resultCardComponent.isVisibleNightlyPrice();
     }
 }

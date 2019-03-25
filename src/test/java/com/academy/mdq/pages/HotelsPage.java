@@ -28,48 +28,39 @@ public class HotelsPage extends WebPage
 
     public HotelsPage typeDestination (String destination)
     {
-        Waits.isClickable(searchFormComponent.getGoingToInput()).isEnabled();
-        type(searchFormComponent.getGoingToInput(),destination);
-        click(searchFormComponent.getFirstOption());
-        return this;
+        return searchFormComponent.typeDestination(destination,this);
     }
 
-    public HotelsPage selectCheckInDate (String checkInDate)
+    public HotelsPage selectCheckInDate (String date)
     {
-        type(searchFormComponent.getCheckInInput(),checkInDate);
-        return this;
+        return searchFormComponent.selectCheckInDate(date, this);
     }
 
-    public HotelsPage selectCheckOutDate (String checkOutDate)
+    public HotelsPage selectCheckOutDate (String date)
     {
-        jsClear(searchFormComponent.getCheckOutInput());
-        type(searchFormComponent.getCheckOutInput(),checkOutDate);
-        return this;
+        return searchFormComponent.selectCheckOutDate(date, this);
     }
+
 
     public  HotelsPage selectAdults (String adultsQuantity)
     {
-        type(searchFormComponent.getAdultsSelect(),adultsQuantity);
-        return this;
+        return searchFormComponent.selectAdults(adultsQuantity,this);
+
     }
 
     public  HotelsPage selectChildren (String childrenQuantity)
     {
-        type(searchFormComponent.getChildrenSelect(),childrenQuantity);
-        return this;
+        return searchFormComponent.selectChildren(childrenQuantity, this);
     }
 
     public  HotelsPage selectChildrenAge (String childrenAge)
     {
-        type(searchFormComponent.getChildrenAgeSelect(),childrenAge);
-        return this;
+        return searchFormComponent.selectChildrenAge(childrenAge,this);
     }
 
     public SearchResultsPage clickOnSearchButton ()
     {
-        click(searchFormComponent.getSearchButton());
-        isNotVisible(waitingSign);
-        return new SearchResultsPage();
+        return searchFormComponent.clickSearchButton(waitingSign);
     }
 
 }

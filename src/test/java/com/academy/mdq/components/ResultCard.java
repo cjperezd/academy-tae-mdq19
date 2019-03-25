@@ -1,8 +1,11 @@
 package com.academy.mdq.components;
 
 import com.academy.mdq.page.web.WebComponent;
+import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import static com.academy.mdq.waits.Waits.isVisible;
 
 public class ResultCard extends WebComponent {
 
@@ -31,31 +34,49 @@ public class ResultCard extends WebComponent {
     @FindBy (className = "hotel-price")
     private WebElement nightlyPrice;
 
-    public WebElement getHotelImage() {
-        return hotelImage;
+
+    public String getHotelName ()
+    {
+        return hotelName.getText();
     }
 
-    public WebElement getHotelName() {
-        return hotelName;
+    public Boolean isDisplayed (WebElement cardContainer)
+    {
+        return isVisible(cardContainer).isDisplayed();
     }
 
-    public WebElement getCityName() {
-        return cityName;
+    public Boolean isNameEnabled ()
+    {
+        return isVisible(hotelName).isEnabled();
     }
 
-    public WebElement getHotelPhone() {
-        return hotelPhone;
+    public Boolean isVisibleImage ()
+    {
+        return isVisible(hotelImage).isDisplayed();
     }
 
-    public WebElement getReviewStars() {
-        return reviewStars;
+    public Boolean isVisibleCity ()
+    {
+        return isVisible(cityName).isDisplayed();
     }
 
-    public WebElement getHotelRate() {
-        return hotelRate;
+    public Boolean isVisiblePhone ()
+    {
+        return isVisible(hotelPhone).isDisplayed();
     }
 
-    public WebElement getNightlyPrice() {
-        return nightlyPrice;
+    public Boolean isVisibleStars ()
+    {
+        return isVisible(reviewStars).isDisplayed();
+    }
+
+    public Boolean isVisibleRate ()
+    {
+        return isVisible(hotelRate).isDisplayed();
+    }
+
+    public Boolean isVisibleNightlyPrice ()
+    {
+        return isVisible(nightlyPrice).isDisplayed();
     }
 }

@@ -16,7 +16,7 @@ public class MyTest extends BaseTestSuite {
     public void OneTest() {
         HomePage homePage = new HomePage();
 
-        HotelsPage selectOptionsHotel = homePage.clickOnButton();
+        HotelsPage selectOptionsHotel = homePage.clickHotelsButton();
 
         selectOptionsHotel.typeDestination("Miami Beach");
         selectOptionsHotel.selectCheckInDate("05/20/2019");
@@ -36,7 +36,6 @@ public class MyTest extends BaseTestSuite {
         Assert.assertNotEquals("0", resultsPage.getPropertyQuantity());
 
         Assert.assertTrue(resultsPage.getPropertyTitle().contains("Miami Beach"));
-
 
         Assert.assertTrue(propertyResults.isDisplayed());
 

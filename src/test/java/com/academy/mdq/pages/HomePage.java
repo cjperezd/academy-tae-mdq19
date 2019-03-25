@@ -25,10 +25,9 @@ public class HomePage extends WebPage {
     }
 
 
-    public HotelsPage clickOnButton ()
+    public HotelsPage clickHotelsButton ()
     {
-        click(navigationBar.getHotelsButton());
-        return new HotelsPage();
+        return navigationBar.clickHotelsButton();
     }
 
 }

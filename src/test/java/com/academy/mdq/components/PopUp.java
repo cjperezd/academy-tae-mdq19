@@ -1,8 +1,11 @@
 package com.academy.mdq.components;
 
 import com.academy.mdq.page.web.WebComponent;
+import com.academy.mdq.pages.SearchResultsPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import static com.academy.mdq.waits.Waits.isVisible;
 
 public class PopUp extends WebComponent {
     public PopUp(WebElement container) {
@@ -18,15 +21,11 @@ public class PopUp extends WebComponent {
     @FindBy (id="modalCloseButton")
     private WebElement closeButton;
 
-    public WebElement getCopyTextButton() {
-        return copyTextButton;
-    }
 
-    public WebElement getClickTermsButton() {
-        return clickTermsButton;
-    }
-
-    public WebElement getCloseButton() {
-        return closeButton;
+    public SearchResultsPage closePopUp(SearchResultsPage searchResultsPage, WebElement popUpContainer) {
+        if (isVisible(popUpContainer).isDisplayed()) {
+            click(closeButton);
+        }
+        return searchResultsPage;
     }
 }
