@@ -1,13 +1,14 @@
 package com.academy.mdq.pages.hotel.components;
 
 import com.academy.mdq.page.web.WebComponent;
+import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class HotelSearchCard extends WebComponent {
+import java.util.LinkedList;
+import java.util.List;
 
-  @FindBy(id = "bcol")
-  private WebElement ContainerCards;
+public class HotelSearchCard extends WebComponent {
 
   @FindBy(className = "hotel-thumbnail")
   private WebElement cardImage;
@@ -34,35 +35,38 @@ public class HotelSearchCard extends WebComponent {
     super(container);
   }
 
-  public WebElement getContainerCards() {
-    return ContainerCards;
+  public boolean isCardVisible() {
+    return cardImage.isDisplayed();
   }
 
-  public WebElement getCardImage() {
-    return cardImage;
+  public boolean cardHotelName() {
+    return hotelName.isDisplayed();
   }
 
-  public WebElement getHotelName() {
-    return hotelName;
+  public boolean cardCityName() {
+    return cityArea.isDisplayed();
   }
 
-  public WebElement getPhone() {
-    return phone;
+  public boolean cardPhone() {
+    return phone.isDisplayed();
   }
 
-  public WebElement getStars() {
-    return stars;
+  public boolean cardStars() {
+    return stars.isDisplayed();
   }
 
-  public WebElement getRate() {
-    return rate;
+  public boolean cardRate() {
+    return rate.isDisplayed();
   }
 
-  public WebElement getActualPrice() {
-    return actualPrice;
+  public boolean cardNightlyClass() {
+    return actualPrice.isDisplayed();
   }
 
-  public WebElement getCityArea() {
-    return cityArea;
+
+  public String getHotelTitle() {
+    String arr;
+    return arr = hotelName.getText();
   }
+
 }

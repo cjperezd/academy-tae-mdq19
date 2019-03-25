@@ -1,6 +1,8 @@
 package com.academy.mdq.pages.hotel.components;
-
 import com.academy.mdq.page.web.WebComponent;
+import com.academy.mdq.pages.hotel.HotelSearch;
+import com.academy.mdq.pages.hotel.HotelSearchResult;
+import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -25,27 +27,29 @@ public class HotelSearchFilters extends WebComponent {
         super(container);
     }
 
-    public WebElement getInputHotelName() {
-
-        return inputHotelName;
+    public HotelSearchFilters typeHotelName(String hotelName) {
+        type(inputHotelName, hotelName);
+        return this;
     }
 
-    public WebElement getHotelResultTitle() {
-
-        return hotelResultTitle;
+    public HotelSearch clickHotelSearchButton() {
+        click(hotelNameButton);
+        return new HotelSearch();
     }
 
-    public WebElement getHotelNameButton() {
-
-        return hotelNameButton;
+    public String getTotalResults() {
+        Waits.isVisible(hotelResultTitle);
+        String arr = hotelResultTitle.getText().split(" ")[2];
+        return arr;
     }
 
-    public WebElement getClickFirstOptionFae() {
-
-        return clickFirstOptionFae;
+    public String getAllWords() {
+        String arr;
+        return arr = hotelResultTitle.getText();
     }
 
-    public WebElement getWaitSearch() {
-        return waitSearch;
+    public HotelSearch clickOnFirstOptionFae() {
+        click(clickFirstOptionFae);
+        return new HotelSearch();
     }
 }

@@ -1,95 +1,104 @@
 package com.academy.mdq.pages.hotel;
 
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.pages.common.components.PopUpClass;
 import com.academy.mdq.pages.hotel.components.HotelSearchCard;
 import com.academy.mdq.pages.hotel.components.HotelSearchFilters;
 import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class HotelSearchResult extends WebPage {
+
+
+  @FindBy(id = "bcol")
+  private WebElement wrapAll;
+
+  @FindBy(className = "flex-link-wrap ")
+  private List<WebElement> cardsContainer;
+
+  @FindBy(className = "flex-link-wrap ")
+  private WebElement cardsForConstructor;
+
 
   @FindBy(id = "searchForm")
   private WebElement searchSecondPage;
 
-  @FindBy(className = "flex-link-wrap ")
-  private WebElement card;
-
   @FindBy(className = "modal-body")
   private WebElement popUpComp;
 
-  private final HotelSearchFilters hotelSearchFilters = new HotelSearchFilters(searchSecondPage);
-  private final HotelSearchCard hotelSearchCard = new HotelSearchCard(card);
-  private final PopUpClass popUpClass = new PopUpClass(popUpComp);
 
-  public HotelSearchResult writeHotelName(String hotelName) {
-    type(hotelSearchFilters.getInputHotelName(), hotelName);
-    return this;
+  private final HotelSearchFilters hotelSearchFilters = new HotelSearchFilters(searchSecondPage);
+  private final HotelSearchCard hotelSearchCard = new HotelSearchCard(cardsForConstructor);
+
+
+  private List<HotelSearchCard> listOfCards = new ArrayList<>();
+
+
+  public List<HotelSearchCard> initializer() {
+    cardsContainer.forEach(card -> listOfCards.add(new HotelSearchCard(card)));
+    return listOfCards;
   }
 
-  public HotelSearchResult clickHotelSearchButton() {
-    click(hotelSearchFilters.getHotelNameButton());
-    return new HotelSearchResult();
+  public HotelSearchFilters typeHotelName(String hotelName) {
+    return hotelSearchFilters.typeHotelName(hotelName);
+  }
+
+  public HotelSearch clickHotelSearchButton() {
+    return hotelSearchFilters.clickHotelSearchButton();
   }
 
   public String getTotalResults() {
-    return hotelSearchFilters.getHotelResultTitle().getText().split(" ")[2];
+    return hotelSearchFilters.getTotalResults();
   }
 
   public String getAllWords() {
-    String arr;
-    return arr = hotelSearchFilters.getHotelResultTitle().getText();
+    return hotelSearchFilters.getAllWords();
   }
 
-  public HotelSearchResult clickOnFirstOptionFae() {
-    click(hotelSearchFilters.getClickFirstOptionFae());
-    return new HotelSearchResult();
+  public HotelSearch clickOnFirstOptionFae() {
+    return hotelSearchFilters.clickOnFirstOptionFae();
   }
 
   public boolean isCardVisible() {
-    Waits.isVisible(hotelSearchCard.getCardImage());
-    return hotelSearchCard.getCardImage().isDisplayed();
+    isVisibleCard();
+    return hotelSearchCard.isCardVisible();
   }
 
   public boolean cardHotelName() {
-    //Waits.isVisible(hotelSearchCard.getHotelName());
-    return hotelSearchCard.getHotelName().isDisplayed();
+    return hotelSearchCard.cardHotelName();
   }
 
   public boolean cardCityName() {
-    //Waits.isVisible(hotelSearchCard.getCityArea());
-    return hotelSearchCard.getCityArea().isDisplayed();
+    return hotelSearchCard.cardCityName();
   }
 
   public boolean cardPhone() {
-    //Waits.isVisible(hotelSearchCard.getPhone());
-    return hotelSearchCard.getPhone().isDisplayed();
+    return hotelSearchCard.cardPhone();
   }
 
   public boolean cardStars() {
-    //Waits.isVisible(hotelSearchCard.getStars());
-    return hotelSearchCard.getStars().isDisplayed();
+    return hotelSearchCard.cardStars();
   }
 
   public boolean cardRate() {
-    //Waits.isVisible(hotelSearchCard.getRate());
-    return hotelSearchCard.getRate().isDisplayed();
+    return hotelSearchCard.cardRate();
   }
 
   public boolean cardNightlyClass() {
-    //Waits.isVisible(hotelSearchCard.getActualPrice());
-    return hotelSearchCard.getActualPrice().isDisplayed();
+    return hotelSearchCard.cardNightlyClass();
   }
 
 
   public String getHotelTitle() {
-    String arr;
-    return arr = hotelSearchCard.getHotelName().getText();
+    isVisibleCard();
+    return hotelSearchCard.getHotelTitle();
   }
 
-     /*public void clickClosePopUp() {
-        click(hotelSearchFilters.getInputHotelName());
-    }*/
-
+  private void isVisibleCard(){
+    Waits.isVisible(wrapAll);
+  }
 }
