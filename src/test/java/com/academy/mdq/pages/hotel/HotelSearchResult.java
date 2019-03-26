@@ -8,21 +8,26 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 public class HotelSearchResult extends WebPage {
-
 
   @FindBy(id = "bcol")
   private WebElement wrapAll;
 
-  @FindBy(className = "flex-link-wrap ")
+  @FindBy (id = "hotelNameGoBtn")
+  private WebElement hotelNameButton;
+
+  @FindBy(className = "flex-link-wrap")
   private List<WebElement> cardsContainer;
 
-  @FindBy(className = "flex-link-wrap ")
-  private WebElement cardsForConstructor;
-
+  @FindBy(css = ".neighborhood.secondary ")
+  private List<WebElement> areaOfCity;
 
   @FindBy(id = "searchForm")
   private WebElement searchSecondPage;
@@ -32,23 +37,27 @@ public class HotelSearchResult extends WebPage {
 
 
   private final HotelSearchFilters hotelSearchFilters = new HotelSearchFilters(searchSecondPage);
-  private final HotelSearchCard hotelSearchCard = new HotelSearchCard(cardsForConstructor);
 
 
   private List<HotelSearchCard> listOfCards = new ArrayList<>();
+  private Set<String> areas = new HashSet<>();
 
 
-  public List<HotelSearchCard> initializer() {
+  public HotelSearchResult() {
+    super();
+  }
+
+  public List<HotelSearchCard> getCardsOnList(){
     cardsContainer.forEach(card -> listOfCards.add(new HotelSearchCard(card)));
     return listOfCards;
   }
 
-  public HotelSearchFilters typeHotelName(String hotelName) {
-    return hotelSearchFilters.typeHotelName(hotelName);
+  public Set<String> getAreas(){
+    return this.areaOfCity.stream().map(area -> area.getText()).collect(toSet());
   }
 
-  public HotelSearch clickHotelSearchButton() {
-    return hotelSearchFilters.clickHotelSearchButton();
+  public HotelSearchFilters typeHotelName(String hotelName) {
+    return hotelSearchFilters.typeHotelName(hotelName);
   }
 
   public String getTotalResults() {
@@ -63,42 +72,16 @@ public class HotelSearchResult extends WebPage {
     return hotelSearchFilters.clickOnFirstOptionFae();
   }
 
-  public boolean isCardVisible() {
-    isVisibleCard();
-    return hotelSearchCard.isCardVisible();
+  public HotelSearchResult clickHotelSearchButton() {
+    click(hotelNameButton);
+    return new HotelSearchResult();
   }
 
-  public boolean cardHotelName() {
-    return hotelSearchCard.cardHotelName();
+  public HotelSearchCard selectACard(int index){
+    return listOfCards.get(index);
   }
 
-  public boolean cardCityName() {
-    return hotelSearchCard.cardCityName();
-  }
-
-  public boolean cardPhone() {
-    return hotelSearchCard.cardPhone();
-  }
-
-  public boolean cardStars() {
-    return hotelSearchCard.cardStars();
-  }
-
-  public boolean cardRate() {
-    return hotelSearchCard.cardRate();
-  }
-
-  public boolean cardNightlyClass() {
-    return hotelSearchCard.cardNightlyClass();
-  }
-
-
-  public String getHotelTitle() {
-    isVisibleCard();
-    return hotelSearchCard.getHotelTitle();
-  }
-
-  private void isVisibleCard(){
-    Waits.isVisible(wrapAll);
+  public boolean areAreasInTheCards(){
+    return listOfCards.stream().allMatch(card -> getAreas().contains(card.getCityName()));
   }
 }

@@ -14,9 +14,6 @@ public class HotelSearchFilters extends WebComponent {
     @FindBy (className = "section-header-main")
     private WebElement hotelResultTitle;
 
-    @FindBy (id = "hotelNameGoBtn")
-    private WebElement hotelNameButton;
-
     @FindBy (id = "aria-option-0")
     private WebElement clickFirstOptionFae;
 
@@ -30,11 +27,6 @@ public class HotelSearchFilters extends WebComponent {
     public HotelSearchFilters typeHotelName(String hotelName) {
         type(inputHotelName, hotelName);
         return this;
-    }
-
-    public HotelSearch clickHotelSearchButton() {
-        click(hotelNameButton);
-        return new HotelSearch();
     }
 
     public String getTotalResults() {

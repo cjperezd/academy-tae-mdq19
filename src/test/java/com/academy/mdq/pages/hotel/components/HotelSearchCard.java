@@ -4,9 +4,11 @@ import com.academy.mdq.page.web.WebComponent;
 import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Wait;
 
-import java.util.LinkedList;
 import java.util.List;
+
+import static com.academy.mdq.waits.Waits.isVisible;
 
 public class HotelSearchCard extends WebComponent {
 
@@ -28,14 +30,18 @@ public class HotelSearchCard extends WebComponent {
   @FindBy(className = "hotel-price")
   private WebElement actualPrice;
 
-  @FindBy(css = ".neighborhood.secondary")
+  @FindBy (css = ".neighborhood.secondary")
   private WebElement cityArea;
+
+  @FindBy (id = "modalInterstitial")
+  private WebElement updatingSearch;
 
   public HotelSearchCard(WebElement container) {
     super(container);
   }
 
-  public boolean isCardVisible() {
+
+  public boolean isImageVisible() {
     return cardImage.isDisplayed();
   }
 
@@ -63,10 +69,13 @@ public class HotelSearchCard extends WebComponent {
     return actualPrice.isDisplayed();
   }
 
-
   public String getHotelTitle() {
-    String arr;
-    return arr = hotelName.getText();
+    Waits.isNotVisible(updatingSearch);
+    return hotelName.getText();
+  }
+
+  public String getCityName(){
+    return cityArea.getText();
   }
 
 }

@@ -1,10 +1,9 @@
 package com.academy.mdq.tests.hotel;
 
 import com.academy.mdq.pages.CheapTicketsHome;
-import com.academy.mdq.pages.hotel.HotelSearchResult;
 import com.academy.mdq.pages.hotel.HotelSearch;
+import com.academy.mdq.pages.hotel.HotelSearchResult;
 import com.academy.mdq.testsuite.BaseTestSuite;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -23,33 +22,39 @@ public class HotelSearchTest extends BaseTestSuite {
     CheapTicketsHome home = new CheapTicketsHome();
     HotelSearch hotelSearch = (HotelSearch) home.clickOn(HOTEL);
     HotelSearchResult hotelSearchResult = hotelSearch.typeGoingTo(CITY)
-        .typeCheckIn("10/05/2019")
-        .typeCheckOut("10/15/2019")
-        .selectAdults("4")
-        .selectChildren("1")
-        .selectChildrenYear("7")
-        .clickSearch();
+            .typeCheckIn("10/05/2019")
+            .typeCheckOut("10/15/2019")
+            .selectAdults("4")
+            .selectChildren("1")
+            .selectChildrenYear("7")
+            .clickSearch();
 
 
     assertNotEquals("0", hotelSearchResult.getTotalResults());
-    // TODO Validate results card are all for Miami Beach
-    hotelSearchResult.initializer();
-    System.out.println("Size: "+hotelSearchResult.initializer().size());
-
+    hotelSearchResult.getCardsOnList();
+    hotelSearchResult.getAreas();
+    assertTrue("All are present in all cards", hotelSearchResult.areAreasInTheCards());
     hotelSearchResult.typeHotelName("Faena");
     assertTrue(hotelSearchResult.getAllWords(), hotelSearchResult.getAllWords().contains(CITY));
 
+
+
     hotelSearchResult.clickOnFirstOptionFae();
     hotelSearchResult.clickHotelSearchButton();
+    hotelSearchResult.getAreas();
+    hotelSearchResult.getCardsOnList();
 
-    assertTrue(hotelSearchResult.isCardVisible());
-    assertTrue(hotelSearchResult.cardCityName());
-    assertTrue(hotelSearchResult.cardHotelName());
-    assertTrue(hotelSearchResult.cardNightlyClass());
-    assertTrue(hotelSearchResult.cardPhone());
-    assertTrue(hotelSearchResult.cardRate());
-    assertTrue(hotelSearchResult.cardStars());
+    //hotelSearchResult.setCardsOnList();
+    //hotelSearchResult.getAreas();
 
-    assertEquals("Faena Hotel Miami Beach", hotelSearchResult.getHotelTitle());
+    assertTrue(hotelSearchResult.selectACard(0).isImageVisible());
+    assertTrue(hotelSearchResult.selectACard(0).cardCityName());
+    assertTrue(hotelSearchResult.selectACard(0).cardHotelName());
+    assertTrue(hotelSearchResult.selectACard(0).cardNightlyClass());
+    assertTrue(hotelSearchResult.selectACard(0).cardPhone());
+    assertTrue(hotelSearchResult.selectACard(0).cardRate());
+    assertTrue(hotelSearchResult.selectACard(0).cardStars());
+
+    assertEquals("Faena Hotel Miami Beach", hotelSearchResult.selectACard(0).getHotelTitle());
   }
 }
