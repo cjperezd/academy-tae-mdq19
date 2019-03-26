@@ -1,16 +1,13 @@
 package com.academy.mdq.pages.hotel.components;
 
-import com.academy.mdq.pages.commons.CalendarPicker;
-import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.page.web.WebComponent;
+import com.academy.mdq.pages.commons.CalendarPicker;
 import com.academy.mdq.pages.hotel.HotelSearch;
 import com.academy.mdq.pages.hotel.HotelSearchResults;
-import com.academy.mdq.waits.Waits;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.academy.mdq.waits.Waits.*;
+import static com.academy.mdq.waits.Waits.isClickable;
 import static com.academy.mdq.waits.Waits.isNotVisible;
 
 
@@ -40,6 +37,9 @@ public class HotelSearchForm extends WebComponent {
     @FindBy(id = "hotel-checkin-hlp")
     private WebElement checkInInput;
 
+    @FindBy(css = ".datepicker-dropdown .datepicker-cal")
+    private WebElement calendarContainer;
+
     @FindBy(id = "hotel-checkout-hlp")
     private WebElement checkOutInput;
 
@@ -64,60 +64,64 @@ public class HotelSearchForm extends WebComponent {
     @FindBy(css = "#gcw-hotel-form-hlp .search-btn-col button")
     private WebElement searchButton;
 
+    private CalendarPicker calendar = new CalendarPicker(calendarContainer);
+
 
     public HotelSearchForm(WebElement container) {
         super(container);
     }
 
-
-    public HotelSearch typeDestination (String destination, HotelSearch hotelSearch)
-    {
+    public HotelSearch typeDestination(String destination, HotelSearch hotelSearch) {
         isClickable(goingToInput).isEnabled();
         click(goingToInput);
-        type(goingToInput,destination);
+        type(goingToInput, destination);
         selectFirstOption();
         return hotelSearch;
     }
 
-    private void selectFirstOption ()
-    {
+    private void selectFirstOption() {
         click(firstOption);
     }
 
 
-    public HotelSearch selectCheckInDate (String checkInDate, HotelSearch hotelSearch)
-    {
-        type(checkInInput,checkInDate);
+    public HotelSearch selectCheckInDate(String checkInDate, HotelSearch hotelSearch) {
+        type(checkInInput, checkInDate);
         return hotelSearch;
     }
 
-    public HotelSearch selectCheckOutDate (String checkOutDate, HotelSearch hotelSearch)
-    {
+    public HotelSearch selectCheckOutDate(String checkOutDate, HotelSearch hotelSearch) {
         jsClear(checkOutInput);
-        type(checkOutInput,checkOutDate);
+        type(checkOutInput, checkOutDate);
         return hotelSearch;
     }
 
-    public HotelSearch selectAdults (String adultsQuantity, HotelSearch hotelSearch)
-    {
+
+    public HotelSearch clickCheckInInput(HotelSearch hotelSearch) {
+        click(checkInInput);
+        return hotelSearch;
+    }
+
+    public HotelSearch clickCheckOutInput(HotelSearch hotelSearch) {
+        click(checkInInput);
+        return hotelSearch;
+    }
+
+    public HotelSearch selectAdults(String adultsQuantity, HotelSearch hotelSearch) {
         selectByText(adultsSelect, adultsQuantity);
         return hotelSearch;
     }
 
-    public HotelSearch selectChildren (String childrenQuantity, HotelSearch hotelSearch)
-    {
+    public HotelSearch selectChildren(String childrenQuantity, HotelSearch hotelSearch) {
         selectByText(childrenSelect, childrenQuantity);
         return hotelSearch;
     }
 
-    public HotelSearch selectChildrenAge (String childrenAge, HotelSearch hotelSearch)
-    {
+    public HotelSearch selectChildrenAge(String childrenAge, HotelSearch hotelSearch) {
         selectByText(childrenAgeSelect, childrenAge);
         return hotelSearch;
     }
 
-    public HotelSearchResults clickSearchButton (WebElement waitingSign)
-    {
+    public HotelSearchResults clickSearchButton(WebElement waitingSign) {
         click(searchButton);
         isNotVisible(waitingSign);
         return new HotelSearchResults();

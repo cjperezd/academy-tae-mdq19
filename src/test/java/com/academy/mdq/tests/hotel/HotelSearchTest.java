@@ -16,12 +16,13 @@ public class HotelSearchTest extends BaseTestSuite {
     private static final String CITY = "Miami Beach";
 
     @Test
-    public void OneTest() {
+    public void exercise1() {
         HotelSearchResults resultsPage = new HomePage()
             .clickHotelsButton()
             .typeDestination(CITY)
-            .selectCheckInDate("05/20/2019")
-            .selectCheckOutDate("05/23/2019")
+            .selectCheckInDate("3/26/2019")
+            //.pickCheckInDate("3/26/2019")
+            .selectCheckOutDate("4/12/2019")
             .selectAdults("4")
             .selectChildren("1")
             .selectChildrenAge("7")

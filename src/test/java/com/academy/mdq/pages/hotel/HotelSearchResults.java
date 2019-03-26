@@ -9,10 +9,8 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import static com.academy.mdq.waits.Waits.isNotVisible;
-import static com.academy.mdq.waits.Waits.isVisible;
+import static com.academy.mdq.waits.Waits.*;
 
 public class HotelSearchResults extends WebPage {
 
@@ -28,26 +26,30 @@ public class HotelSearchResults extends WebPage {
     @FindBy(css = ".hotelNameFilterBtn.submitHotelName")
     private WebElement goButton;
 
-    @FindBy(id="modalInterstitial")
+    @FindBy(id = "modalInterstitial")
     private WebElement waitingSign;
 
     @FindBy(id = "hotelResultTitle")
     private WebElement hotelResultsTitle;
 
-    @FindBy (className = "flex-link-wrap")
+    @FindBy(className = "flex-link-wrap")
     private List<WebElement> cardsContainer;
 
-    @FindBy (className = "neighborhoodTextLabel")
-    private Set <String> areas;
+    @FindBy(className = "neighborhoodTextLabel")
+    private List<WebElement> areas;
+
+    @FindBy (css = "#neighborhoodContainer .more:not(.visuallyhidden)")
+    private WebElement showMoreButton;
 
     private final List<HotelResultCard> hotelResultCards = new ArrayList<>();
 
     private final PopUp popUpComponent = new PopUp(popUpContainer);
 
+    private List<String> areasNames = new ArrayList<>();
 
-    public HotelSearchResults ()
-    {
+    public HotelSearchResults() {
         super();
+        areVisible(cardsContainer);
         cardsContainer.forEach(card -> hotelResultCards.add(new HotelResultCard(card)));
     }
 
@@ -66,7 +68,7 @@ public class HotelSearchResults extends WebPage {
     public HotelSearchResults clickGoButton() {
         click(goButton);
         isNotVisible(waitingSign);
-        Waits.areVisible(cardsContainer);
+        areVisible(cardsContainer);
         return new HotelSearchResults();
     }
 
@@ -74,23 +76,27 @@ public class HotelSearchResults extends WebPage {
         return hotelResultsTitle.getText().split(" ")[2];
     }
 
-    public Boolean areCardsFromNeighborhood(){
-
-        for(HotelResultCard card : hotelResultCards)
-        {
-            if (!areas.contains(card.getCityName()))
-            {
-                return false;
-            }
+    public void getAreaNames ()
+    {
+        clickShowMore();
+        for (WebElement area : areas) {
+            areasNames.add(area.getText());
         }
-
-        return true;
     }
 
-    public HotelResultCard selectCard(int card){
+    public boolean areCardsFromNeighborhood() {
+        areVisible(cardsContainer);
+        getAreaNames();
+        return hotelResultCards.stream().allMatch(card -> areasNames.contains(card.getCityName()));
+    }
+
+    public HotelResultCard selectCard(int card) {
         return hotelResultCards.get(card);
     }
 
-
+    public void clickShowMore ()
+    {
+        click(showMoreButton);
+    }
 
 }

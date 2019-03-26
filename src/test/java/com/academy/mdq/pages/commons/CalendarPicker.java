@@ -1,42 +1,49 @@
 package com.academy.mdq.pages.commons;
 
 import com.academy.mdq.page.web.WebComponent;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class CalendarPicker extends WebComponent {
 
-    @FindBy (className = "datepicker-close")
+    @FindBy(className = "datepicker-close")
     private WebElement datePickerCloseButton;
 
-    private List<WebElement> columns;
+    @FindBy(className = "datepicker-cal-month")
+    private List<WebElement> calendarMonthContainers;
 
-    protected CalendarPicker(WebElement container) {
+    @FindBy(className = "datepicker-prev")
+    private WebElement prevButton;
+
+    @FindBy(className = "datepicker-next")
+    private WebElement nextButton;
+
+    private List<CalendarMonth> calendarsComponents;
+
+    public CalendarPicker(WebElement container) {
         super(container);
-
-        columns = container.findElements(By.tagName("td"));
     }
 
-    public void findDay (String day)
-    {
-        for (WebElement days : columns)
-        {
-            if (days.getText().equals(day))
-            {
-                click(days.findElement(By.linkText(day)));
-                closeCalendar();
-                break;
-            }
-        }
+    private void clickNext() {
+        click(nextButton);
     }
 
-    private void closeCalendar ()
-    {
-           click(datePickerCloseButton);
+    private void clickPrev() {
+        click(prevButton);
 
+    }
+
+    public void clickCheckInDate (String date)
+    {
+
+    }
+
+
+    public void closeCalendar() {
+        click(datePickerCloseButton);
     }
 
 }
