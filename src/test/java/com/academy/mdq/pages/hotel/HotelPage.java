@@ -1,12 +1,13 @@
 package com.academy.mdq.pages.hotel;
 
-import com.academy.mdq.pages.complements.Banner;
+import com.academy.mdq.page.web.WebPage;
+import com.academy.mdq.pages.complements.DatePickerCalendar;
 import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class HotelPage extends Banner {
+public class HotelPage extends WebPage {
 
   @FindBy(id = "hotel-destination-hlp")
   private WebElement destinInput;
@@ -33,30 +34,45 @@ public class HotelPage extends Banner {
   private WebElement searchButton;
 
   @FindBy(className = "datepicker-cal")
-  private WebElement datePickerContainer;
+  private WebElement datepicker;
+
+  private DatePickerCalendar calendar = new DatePickerCalendar(datepicker);
 
   public HotelPage(){
     super();
-    if (!isVisible()){
+    if (!isVisible()) {
       throw new NotFoundException("Unable to create Hotel page, elements are not visible...");
     }
   }
 
   public HotelPage enterDestination(String destination) {
+    click(Waits.isVisible(destinInput));
     type(destinInput, destination);
     click(destinLi);
     return this;
   }
 
+  public HotelPage setDates(String checkIn, String checkOut) {
+    click(checkinInput);
+    calendar.setCalendars();
+    calendar.chooseMonth(checkIn);
+    click(checkoutInput);
+    jsClear(checkoutInput);
+    calendar.returnCorrectMonth(checkOut).pickDate(checkOut);
+    return this;
+  }
+
   public HotelPage enterCheckIn(String dateIn) {
     click(checkinInput);
+    calendar.setCalendars();
     type(checkinInput, dateIn);
-    datePicker().pickFirstDayAvailable();
+    calendar.returnFirstMonth().pickFirstDayAvailable();
     return this;
   }
 
   public HotelPage enterCheckOut(String dateOut) {
     click(checkoutInput);
+    calendar.setCalendars();
     jsClear(checkoutInput);
     type(checkoutInput, dateOut);
     return this;
@@ -64,20 +80,16 @@ public class HotelPage extends Banner {
 
   public HotelPage pickFirstDay() {
     click(checkinInput);
-    datePicker().pickFirstDayAvailable();
+    calendar.setCalendars();
+    calendar.returnFirstMonth().pickFirstDayAvailable();
     return this;
   }
 
-  public HotelPage pickRandomLastDate() {
+  public HotelPage pickDaysAfter(int daysAfter) {
     click(checkoutInput);
-    datePicker().pickRandomDay();
-    return this;
-  }
-
-  public HotelPage pickLastDay(int days) {
-    click(checkinInput);
-    jsClear(checkinInput);
-    datePicker().pickDaysAfter(days);
+    calendar.setCalendars();
+    jsClear(checkoutInput);
+    calendar.returnSecondMonth().pickDaysAfter(daysAfter);
     return this;
   }
 

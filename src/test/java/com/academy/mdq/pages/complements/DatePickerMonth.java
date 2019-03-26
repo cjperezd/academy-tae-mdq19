@@ -1,21 +1,26 @@
 package com.academy.mdq.pages.complements;
 
-import com.academy.mdq.pages.hotel.HotelPage;
 import com.academy.mdq.page.web.WebComponent;
+import com.academy.mdq.pages.hotel.HotelPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class DatePicker extends WebComponent {
+public class DatePickerMonth extends WebComponent {
 
   @FindBy(css = ".datepicker-day-number button:not(.disabled)")
   private List<WebElement> availableDaysLabel;
 
   @FindBy(css = ".datepicker-day-number .start")
-  private WebElement startday;
+  private WebElement startDay;
 
-  public DatePicker(WebElement container) {
+  @FindBy(className = "datepicker-cal-month-header")
+  private WebElement monthHeader;
+
+  public DatePickerMonth(WebElement container) {
     super(container);
   }
 
@@ -34,7 +39,7 @@ public class DatePicker extends WebComponent {
 
   //pick the day entered in the checkin input
   public HotelPage pickSelectedDate() {
-    click(startday);
+    click(startDay);
     return new HotelPage();
   }
 
@@ -47,7 +52,17 @@ public class DatePicker extends WebComponent {
 
   //pick a number of days after the checkin
   public HotelPage pickDaysAfter(int daysAfter) {
-    click(availableDaysLabel.get(daysAfter));
+    LocalDate end = LocalDate.now().plusDays(daysAfter);
+    return new HotelPage();
+  }
+
+  public String toStringMonth() {
+    return monthHeader.getText().substring(0,3).toLowerCase();
+  }
+
+  public HotelPage pickDate(String date) {
+    LocalDate finalDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+    availableDaysLabel.stream().filter(day -> day.getText().equals(finalDate.getDayOfMonth())).findFirst().ifPresent(WebElement::click);
     return new HotelPage();
   }
 
