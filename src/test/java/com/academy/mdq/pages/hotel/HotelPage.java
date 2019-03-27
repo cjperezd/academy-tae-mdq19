@@ -7,6 +7,8 @@ import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.time.LocalDate;
+
 public class HotelPage extends WebPage {
 
   @FindBy(id = "hotel-destination-hlp")
@@ -36,9 +38,7 @@ public class HotelPage extends WebPage {
   @FindBy(className = "datepicker-cal")
   private WebElement datepicker;
 
-  private DatePickerCalendar calendar = new DatePickerCalendar(datepicker);
-
-  public HotelPage(){
+  public HotelPage() {
     super();
     if (!isVisible()) {
       throw new NotFoundException("Unable to create Hotel page, elements are not visible...");
@@ -52,17 +52,19 @@ public class HotelPage extends WebPage {
     return this;
   }
 
-  public HotelPage setDates(String checkIn, String checkOut) {
+  public HotelPage selectCheckIn(LocalDate checkIn) {
     click(checkinInput);
-    calendar.setCalendars();
-    calendar.chooseMonth(checkIn);
-    click(checkoutInput);
-    jsClear(checkoutInput);
-    calendar.returnCorrectMonth(checkOut).pickDate(checkOut);
+    new DatePickerCalendar(datepicker).selectCheckIn(checkIn);
     return this;
   }
 
-  public HotelPage enterCheckIn(String dateIn) {
+  public HotelPage selectCheckOut(LocalDate checkOut, int checkInMonth) {
+    click(checkoutInput);
+    new DatePickerCalendar(datepicker).selectCheckOut(checkOut, checkInMonth);
+    return this;
+  }
+
+  /*public HotelPage enterCheckIn(String dateIn) {
     click(checkinInput);
     calendar.setCalendars();
     type(checkinInput, dateIn);
@@ -91,7 +93,7 @@ public class HotelPage extends WebPage {
     jsClear(checkoutInput);
     calendar.returnSecondMonth().pickDaysAfter(daysAfter);
     return this;
-  }
+  }*/
 
   public HotelPage selectAdults(int num) {
     selectByText(adultSelect, String.valueOf(num));
