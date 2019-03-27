@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CalendarPicker extends WebComponent {
@@ -21,29 +22,27 @@ public class CalendarPicker extends WebComponent {
     @FindBy(className = "datepicker-next")
     private WebElement nextButton;
 
-    private List<CalendarMonth> calendarsComponents;
+    private List<CalendarMonth> calendarsComponents = new ArrayList<>();
 
     public CalendarPicker(WebElement container) {
         super(container);
     }
 
-    private void clickNext() {
+    public void clickNext() {
         click(nextButton);
     }
 
-    private void clickPrev() {
+    public void clickPrev() {
         click(prevButton);
-
     }
-
-    public void clickCheckInDate (String date)
-    {
-
-    }
-
-
     public void closeCalendar() {
         click(datePickerCloseButton);
+    }
+
+    public void clickDay (String date)
+    {
+        int dayToSelect = LocalDate.parse(date).getDayOfMonth();
+        calendarsComponents.get(0).clickSelectedDay (dayToSelect);
     }
 
 }

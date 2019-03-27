@@ -16,18 +16,16 @@ public class CalendarMonth extends WebComponent {
         super(container);
     }
 
-    public CalendarMonth clickCheckInDate(String dayCheck) {
-        click(getDayElement(dayCheck));
-        return this;
-    }
-
-    private WebElement getDayElement(String dayCheck) {
-        for (WebElement dayElem : dayButtons) {
-            if (dayElem.getText().equals(dayCheck)) {
-                return dayElem;
+    public void clickSelectedDay (int selectedDay)
+    {
+        WebElement daySelected = dayButtons.get(0);
+        for (WebElement day : dayButtons)
+        {
+            if (day.getText().equals(String.valueOf(selectedDay)))
+            {
+                daySelected = day;
             }
         }
-        return dayButtons.get(0);
+        click(daySelected);
     }
-
 }

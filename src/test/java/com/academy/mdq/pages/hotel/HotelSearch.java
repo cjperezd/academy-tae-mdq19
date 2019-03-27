@@ -42,4 +42,9 @@ public class HotelSearch extends WebPage {
         return searchFormComponent.clickSearchButton(waitingSign);
     }
 
+    public HotelSearch pickDateCheckIn (String date)
+    {
+        searchFormComponent.pickCheckInDate(date,this);
+        return  this;
+    }
 }

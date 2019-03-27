@@ -87,6 +87,7 @@ public class HotelSearchResults extends WebPage {
     public boolean areCardsFromNeighborhood() {
         areVisible(cardsContainer);
         getAreaNames();
+        //NO EXISTEN LOS BARRIOS DE LAS CARDS EN EL LISTADO FILTRO DE BARRIOS
         return hotelResultCards.stream().allMatch(card -> areasNames.contains(card.getCityName()));
     }
 
