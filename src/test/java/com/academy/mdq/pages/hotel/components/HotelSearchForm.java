@@ -1,9 +1,13 @@
 package com.academy.mdq.pages.hotel.components;
 
 import com.academy.mdq.page.web.WebComponent;
+import com.academy.mdq.pages.common.components.DatePickerCalendar;
+import com.academy.mdq.pages.hotel.HotelSearch;
 import com.academy.mdq.pages.hotel.HotelSearchResult;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.time.LocalDate;
 
 import static com.academy.mdq.waits.Waits.isClickable;
 
@@ -66,6 +70,15 @@ public class HotelSearchForm extends WebComponent {
     @FindBy (id = "modalInterstitial")
     private WebElement waitSearch;
 
+    @FindBy(id = "hotel-checkin-hlp")
+    private WebElement checkinInput;
+
+    @FindBy(id = "hotel-checkout-hlp")
+    private WebElement checkoutInput;
+
+    @FindBy(className = "datepicker-cal")
+    private WebElement datepicker;
+
     public HotelSearchForm(WebElement container) {
         super(container);
     }
@@ -73,6 +86,18 @@ public class HotelSearchForm extends WebComponent {
     public HotelSearchForm typeGoingTo(String goingTo) {
         isClickable(inputGoingTo);
         type(inputGoingTo, goingTo);
+        return this;
+    }
+
+    public HotelSearchForm selectCheckIn(LocalDate checkIn) {
+        click(checkinInput);
+        new DatePickerCalendar(datepicker).selectCheckIn(checkIn);
+        return this;
+    }
+
+    public HotelSearchForm selectCheckOut(LocalDate checkOut, int checkInMonth) {
+        click(checkoutInput);
+        new DatePickerCalendar(datepicker).selectCheckOut(checkOut, checkInMonth);
         return this;
     }
 

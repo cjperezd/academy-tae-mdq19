@@ -1,14 +1,8 @@
 package com.academy.mdq.pages.hotel.components;
 
 import com.academy.mdq.page.web.WebComponent;
-import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Wait;
-
-import java.util.List;
-
-import static com.academy.mdq.waits.Waits.isVisible;
 
 public class HotelSearchCard extends WebComponent {
 
@@ -70,7 +64,7 @@ public class HotelSearchCard extends WebComponent {
   }
 
   public String getHotelTitle() {
-    Waits.isNotVisible(updatingSearch);
+    //Waits.isNotVisible(updatingSearch);
     return hotelName.getText();
   }
 

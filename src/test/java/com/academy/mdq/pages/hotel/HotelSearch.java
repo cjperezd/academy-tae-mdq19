@@ -2,10 +2,14 @@ package com.academy.mdq.pages.hotel;
 
 import com.academy.mdq.page.web.WebPage;
 import com.academy.mdq.pages.common.components.CalendarComp;
+import com.academy.mdq.pages.common.components.DatePickerCalendar;
 import com.academy.mdq.pages.common.components.Search;
 import com.academy.mdq.pages.hotel.components.HotelSearchForm;
+import net.sf.cglib.core.Local;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.time.LocalDate;
 
 public class HotelSearch extends WebPage implements Search {
 
@@ -20,6 +24,14 @@ public class HotelSearch extends WebPage implements Search {
 
     public HotelSearchForm typeGoingTo(String goingTo) {
         return hotelSearchForm.typeGoingTo(goingTo);
+    }
+
+    public HotelSearchForm selectCheckIn(LocalDate checkIn){
+        return hotelSearchForm.selectCheckIn(checkIn);
+    }
+
+    public HotelSearchForm selectCheckOut(LocalDate checkOut, int checkInMonth){
+        return hotelSearchForm.selectCheckOut(checkOut,checkInMonth);
     }
 
     public HotelSearchForm typeCheckIn(String checkIn) {

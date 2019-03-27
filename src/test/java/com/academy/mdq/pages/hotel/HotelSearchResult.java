@@ -3,7 +3,6 @@ package com.academy.mdq.pages.hotel;
 import com.academy.mdq.page.web.WebPage;
 import com.academy.mdq.pages.hotel.components.HotelSearchCard;
 import com.academy.mdq.pages.hotel.components.HotelSearchFilters;
-import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -11,77 +10,76 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toSet;
 
 public class HotelSearchResult extends WebPage {
 
-  @FindBy(id = "bcol")
-  private WebElement wrapAll;
+    @FindBy(id = "bcol")
+    private WebElement wrapAll;
 
-  @FindBy (id = "hotelNameGoBtn")
-  private WebElement hotelNameButton;
+    @FindBy (id = "hotelNameGoBtn")
+    private WebElement hotelNameButton;
 
-  @FindBy(className = "flex-link-wrap")
-  private List<WebElement> cardsContainer;
+    @FindBy(className = "flex-link-wrap")
+    private List<WebElement> cardsContainer;
 
-  @FindBy(css = ".neighborhood.secondary ")
-  private List<WebElement> areaOfCity;
+    @FindBy(css = ".neighborhood.secondary ")
+    private List<WebElement> areaOfCity;
 
-  @FindBy(id = "searchForm")
-  private WebElement searchSecondPage;
+    @FindBy(id = "searchForm")
+    private WebElement searchSecondPage;
 
-  @FindBy(className = "modal-body")
-  private WebElement popUpComp;
-
-
-  private final HotelSearchFilters hotelSearchFilters = new HotelSearchFilters(searchSecondPage);
+    @FindBy(className = "modal-body")
+    private WebElement popUpComp;
 
 
-  private List<HotelSearchCard> listOfCards = new ArrayList<>();
-  private Set<String> areas = new HashSet<>();
+    private final HotelSearchFilters hotelSearchFilters = new HotelSearchFilters(searchSecondPage);
 
 
-  public HotelSearchResult() {
-    super();
-  }
+    private List<HotelSearchCard> listOfCards = new ArrayList<>();
+    private Set<String> areas = new HashSet<>();
 
-  public List<HotelSearchCard> getCardsOnList(){
-    cardsContainer.forEach(card -> listOfCards.add(new HotelSearchCard(card)));
-    return listOfCards;
-  }
 
-  public Set<String> getAreas(){
-    return this.areaOfCity.stream().map(area -> area.getText()).collect(toSet());
-  }
+    public HotelSearchResult() {
+        super();
+    }
 
-  public HotelSearchFilters typeHotelName(String hotelName) {
-    return hotelSearchFilters.typeHotelName(hotelName);
-  }
+    public List<HotelSearchCard> getCardsOnList(){
+        cardsContainer.forEach(card -> listOfCards.add(new HotelSearchCard(card)));
+        return listOfCards;
+    }
 
-  public String getTotalResults() {
-    return hotelSearchFilters.getTotalResults();
-  }
+    public Set<String> getAreas(){
+        return areas = this.areaOfCity.stream().map(area -> area.getText()).collect(toSet());
+    }
 
-  public String getAllWords() {
-    return hotelSearchFilters.getAllWords();
-  }
+    public HotelSearchFilters typeHotelName(String hotelName) {
+        return hotelSearchFilters.typeHotelName(hotelName);
+    }
 
-  public HotelSearch clickOnFirstOptionFae() {
-    return hotelSearchFilters.clickOnFirstOptionFae();
-  }
+    public String getTotalResults() {
+        return hotelSearchFilters.getTotalResults();
+    }
 
-  public HotelSearchResult clickHotelSearchButton() {
-    click(hotelNameButton);
-    return new HotelSearchResult();
-  }
+    public String getAllWords() {
+        return hotelSearchFilters.getAllWords();
+    }
 
-  public HotelSearchCard selectACard(int index){
-    return listOfCards.get(index);
-  }
+    public HotelSearch clickOnFirstOptionFae() {
+        return hotelSearchFilters.clickOnFirstOptionFae();
+    }
 
-  public boolean areAreasInTheCards(){
-    return listOfCards.stream().allMatch(card -> getAreas().contains(card.getCityName()));
-  }
+    public HotelSearchResult clickHotelSearchButton() {
+        click(hotelNameButton);
+        return new HotelSearchResult();
+    }
+
+    public HotelSearchCard selectACard(int index){
+        return listOfCards.get(index);
+    }
+
+    public boolean areAreasInTheCards(){
+        return listOfCards.stream().allMatch(card -> getAreas().contains(card.getCityName()));
+    }
 }

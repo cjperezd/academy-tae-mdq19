@@ -6,10 +6,12 @@ import com.academy.mdq.pages.hotel.HotelSearchResult;
 import com.academy.mdq.testsuite.BaseTestSuite;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 import static com.academy.mdq.pages.CheapTicketsHome.Product.HOTEL;
+import static java.time.LocalDate.*;
 import static org.junit.Assert.*;
 
 public class HotelSearchTest extends BaseTestSuite {
@@ -21,9 +23,12 @@ public class HotelSearchTest extends BaseTestSuite {
   public void myTest() {
     CheapTicketsHome home = new CheapTicketsHome();
     HotelSearch hotelSearch = (HotelSearch) home.clickOn(HOTEL);
+    LocalDate checkIn = now().plusMonths(14).minusDays(10);
     HotelSearchResult hotelSearchResult = hotelSearch.typeGoingTo(CITY)
-            .typeCheckIn("10/05/2019")
-            .typeCheckOut("10/15/2019")
+            .selectCheckIn(checkIn)
+            .selectCheckOut(checkIn.plusDays(10), checkIn.getMonthValue())
+            //.typeCheckIn("10/05/2019")
+            //.typeCheckOut("10/15/2019")
             .selectAdults("4")
             .selectChildren("1")
             .selectChildrenYear("7")
@@ -42,6 +47,7 @@ public class HotelSearchTest extends BaseTestSuite {
     hotelSearchResult.clickOnFirstOptionFae();
     hotelSearchResult.clickHotelSearchButton();
     hotelSearchResult.getAreas();
+    hotelSearchResult.getCardsOnList().clear();
     hotelSearchResult.getCardsOnList();
 
     //hotelSearchResult.setCardsOnList();
