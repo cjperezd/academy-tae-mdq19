@@ -6,10 +6,12 @@ import com.academy.mdq.pages.hotel.components.HotelResultCard;
 import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Wait;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.academy.mdq.driver.Drivers.getDriver;
 import static com.academy.mdq.waits.Waits.*;
 
 public class HotelSearchResults extends WebPage {
@@ -100,4 +102,13 @@ public class HotelSearchResults extends WebPage {
         click(showMoreButton);
     }
 
+
+    public HotelRoomsReservation selectFirstResult ()
+    {
+        hotelResultCards.get(0).clickHotelName();
+        List<String> windowHandles = new ArrayList(getDriver().getWebDriver().getWindowHandles());
+        getDriver().getWebDriver().switchTo().window(windowHandles.get(1));
+        return new HotelRoomsReservation();
+
+    }
 }

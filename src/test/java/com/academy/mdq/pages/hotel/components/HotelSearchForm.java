@@ -7,6 +7,7 @@ import com.academy.mdq.pages.hotel.HotelSearchResults;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.text.Format;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +42,8 @@ public class HotelSearchForm extends WebComponent {
     @FindBy(id = "hotel-checkin-hlp")
     private WebElement checkInInput;
 
-    @FindBy(css = ".datepicker-dropdown .datepicker-cal")
-    private List<WebElement> calendarContainer;
+    @FindBy(className = "datepicker-cal")
+    private WebElement datepicker;
 
     @FindBy(id = "hotel-checkout-hlp")
     private WebElement checkOutInput;
@@ -68,7 +69,7 @@ public class HotelSearchForm extends WebComponent {
     @FindBy(css = "#gcw-hotel-form-hlp .search-btn-col button")
     private WebElement searchButton;
 
-    private List<CalendarPicker> calendarCheckInOut = new ArrayList<>();
+
 
 
 
@@ -101,15 +102,6 @@ public class HotelSearchForm extends WebComponent {
     }
 
 
-    public HotelSearch clickCheckInInput(HotelSearch hotelSearch) {
-        click(checkInInput);
-        return hotelSearch;
-    }
-
-    public HotelSearch clickCheckOutInput(HotelSearch hotelSearch) {
-        click(checkInInput);
-        return hotelSearch;
-    }
 
     public HotelSearch selectAdults(String adultsQuantity, HotelSearch hotelSearch) {
         selectByText(adultsSelect, adultsQuantity);
@@ -132,50 +124,17 @@ public class HotelSearchForm extends WebComponent {
         return new HotelSearchResults();
     }
 
-    //CALENDAR PICKER METHODS
 
-    public void initializeCalendarPickers ()
-    {
-        int i = 0;
-        for (CalendarPicker calendar : calendarCheckInOut)
-        {
-            calendar = new CalendarPicker(calendarContainer.get(i));
-            i++;
-        }
+    public HotelSearchForm selectCheckIn(LocalDate checkIn) {
+        click(checkInInput);
+        new CalendarPicker(datepicker).selectCheckIn(checkIn);
+        return this;
     }
 
-    private HotelSearch locateActualCalendarMonth (String date, HotelSearch hotelSearch)
-    {
-        int monthNow = LocalDate.now().getMonthValue();
-        int monthWanted = LocalDate.parse(date).getMonthValue();
-
-        int monthDifference = monthWanted - monthNow;
-
-        if (monthDifference<0)
-        {
-            for (int i = 0; i <monthDifference ; i++) {
-                calendarCheckInOut.get(0).clickNext();
-            }
-
-        }
-        return hotelSearch;
-    }
-
-    public HotelSearch pickCheckInDate (String date, HotelSearch hotelSearch)
-    {
-        clickCheckInInput(hotelSearch);
-        locateActualCalendarMonth(date, hotelSearch);
-        calendarCheckInOut.get(0).clickDay(date);
-        calendarCheckInOut.get(0).closeCalendar();
-        return hotelSearch;
-    }
-
-    public HotelSearch pickCheckOutDate (String date, HotelSearch hotelSearch)
-    {
-        clickCheckOutInput(hotelSearch);
-
-        calendarCheckInOut.get(1).closeCalendar();
-        return hotelSearch;
+    public HotelSearchForm selectCheckOut(LocalDate checkOut, int checkInMonth) {
+        click(checkOutInput);
+        new CalendarPicker(datepicker).selectCheckOut(checkOut, checkInMonth);
+        return this;
     }
 
 }

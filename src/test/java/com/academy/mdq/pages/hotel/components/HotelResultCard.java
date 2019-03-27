@@ -1,8 +1,9 @@
 package com.academy.mdq.pages.hotel.components;
 
 import com.academy.mdq.page.web.WebComponent;
-import com.academy.mdq.waits.Waits;
+import com.academy.mdq.pages.hotel.HotelRoomsReservation;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 
 import static com.academy.mdq.waits.Waits.isVisible;
@@ -12,8 +13,11 @@ public class HotelResultCard extends WebComponent {
     @FindBy (className = "hotel-thumbnail")
     private WebElement hotelImage;
 
-    @FindBy (css = "h4[data-automation='hotel-name']")
+    @FindBy (className = "hotelTitle")
     private WebElement hotelName;
+
+    @FindBy (css=".flex-link[data-track]")
+    private WebElement hotelNameLink;
 
     @FindBy (css = ".neighborhood.secondary ")
     private WebElement cityName;
@@ -74,5 +78,11 @@ public class HotelResultCard extends WebComponent {
     public Boolean isVisibleNightlyPrice ()
     {
         return isVisible(nightlyPrice).isDisplayed();
+    }
+
+    public void clickHotelName ()
+    {
+        click(hotelNameLink);
+
     }
 }

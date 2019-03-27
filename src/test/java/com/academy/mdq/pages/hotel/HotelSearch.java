@@ -1,9 +1,14 @@
 package com.academy.mdq.pages.hotel;
 
+import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.page.web.WebPage;
 import com.academy.mdq.pages.hotel.components.HotelSearchForm;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.time.LocalDate;
+
+import static com.academy.mdq.driver.Drivers.getDriver;
 
 public class HotelSearch extends WebPage {
     @FindBy(id = "gcw-hotel-form-hlp")
@@ -42,9 +47,13 @@ public class HotelSearch extends WebPage {
         return searchFormComponent.clickSearchButton(waitingSign);
     }
 
-    public HotelSearch pickDateCheckIn (String date)
-    {
-        searchFormComponent.pickCheckInDate(date,this);
-        return  this;
+    public HotelSearch selectCheckIn(LocalDate checkInDate) {
+        searchFormComponent.selectCheckIn(checkInDate);
+        return this;
+    }
+
+    public HotelSearch selectCheckOut(LocalDate checkOutDate, int monthValue) {
+        searchFormComponent.selectCheckOut(checkOutDate, monthValue);
+        return this;
     }
 }

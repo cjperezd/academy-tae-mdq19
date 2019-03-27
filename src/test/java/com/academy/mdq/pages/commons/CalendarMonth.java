@@ -6,26 +6,30 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+import static com.academy.mdq.waits.Waits.areVisible;
 
 public class CalendarMonth extends WebComponent {
 
     @FindBy(css = ".datepicker-day-number button:not(.disabled)")
-    private List<WebElement> dayButtons;
+    private List<WebElement> availableDaysLabel;
+
+    @FindBy(css = ".datepicker-day-number .start")
+    private WebElement startDay;
+
+    @FindBy(className = "datepicker-cal-month-header")
+    private WebElement monthHeader;
 
     public CalendarMonth(WebElement container) {
         super(container);
     }
 
-    public void clickSelectedDay (int selectedDay)
-    {
-        WebElement daySelected = dayButtons.get(0);
-        for (WebElement day : dayButtons)
-        {
-            if (day.getText().equals(String.valueOf(selectedDay)))
-            {
-                daySelected = day;
-            }
-        }
-        click(daySelected);
+    public void pickDate(int dayOfMonth) {
+        String day = String.valueOf(dayOfMonth);
+        areVisible(availableDaysLabel)
+                .stream()
+                .filter(availableDay -> availableDay.getText().contains(day))
+                .findFirst()
+                .ifPresent(WebElement::click);
     }
+
 }
