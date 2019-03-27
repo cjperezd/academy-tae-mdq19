@@ -68,6 +68,7 @@ public final class Drivers implements Loggeable {
    */
   public static void dispose() {
     DRIVERS.get().getWebDriver().quit();
+    DRIVERS.remove();
   }
 
 }
