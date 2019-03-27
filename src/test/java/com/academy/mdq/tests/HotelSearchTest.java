@@ -57,16 +57,15 @@ public class HotelSearchTest extends BaseTestSuite {
     String destination = "Miami Beach";
     LocalDate checkIn = now().plusDays(3);
 
-    HotelResults reservation = new Home()
+    HotelToReservePage reservation = new Home()
         .goToHotels()
         .enterDestination(destination)
         .selectCheckIn(checkIn)
         .selectCheckOut(checkIn.plusDays(10), checkIn.getMonthValue())
         .selectAdults(1)
-        .search();
-
-    reservation.selectFirstCard();
-    reservation.openNewWindow();
+        .search()
+        .selectFirstCard()
+        .switchTab(1);
 
     PaymentPage payment = new HotelToReservePage().reserveFirstRoom().payTotal();
 

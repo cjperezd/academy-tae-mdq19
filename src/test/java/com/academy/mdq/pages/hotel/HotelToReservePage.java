@@ -20,6 +20,11 @@ public class HotelToReservePage extends WebPage {
 
   private final Room onlyRoom = new Room(firstRoomTBody);
 
+  public HotelToReservePage switchTab(int tab) {
+    openNewTab(tab);
+    return this;
+  }
+
   public HotelToReservePage reserveFirstRoom() {
     isVisible(firstRoomTBody);
     onlyRoom.reserveRoom();

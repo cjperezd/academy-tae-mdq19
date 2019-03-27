@@ -1,10 +1,8 @@
 package com.academy.mdq.pages.hotel;
 
-import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.page.web.WebPage;
 import com.academy.mdq.pages.complements.ResultCard;
 import com.academy.mdq.waits.Waits;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -70,14 +68,6 @@ public class HotelResults extends WebPage {
     Waits.areVisible(cardsDiv);
     transformCards();
     resultCards.get(0).selectCard();
-    return new HotelToReservePage();
-  }
-
-  public HotelToReservePage openNewWindow() {
-    WebDriver driver = Drivers.getDriver().getWebDriver();
-    for(String winHandle : driver.getWindowHandles()){
-      driver.switchTo().window(winHandle);
-    }
     return new HotelToReservePage();
   }
 

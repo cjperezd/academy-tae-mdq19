@@ -1,9 +1,13 @@
 package com.academy.mdq.page.web;
 
+import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.page.CommonOperations;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.academy.mdq.driver.Drivers.getDriver;
 import static com.academy.mdq.waits.Waits.isTextPresent;
@@ -56,6 +60,11 @@ public abstract class WebOperations extends CommonOperations {
     JavascriptExecutor js = (JavascriptExecutor)getDriver().getWebDriver();
     element.click();
     js.executeScript("return arguments[0].value = '';", element);
+  }
+
+  public void openNewTab(int tab) {
+    List<String> windowsHandles = new ArrayList<>(Drivers.getDriver().getWebDriver().getWindowHandles());
+    Drivers.getDriver().getWebDriver().switchTo().window(windowsHandles.get(tab));
   }
 
 }
