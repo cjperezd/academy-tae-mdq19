@@ -1,15 +1,14 @@
 package com.academy.mdq.pages.hotel;
 
+import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.page.web.WebPage;
 import com.academy.mdq.pages.hotel.components.HotelSearchCard;
 import com.academy.mdq.pages.hotel.components.HotelSearchFilters;
+import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static java.util.stream.Collectors.toSet;
 
@@ -39,6 +38,7 @@ public class HotelSearchResult extends WebPage {
 
     private List<HotelSearchCard> listOfCards = new ArrayList<>();
     private Set<String> areas = new HashSet<>();
+    private List <WebElement> hotelsName = new ArrayList<>();
 
 
     public HotelSearchResult() {
@@ -82,4 +82,18 @@ public class HotelSearchResult extends WebPage {
     public boolean areAreasInTheCards(){
         return listOfCards.stream().allMatch(card -> getAreas().contains(card.getCityName()));
     }
+
+    public HotelDetails getFirstHotel() {
+        Waits.isVisible(wrapAll);
+        return getCardsOnList().stream().findFirst().get().selectHotel();
+    }
+
+
+    public HotelDetails switchToNewWindow(){
+        for (String handle : Drivers.getDriver().getWebDriver().getWindowHandles()) {
+            Drivers.getDriver().getWebDriver().switchTo().window(handle);
+        }
+        return new HotelDetails();
+    }
+
 }

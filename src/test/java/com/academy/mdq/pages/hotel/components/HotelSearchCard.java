@@ -1,6 +1,7 @@
 package com.academy.mdq.pages.hotel.components;
 
 import com.academy.mdq.page.web.WebComponent;
+import com.academy.mdq.pages.hotel.HotelDetails;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -29,6 +30,9 @@ public class HotelSearchCard extends WebComponent {
 
   @FindBy (id = "modalInterstitial")
   private WebElement updatingSearch;
+
+  @FindBy (css = ".flex-link[data-track]")
+  private WebElement hotelLink;
 
   public HotelSearchCard(WebElement container) {
     super(container);
@@ -72,4 +76,8 @@ public class HotelSearchCard extends WebComponent {
     return cityArea.getText();
   }
 
+  public HotelDetails selectHotel() {
+    click(hotelLink);
+    return new HotelDetails();
+  }
 }

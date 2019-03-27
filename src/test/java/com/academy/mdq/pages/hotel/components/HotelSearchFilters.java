@@ -8,17 +8,21 @@ import org.openqa.selenium.support.FindBy;
 
 public class HotelSearchFilters extends WebComponent {
 
-    @FindBy (id = "inpHotelNameMirror")
+    @FindBy(id = "inpHotelNameMirror")
     private WebElement inputHotelName;
 
-    @FindBy (className = "section-header-main")
+    @FindBy(className = "section-header-main")
     private WebElement hotelResultTitle;
 
-    @FindBy (id = "aria-option-0")
+    @FindBy(id = "aria-option-0")
     private WebElement clickFirstOptionFae;
 
-    @FindBy (id = "modalInterstitial")
+    @FindBy(id = "modalInterstitial")
     private WebElement waitSearch;
+
+    @FindBy(css = ".hotelName.fakeLink")
+    private WebElement hotelTitleName;
+
 
     public HotelSearchFilters(WebElement container) {
         super(container);
@@ -44,4 +48,5 @@ public class HotelSearchFilters extends WebComponent {
         click(clickFirstOptionFae);
         return new HotelSearch();
     }
+
 }
