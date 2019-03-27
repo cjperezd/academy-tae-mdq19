@@ -2,8 +2,11 @@ package com.academy.mdq.tests;
 
 import com.academy.mdq.pages.Home;
 import com.academy.mdq.pages.hotel.HotelResults;
-import com.academy.mdq.pages.hotel.PropertyResults;
+import com.academy.mdq.pages.hotel.HotelToReservePage;
+import com.academy.mdq.pages.hotel.PaymentPage;
+import com.academy.mdq.pages.hotel.PropertyResultsPage;
 import com.academy.mdq.testsuite.BaseTestSuite;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -17,7 +20,7 @@ public class HotelSearchTest extends BaseTestSuite {
   public void searchResults() {
     String destination = "Miami Beach";
     String property = "Faena Hotel Miami Beach";
-    LocalDate checkIn = now().plusMonths(14).minusDays(10);
+    LocalDate checkIn = now().plusDays(3);
 
     HotelResults resultDest = new Home()
         .goToHotels()
@@ -32,9 +35,9 @@ public class HotelSearchTest extends BaseTestSuite {
     //enter date by text
     //HotelResults resultDest = hotelPage.enterDestination(destination).enterCheckIn(checkIn).enterCheckOut("04/17/2019").selectAdults(4).selectChildren(1).selectAge(7).search();
 
-    assertEquals("All the cards are from " + destination, resultDest.verifyCards(), true);
+//    assertEquals("All the cards are from " + destination, resultDest.verifyCards(), true);
 
-    PropertyResults resultProp = resultDest
+    PropertyResultsPage resultProp = resultDest
         .searchProperty("Faena")
         .selectGo()
         .waiting();
@@ -47,6 +50,29 @@ public class HotelSearchTest extends BaseTestSuite {
     assertEquals("The stars are visible", resultProp.isFirstStarLiVisible(), true);
     assertEquals("The rate is visible", resultProp.isFirstReviewLiVisible(), true);
     assertEquals("The price is visible", resultProp.isFirstPriceSpanVisible(), true);
+  }
+
+  @Test
+  public void reserveHotel() {
+    String destination = "Miami Beach";
+    LocalDate checkIn = now().plusDays(3);
+
+    HotelResults reservation = new Home()
+        .goToHotels()
+        .enterDestination(destination)
+        .selectCheckIn(checkIn)
+        .selectCheckOut(checkIn.plusDays(10), checkIn.getMonthValue())
+        .selectAdults(1)
+        .search();
+
+    reservation.selectFirstCard();
+    reservation.openNewWindow();
+
+    PaymentPage payment = new HotelToReservePage().reserveFirstRoom().payTotal();
+
+    Assert.assertEquals("The Form is displayed", payment.isCardFormVisible(), true);
+    Assert.assertEquals("All the inputs are enable", payment.areAllElementsEnable(), true);
+
   }
 
 }

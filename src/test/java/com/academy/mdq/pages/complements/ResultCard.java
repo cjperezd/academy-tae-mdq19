@@ -4,18 +4,19 @@ import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static com.academy.mdq.waits.Waits.isClickable;
 import static com.academy.mdq.waits.Waits.isVisible;
 
 public class ResultCard extends WebComponent {
 
-  @FindBy(css = "div .flex-link-wrap")
-  private WebElement cardDiv;
-
   @FindBy(className = "hotel-thumbnail")
   private WebElement imgDiv;
 
-  @FindBy(className = "h4[data-automation='hotel-name']")
-  private WebElement hotelLi;
+  @FindBy(className = "hotelTitle")
+  private WebElement titleLi;
+
+  @FindBy(css = ".flex-link[data-track]")
+  private WebElement hotelLink;
 
   @FindBy(className = "neighborhood")
   private WebElement areaLi;
@@ -41,11 +42,15 @@ public class ResultCard extends WebComponent {
   }
 
   public boolean isHotelLiEqual(String property) {
-    return isVisible(hotelLi).getText().equals(property);
+    return titleLi.getText().equals(property);
   }
 
   public boolean isHotelLiEnable() {
-    return isVisible(hotelLi).isEnabled();
+    return titleLi.isEnabled();
+  }
+
+  public void selectCard() {
+    click(isClickable(hotelLink));
   }
 
   public String getAreaLi() {

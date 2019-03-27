@@ -1,7 +1,10 @@
 package com.academy.mdq.pages.hotel;
 
+import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.page.web.WebPage;
 import com.academy.mdq.pages.complements.ResultCard;
+import com.academy.mdq.waits.Waits;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -40,13 +43,42 @@ public class HotelResults extends WebPage {
   @FindBy(id = "modalInterstitial")
   private WebElement waitingDiv;
 
+  private final List<ResultCard> resultCards = new ArrayList<>();
+
   public boolean verifyCards() {
     closePopUp();
-    List<ResultCard> resultCards = new ArrayList<>();
     click(isClickable(showMoreSpan));
     List<String> neighborhood = neighborhoods.stream().map(WebElement::getText).collect(Collectors.toList());
-    cardsDiv.stream().forEach(element -> resultCards.add(new ResultCard(element)));
+    transformCards();
     return resultCards.stream().allMatch(card -> neighborhood.contains(card.getAreaLi()));
+  }
+
+  public HotelResults searchProperty(String property) {
+//    closePopUp();
+    type(propertyInput, property);
+    click(firstOption);
+    return this;
+  }
+
+  public PropertyResultsPage selectGo() {
+    click(goButton);
+    waitForInvisibility(waitingDiv);
+    return new PropertyResultsPage();
+  }
+
+  public HotelToReservePage selectFirstCard() {
+    Waits.areVisible(cardsDiv);
+    transformCards();
+    resultCards.get(0).selectCard();
+    return new HotelToReservePage();
+  }
+
+  public HotelToReservePage openNewWindow() {
+    WebDriver driver = Drivers.getDriver().getWebDriver();
+    for(String winHandle : driver.getWindowHandles()){
+      driver.switchTo().window(winHandle);
+    }
+    return new HotelToReservePage();
   }
 
   private HotelResults closePopUp() {
@@ -56,16 +88,8 @@ public class HotelResults extends WebPage {
     return this;
   }
 
-  public HotelResults searchProperty(String property) {
-    type(propertyInput, property);
-    click(firstOption);
-    return this;
-  }
-
-  public PropertyResults selectGo() {
-    click(goButton);
-    waitForInvisibility(waitingDiv);
-    return new PropertyResults();
+  private void transformCards() {
+    cardsDiv.stream().forEach(element -> resultCards.add(new ResultCard(element)));
   }
 
 }

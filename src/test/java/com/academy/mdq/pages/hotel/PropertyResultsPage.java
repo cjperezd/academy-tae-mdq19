@@ -7,20 +7,22 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+import static com.academy.mdq.waits.Waits.areVisible;
 import static com.academy.mdq.waits.Waits.waitForInvisibility;
 
-public class PropertyResults extends WebPage {
+public class PropertyResultsPage extends WebPage {
 
-    @FindBy(css = "div .flex-link-wrap")
+    @FindBy(className = "flex-link-wrap")
     private List<WebElement> cardsDiv;
 
     @FindBy(id = "modalInterstitial")
     private WebElement waitingDiv;
 
-    private final ResultCard firstCard= new ResultCard(cardsDiv.get(0));
+    private final ResultCard firstCard = new ResultCard(cardsDiv.get(0));
 
-    public PropertyResults waiting() {
+    public PropertyResultsPage waiting() {
         waitForInvisibility(waitingDiv);
+        areVisible(cardsDiv);
         return this;
     }
 
