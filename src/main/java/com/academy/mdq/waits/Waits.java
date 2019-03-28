@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 import static com.academy.mdq.driver.Drivers.getDriver;
@@ -61,6 +62,10 @@ public final class Waits {
 
   public static boolean isNotVisible(WebElement webElement){
     return waiting().until(invisibilityOf(webElement));
+  }
+
+  public static void waitTSeconds(WebElement webElement, String attribute, String value ) throws InterruptedException {
+    waiting().until(attributeContains(webElement, attribute, value));
   }
 
 
