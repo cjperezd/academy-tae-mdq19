@@ -6,7 +6,6 @@ import com.academy.mdq.pages.hotel.components.HotelResultCard;
 import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Wait;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +39,7 @@ public class HotelSearchResults extends WebPage {
     @FindBy(className = "neighborhoodTextLabel")
     private List<WebElement> areas;
 
-    @FindBy (css = "#neighborhoodContainer .more:not(.visuallyhidden)")
+    @FindBy(css = "#neighborhoodContainer .more:not(.visuallyhidden)")
     private WebElement showMoreButton;
 
     private final List<HotelResultCard> hotelResultCards = new ArrayList<>();
@@ -78,8 +77,7 @@ public class HotelSearchResults extends WebPage {
         return hotelResultsTitle.getText().split(" ")[2];
     }
 
-    public void getAreaNames ()
-    {
+    public void getAreaNames() {
         clickShowMore();
         for (WebElement area : areas) {
             areasNames.add(area.getText());
@@ -97,14 +95,12 @@ public class HotelSearchResults extends WebPage {
         return hotelResultCards.get(card);
     }
 
-    public void clickShowMore ()
-    {
+    public void clickShowMore() {
         click(showMoreButton);
     }
 
 
-    public HotelRoomsReservation selectFirstResult ()
-    {
+    public HotelRoomsReservation selectFirstResult() {
         hotelResultCards.get(0).clickHotelName();
         List<String> windowHandles = new ArrayList(getDriver().getWebDriver().getWindowHandles());
         getDriver().getWebDriver().switchTo().window(windowHandles.get(1));

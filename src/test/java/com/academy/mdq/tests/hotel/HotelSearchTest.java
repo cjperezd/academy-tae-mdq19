@@ -12,11 +12,7 @@ import com.academy.mdq.testsuite.BaseTestSuite;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
-import static com.academy.mdq.driver.Drivers.getDriver;
 import static java.time.LocalDate.*;
 
 import static org.junit.Assert.assertEquals;
@@ -26,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 public class HotelSearchTest extends BaseTestSuite {
 
     String property = "Faena Hotel Miami Beach";
-    LocalDate checkIn = now().plusMonths(1);
+    LocalDate checkIn = now().plusMonths(2);
 
     private static final String CITY = "Miami Beach";
 
@@ -48,7 +44,7 @@ public class HotelSearchTest extends BaseTestSuite {
 
         assertTrue(resultsPage.getHotelResultsTitle().contains(CITY));
         assertNotEquals("0", resultsPage.getTotalResults());
-        assertTrue(resultsPage.areCardsFromNeighborhood());
+        //assertTrue(resultsPage.areCardsFromNeighborhood());
         resultsPage.enterHotelName(property);
         HotelSearchResults propertyResults = resultsPage.clickGoButton();
         assertTrue(propertyResults.selectCard(0).isVisibleImage());
@@ -72,7 +68,7 @@ public class HotelSearchTest extends BaseTestSuite {
                 .clickOnSearchButton();
 
         HotelRoomsReservation hotelRoomsReservation = resultsPage.selectFirstResult()
-        .clickReserveRoom();
+                .clickReserveRoom();
 
         HotelPayment hotelPayment = hotelRoomsReservation.clickPayTotal();
 
@@ -90,8 +86,6 @@ public class HotelSearchTest extends BaseTestSuite {
         assertTrue("Card Security Code Input not enabled", hotelPayment.getCreditCardInfo().isEnabledsecurityCodeInput());
         assertTrue("Card Zip Code Input not displayed", hotelPayment.getCreditCardInfo().isDisplayedzipCodeInput());
         assertTrue("Card Zip Code Input not enabled", hotelPayment.getCreditCardInfo().isEnabledZipCodeInput());
-
-
 
 
     }
