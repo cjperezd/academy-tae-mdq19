@@ -9,7 +9,7 @@ import static org.openqa.selenium.support.PageFactory.initElements;
 
 public abstract class MobilePage extends CommonOperations {
 
-  public MobilePage() {
+  protected MobilePage() {
     WebDriver webDriver = getDriver().getWebDriver();
     initElements(new AppiumFieldDecorator(webDriver), this);
   }
