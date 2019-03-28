@@ -1,14 +1,11 @@
-package com.academy.mdq.pages.hotel;
+package com.academy.mdq.web.pages.hotel;
 
-import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.pages.hotel.components.HotelSearchForm;
+import com.academy.mdq.web.pages.hotel.components.HotelSearchForm;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.time.LocalDate;
-
-import static com.academy.mdq.driver.Drivers.getDriver;
 
 public class HotelSearch extends WebPage {
     @FindBy(id = "gcw-hotel-form-hlp")

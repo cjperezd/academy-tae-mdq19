@@ -1,9 +1,7 @@
-package com.academy.mdq.pages.hotel.components;
+package com.academy.mdq.web.pages.hotel.components;
 
 import com.academy.mdq.page.web.WebComponent;
-import com.academy.mdq.pages.hotel.HotelRoomsReservation;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 
 import static com.academy.mdq.waits.Waits.isVisible;

@@ -1,16 +1,13 @@
-package com.academy.mdq.pages.hotel.components;
+package com.academy.mdq.web.pages.hotel.components;
 
 import com.academy.mdq.page.web.WebComponent;
-import com.academy.mdq.pages.commons.CalendarPicker;
-import com.academy.mdq.pages.hotel.HotelSearch;
-import com.academy.mdq.pages.hotel.HotelSearchResults;
+import com.academy.mdq.web.pages.commons.CalendarPicker;
+import com.academy.mdq.web.pages.hotel.HotelSearch;
+import com.academy.mdq.web.pages.hotel.HotelSearchResults;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.text.Format;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.academy.mdq.waits.Waits.isClickable;
 import static com.academy.mdq.waits.Waits.isNotVisible;

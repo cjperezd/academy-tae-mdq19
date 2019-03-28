@@ -63,4 +63,8 @@ public final class Waits {
     return waiting().until(invisibilityOf(webElement));
   }
 
+  public static boolean isTime(WebElement webElement,String attribute, String value){
+    return waiting().until(attributeContains(webElement, attribute, value));
+  }
+
 }

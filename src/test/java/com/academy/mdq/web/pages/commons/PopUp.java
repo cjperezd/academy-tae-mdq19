@@ -1,7 +1,7 @@
-package com.academy.mdq.pages.commons;
+package com.academy.mdq.web.pages.commons;
 
 import com.academy.mdq.page.web.WebComponent;
-import com.academy.mdq.pages.hotel.HotelSearchResults;
+import com.academy.mdq.web.pages.hotel.HotelSearchResults;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

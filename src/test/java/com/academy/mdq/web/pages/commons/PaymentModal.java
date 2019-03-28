@@ -1,4 +1,4 @@
-package com.academy.mdq.pages.commons;
+package com.academy.mdq.web.pages.commons;
 
 import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;

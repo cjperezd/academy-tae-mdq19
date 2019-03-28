@@ -1,11 +1,10 @@
-package com.academy.mdq.tests.hotel;
+package com.academy.mdq.web.tests.hotel;
 
 
-import com.academy.mdq.driver.Drivers;
-import com.academy.mdq.pages.hotel.HomePage;
-import com.academy.mdq.pages.hotel.HotelPayment;
-import com.academy.mdq.pages.hotel.HotelRoomsReservation;
-import com.academy.mdq.pages.hotel.HotelSearchResults;
+import com.academy.mdq.web.pages.hotel.HomePage;
+import com.academy.mdq.web.pages.hotel.HotelPayment;
+import com.academy.mdq.web.pages.hotel.HotelRoomsReservation;
+import com.academy.mdq.web.pages.hotel.HotelSearchResults;
 import com.academy.mdq.testsuite.BaseTestSuite;
 
 
