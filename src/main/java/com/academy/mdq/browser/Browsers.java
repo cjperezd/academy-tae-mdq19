@@ -1,6 +1,7 @@
 package com.academy.mdq.browser;
 
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -68,7 +69,7 @@ public enum Browsers implements GetCapabilities {
   ANDROID {
     @Override
     public Capabilities getCapabilities() {
-      DesiredCapabilities capabilities = android();
+      MutableCapabilities capabilities = new MutableCapabilities();
       Map<String, Object> extraCapabilities = CAPABILITIES_READER.readCapabilities("android.properties");
       extraCapabilities.forEach((key, value) -> capabilities.setCapability(key, value));
       return capabilities;
