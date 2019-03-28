@@ -1,18 +1,17 @@
-package com.academy.mdq.tests.hotel;
+package com.academy.mdq.web.tests.hotel;
 
-import com.academy.mdq.driver.Drivers;
-import com.academy.mdq.pages.CheapTicketsHome;
-import com.academy.mdq.pages.hotel.HotelDetails;
-import com.academy.mdq.pages.hotel.HotelDetailsResult;
-import com.academy.mdq.pages.hotel.HotelSearch;
-import com.academy.mdq.pages.hotel.HotelSearchResult;
+import com.academy.mdq.web.pages.CheapTicketsHome;
+import com.academy.mdq.web.pages.hotel.HotelDetails;
+import com.academy.mdq.web.pages.hotel.HotelDetailsResult;
+import com.academy.mdq.web.pages.hotel.HotelSearch;
+import com.academy.mdq.web.pages.hotel.HotelSearchResult;
 import com.academy.mdq.testsuite.BaseTestSuite;
 import org.junit.Assert;
 import org.junit.Test;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-import static com.academy.mdq.pages.CheapTicketsHome.Product.HOTEL;
+import static com.academy.mdq.web.pages.CheapTicketsHome.Product.HOTEL;
 import static java.time.LocalDate.now;
 
 public class HotelReserveTest extends BaseTestSuite {

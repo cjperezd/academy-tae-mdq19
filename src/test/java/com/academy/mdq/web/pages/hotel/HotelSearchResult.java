@@ -1,9 +1,9 @@
-package com.academy.mdq.pages.hotel;
+package com.academy.mdq.web.pages.hotel;
 
 import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.pages.hotel.components.HotelSearchCard;
-import com.academy.mdq.pages.hotel.components.HotelSearchFilters;
+import com.academy.mdq.web.pages.hotel.components.HotelSearchCard;
+import com.academy.mdq.web.pages.hotel.components.HotelSearchFilters;
 import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -51,6 +51,7 @@ public class HotelSearchResult extends WebPage {
     }
 
     public Set<String> getAreas(){
+        Waits.isVisible(wrapAll);
         return areas = this.areaOfCity.stream().map(area -> area.getText()).collect(toSet());
     }
 

@@ -1,4 +1,4 @@
-package com.academy.mdq.pages.common.components;
+package com.academy.mdq.web.pages.common.components;
 
 
 import com.academy.mdq.page.web.WebComponent;
@@ -8,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.academy.mdq.js.Javascript.click;
 import static com.academy.mdq.waits.Waits.areVisible;
 import static java.time.LocalDate.*;
 

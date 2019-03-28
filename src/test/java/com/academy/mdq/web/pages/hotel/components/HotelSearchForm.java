@@ -1,9 +1,8 @@
-package com.academy.mdq.pages.hotel.components;
+package com.academy.mdq.web.pages.hotel.components;
 
 import com.academy.mdq.page.web.WebComponent;
-import com.academy.mdq.pages.common.components.DatePickerCalendar;
-import com.academy.mdq.pages.hotel.HotelSearch;
-import com.academy.mdq.pages.hotel.HotelSearchResult;
+import com.academy.mdq.web.pages.common.components.DatePickerCalendar;
+import com.academy.mdq.web.pages.hotel.HotelSearchResult;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

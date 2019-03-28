@@ -1,8 +1,8 @@
-package com.academy.mdq.pages;
+package com.academy.mdq.web.pages;
 
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.pages.common.components.Search;
-import com.academy.mdq.pages.common.components.SearchBar;
+import com.academy.mdq.web.pages.common.components.Search;
+import com.academy.mdq.web.pages.common.components.SearchBar;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

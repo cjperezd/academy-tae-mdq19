@@ -1,11 +1,9 @@
-package com.academy.mdq.pages.hotel;
+package com.academy.mdq.web.pages.hotel;
 
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.pages.common.components.CalendarComp;
-import com.academy.mdq.pages.common.components.DatePickerCalendar;
-import com.academy.mdq.pages.common.components.Search;
-import com.academy.mdq.pages.hotel.components.HotelSearchForm;
-import net.sf.cglib.core.Local;
+import com.academy.mdq.web.pages.common.components.CalendarComp;
+import com.academy.mdq.web.pages.common.components.Search;
+import com.academy.mdq.web.pages.hotel.components.HotelSearchForm;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
