@@ -10,11 +10,12 @@ public abstract class MobileComponent extends MobileOperations {
   private MobileElement container;
 
   public MobileComponent(MobileElement container) {
-    this.container = container;
     initElements(new AppiumFieldDecorator(container), this);
+    this.container = container;
   }
 
-  public MobileElement getContainer() {
+  protected MobileElement getContainer() {
     return container;
   }
+
 }
