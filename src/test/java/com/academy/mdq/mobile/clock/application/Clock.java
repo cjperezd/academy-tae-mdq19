@@ -34,7 +34,7 @@ public class Clock extends MobilePage {
     }
 
     public void clickOnPauseButton() throws InterruptedException {
-        Waits.waitTSeconds(stopWatchTime,"contentDescription","22");
+        Waits.waitTSeconds(stopWatchTime,"contentDescription","20");
         click(playButton);
     }
 
