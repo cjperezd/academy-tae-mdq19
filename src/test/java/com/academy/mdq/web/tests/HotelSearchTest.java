@@ -1,10 +1,10 @@
-package com.academy.mdq.tests;
+package com.academy.mdq.web.tests;
 
-import com.academy.mdq.pages.Home;
-import com.academy.mdq.pages.hotel.HotelResults;
-import com.academy.mdq.pages.hotel.HotelToReservePage;
-import com.academy.mdq.pages.hotel.PaymentPage;
-import com.academy.mdq.pages.hotel.PropertyResultsPage;
+import com.academy.mdq.web.pages.Home;
+import com.academy.mdq.web.pages.hotel.HotelResults;
+import com.academy.mdq.web.pages.hotel.HotelToReservePage;
+import com.academy.mdq.web.pages.hotel.PaymentPage;
+import com.academy.mdq.web.pages.hotel.PropertyResultsPage;
 import com.academy.mdq.testsuite.BaseTestSuite;
 import org.junit.Assert;
 import org.junit.Test;

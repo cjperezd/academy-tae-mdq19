@@ -1,7 +1,7 @@
-package com.academy.mdq.pages.hotel;
+package com.academy.mdq.web.pages.hotel;
 
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.pages.complements.CreditCardForm;
+import com.academy.mdq.web.pages.complements.CreditCardForm;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

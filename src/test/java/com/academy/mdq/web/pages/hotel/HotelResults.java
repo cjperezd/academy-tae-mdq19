@@ -1,7 +1,7 @@
-package com.academy.mdq.pages.hotel;
+package com.academy.mdq.web.pages.hotel;
 
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.pages.complements.ResultCard;
+import com.academy.mdq.web.pages.complements.ResultCard;
 import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

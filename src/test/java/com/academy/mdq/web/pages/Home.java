@@ -1,8 +1,8 @@
-package com.academy.mdq.pages;
+package com.academy.mdq.web.pages;
 
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.pages.complements.NavigationBar;
-import com.academy.mdq.pages.hotel.HotelPage;
+import com.academy.mdq.web.pages.complements.NavigationBar;
+import com.academy.mdq.web.pages.hotel.HotelPage;
 
 public class Home extends WebPage {
 

@@ -1,7 +1,7 @@
-package com.academy.mdq.pages.hotel;
+package com.academy.mdq.web.pages.hotel;
 
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.pages.complements.DatePickerCalendar;
+import com.academy.mdq.web.pages.complements.DatePickerCalendar;
 import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
