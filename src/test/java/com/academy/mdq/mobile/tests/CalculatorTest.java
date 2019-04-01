@@ -7,15 +7,18 @@ import org.junit.Test;
 
 public class CalculatorTest extends BaseTestSuite {
 
+
     @Test
     public void myTest() throws InterruptedException {
         Calculator calculator = new Calculator();
+        int number = 10000;
+        int numberTwo = 5000;
 
 
-        calculator.clickOnNumber();
+        calculator.clickOnNumber(number);
         calculator.clickOnSum();
-        calculator.clickSecondNumber();
+        calculator.clickOnNumber(numberTwo);
         calculator.clickOnEquals();
-        Assert.assertTrue("Result not Ok!",calculator.isResultOk());
+        Assert.assertTrue("Result not Equal!!",calculator.isResultOk());
     }
 }

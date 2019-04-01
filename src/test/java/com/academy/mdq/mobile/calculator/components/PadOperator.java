@@ -20,12 +20,18 @@ public class PadOperator extends MobileComponent {
         private MobileElement divideButton;
     @AndroidFindBy (id = "del")
         private MobileElement deleteButton;
-
+    @AndroidFindBy(id = "eq")
+        private MobileElement digitEqualsButton;
 
 
 
     public PadOperator clickOnAdd(){
         click(plusButton);
+        return this;
+    }
+
+    public PadOperator clickOnDigitEquals() {
+        click(digitEqualsButton);
         return this;
     }
 

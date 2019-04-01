@@ -3,9 +3,12 @@ package com.academy.mdq.mobile.calculator.application;
 import com.academy.mdq.mobile.calculator.components.NumericPad;
 import com.academy.mdq.mobile.calculator.components.PadOperator;
 import com.academy.mdq.page.mobile.MobilePage;
+import com.academy.mdq.waits.Waits;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class Calculator extends MobilePage {
 
@@ -33,36 +36,25 @@ public class Calculator extends MobilePage {
         return  numericPad;
     }
 
-
-    public Calculator clickOnNumber(){
-        numericPad.clickOnDigitOne();
-        numericPad.clickOnDigitZero();
-        numericPad.clickOnDigitZero();
-        numericPad.clickOnDigitZero();
-        numericPad.clickOnDigitZero();
+    public Calculator clickOnNumber(int number){
+       numericPad.clickOnNumber(number);
         return new Calculator();
     }
+
 
     public void clickOnSum(){
         padOperator.clickOnAdd();
     }
 
-    public void clickSecondNumber(){
-        numericPad.clickOnDigitFive();
-        numericPad.clickOnDigitZero();
-        numericPad.clickOnDigitZero();
-        numericPad.clickOnDigitZero();
-    }
-
     public void clickOnEquals(){
-        numericPad.clickOnDigitEquals();
+        padOperator.clickOnDigitEquals();
     }
 
-    public String result(){
+    private String result(){
         return resultViewer.getText();
     }
 
     public boolean isResultOk(){
-        return result().contains("15000");
+        return result().equals("15,000");
     }
 }
