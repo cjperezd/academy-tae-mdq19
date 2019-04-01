@@ -1,4 +1,5 @@
 package com.academy.mdq.web.pages.books.components;
+
 import com.academy.mdq.page.web.WebComponent;
 import com.academy.mdq.web.pages.books.ResultDetails;
 import org.openqa.selenium.WebElement;

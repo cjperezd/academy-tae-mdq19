@@ -1,9 +1,10 @@
 package com.academy.mdq.web.pages.commons;
 
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import static com.academy.mdq.waits.Waits.isVisible;
 
 public class Cart extends WebPage {
 
@@ -19,18 +20,21 @@ public class Cart extends WebPage {
   @FindBy(css = ".sc-list-item-removed-msg.a-padding-medium")
   private WebElement removedInfomation;
 
-  public String getTitle (){
+  public String getTitle() {
     return bookTitle.getText();
   }
-  public String getPrice (){
+
+  public String getPrice() {
     return bookPrice.getText();
   }
+
   public Cart deleteItem() {
     click(deleteButton);
     return this;
   }
+
   public String getRemovedInformation() {
-    Waits.isVisible(removedInfomation);
+    isVisible(removedInfomation);
     return removedInfomation.getText();
   }
 

@@ -16,7 +16,7 @@ public class NavigationBar extends WebComponent {
   @FindBy(css = ".nav-search-submit.nav-sprite")
   private WebElement submitSearchButton;
 
-  @FindBy(id="nav-cart")
+  @FindBy(id = "nav-cart")
   private WebElement cartButton;
 
   public NavigationBar(WebElement container) {
@@ -42,4 +42,5 @@ public class NavigationBar extends WebComponent {
     click(cartButton);
     return new Cart();
   }
+
 }

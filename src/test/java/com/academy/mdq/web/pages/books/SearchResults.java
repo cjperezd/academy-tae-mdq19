@@ -10,23 +10,21 @@ import java.util.List;
 
 public class SearchResults extends WebPage {
 
-  @FindBy (css=".s-include-content-margin.s-border-bottom")
+  @FindBy(css = ".s-include-content-margin.s-border-bottom")
   private List<WebElement> resultCardsContainers;
 
   private final List<BookResultCard> bookResultCards = new ArrayList<>();
 
-  public SearchResults (){
+  public SearchResults() {
     super();
-    resultCardsContainers.forEach(resultContainer->bookResultCards.add(new BookResultCard(resultContainer)));
+    resultCardsContainers.forEach(resultContainer -> bookResultCards.add(new BookResultCard(resultContainer)));
   }
 
-  public BookResultCard getResultCard (int index)
-  {
+  public BookResultCard getResultCard(int index) {
     return bookResultCards.get(index);
   }
 
-  public ResultDetails selectCardTitle (int index)
-  {
+  public ResultDetails selectCardTitle(int index) {
     return bookResultCards.get(index).selectTitle();
   }
 
