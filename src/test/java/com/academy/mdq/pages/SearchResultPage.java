@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ServiceConfigurationError;
 
 import static com.academy.mdq.waits.Waits.*;
 
@@ -18,20 +19,18 @@ public class SearchResultPage extends WebPage {
 
   private final List<ResultCard> resultsCards = new ArrayList<>();
 
-  public boolean checkFirstCard(String search, String price) {
-    areVisible(resultsDiv);
-    setCards();
-    return resultsCards.get(0).getTitle().contains(search)
-        && resultsCards.get(0).getOriginalPrice().contains(price);
-  }
-
-  public ResultPage selectFirstCard() {
-    resultsCards.get(0).clickLink();
-    return new ResultPage();
-  }
-
-  private void setCards() {
+  public SearchResultPage() {
     resultsDiv.stream().forEach(card -> resultsCards.add(new ResultCard(card)));
+  }
+
+  public ResultCard getResultCard(int index) {
+    areVisible(resultsDiv);
+    return resultsCards.get(index);
+  }
+
+  public ResultPage selectCard(int index) {
+    resultsCards.get(index).clickLink();
+    return new ResultPage();
   }
 
 }

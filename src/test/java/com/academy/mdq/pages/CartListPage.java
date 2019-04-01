@@ -21,23 +21,23 @@ public class CartListPage extends WebPage {
 
   private final List<CartItem> items = new ArrayList<>();
 
-  public boolean verifyFirstItem(String search) {
-    setItems();
-    return items.get(0).getTitle().contains(search);
+  public CartListPage() {
+    cardDivs.stream().forEach(card -> items.add(new CartItem(card)));
   }
 
-  public CartListPage deleteFirstItem() {
-    items.get(0).deleteItem();
+  public CartItem getCartItem(int index) {
+    Waits.areVisible(cardDivs);
+    return items.get(index);
+  }
+
+  public CartListPage deleteItem(int index) {
+    items.get(index).deleteItem();
     return this;
   }
 
-  public boolean verifyDelete() {
+  public String emptyMessage() {
     isVisible(emptyTitle);
-    return emptyTitle.getText().contains("Your Shopping Cart is empty.");
-  }
-
-  private void setItems() {
-    cardDivs.stream().forEach(card -> items.add(new CartItem(card)));
+    return emptyTitle.getText();
   }
 
 }

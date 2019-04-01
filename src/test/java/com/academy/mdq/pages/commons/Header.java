@@ -1,6 +1,8 @@
 package com.academy.mdq.pages.commons;
 
 import com.academy.mdq.page.web.WebComponent;
+import com.academy.mdq.pages.CartListPage;
+import com.academy.mdq.pages.SearchResultPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -22,13 +24,15 @@ public class Header extends WebComponent {
     searchBar.selectFilter(filter);
   }
 
-  public void enterSearch(String search) {
+  public SearchResultPage enterSearch(String search) {
     searchBar.writeSearch(search);
     searchBar.clickGoButton();
+    return new SearchResultPage();
   }
 
-  public void selectCart() {
+  public CartListPage selectCart() {
     click(cartButton);
+    return new CartListPage();
   }
 
 }

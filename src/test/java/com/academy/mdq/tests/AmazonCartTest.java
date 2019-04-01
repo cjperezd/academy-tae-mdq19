@@ -3,9 +3,13 @@ package com.academy.mdq.tests;
 import com.academy.mdq.pages.AmazonHomePage;
 import com.academy.mdq.pages.CartListPage;
 import com.academy.mdq.pages.SearchResultPage;
+import com.academy.mdq.pages.commons.CartItem;
+import com.academy.mdq.pages.commons.ResultCard;
 import com.academy.mdq.testsuite.BaseTestSuite;
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class AmazonCartTest extends BaseTestSuite {
 
@@ -20,17 +24,21 @@ public class AmazonCartTest extends BaseTestSuite {
         .setFilter(filter)
         .search(search);
 
-    Assert.assertEquals("The result of the book is correct", resultPage.checkFirstCard(search, price), true);
+    ResultCard firstCard = resultPage.getResultCard(0);
 
-    CartListPage cartPage = resultPage.selectFirstCard()
+    assertEquals("The name of the book is correct", firstCard.getTitle().contains(search), true);
+    assertEquals("The price of the book is correct", firstCard.getOriginalPrice().contains(price), true);
+
+    CartListPage cartPage = resultPage
+        .selectCard(0)
         .addToCard()
         .goToCart();
 
-    Assert.assertEquals("The book in the cart list is correct", cartPage.verifyFirstItem(search), true);
+    assertEquals("The book in the cart list is correct", cartPage.getCartItem(0).getTitle().contains(search), true);
 
-    CartListPage delete = cartPage.deleteFirstItem();
+    CartListPage delete = cartPage.deleteItem(0);
 
-    Assert.assertEquals("The book has been deleted", delete.verifyDelete(), true);
+    assertEquals("The book has been deleted", delete.emptyMessage().equals("Your Shopping Cart is empty."), true);
 
   }
 

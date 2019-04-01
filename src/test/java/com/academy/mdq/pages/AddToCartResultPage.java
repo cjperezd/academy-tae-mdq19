@@ -14,8 +14,7 @@ public class AddToCartResultPage extends WebPage {
   private final Header navBar = new Header(navegationBar);
 
   public CartListPage goToCart() {
-    navBar.selectCart();
-    return new CartListPage();
+    return navBar.selectCart();
   }
 
 }

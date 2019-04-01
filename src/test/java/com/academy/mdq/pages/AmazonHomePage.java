@@ -19,8 +19,7 @@ public class AmazonHomePage extends WebPage {
   }
 
   public SearchResultPage search(String search) {
-    navBar.enterSearch(search);
-    return new SearchResultPage();
+    return navBar.enterSearch(search);
   }
 
 }
