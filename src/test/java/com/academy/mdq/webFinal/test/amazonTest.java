@@ -22,10 +22,12 @@ public class amazonTest extends BaseTestSuite {
         amazonHomePage.typeText(bookName);
         AmazonResultPage amazonResultPage = amazonHomePage.clickOnGo();
         amazonResultPage.getCardsOnList();
+        //TODO: Hacer un assert con nombre y precio
         AmazonPageBook amazonPageBook = amazonResultPage.clickRightBook();
         amazonPageBook.clickOnAddToCart();
         CartPage cartPage = amazonPageBook.clickCartButton();
         cartPage.clickOnDelete();
+        //TODO 2: Hacer un assert del nombre que sea correcto el que voy a eliminar
         Thread.sleep(5000);
         Assert.assertTrue(cartPage.isTheName());
 
