@@ -20,16 +20,13 @@ public class ToolBar extends MobileComponent {
 
   private MobileElement stopWatchButton;
 
-
   public ToolBar(MobileElement container) {
     super(container);
     alarmButton = toolBarbuttons.get(0);
     clockButton = toolBarbuttons.get(1);
     timerButton = toolBarbuttons.get(2);
     stopWatchButton = toolBarbuttons.get(3);
-
   }
-
 
   public StopWatch clickStopWatchButton() {
     click(stopWatchButton);

@@ -16,21 +16,17 @@ public class ManagePermissions extends MobileComponent {
   @AndroidFindBy(id = "current_page_text")
   private MobileElement quantityTexts;
 
-
   public ManagePermissions(MobileElement container) {
     super(container);
   }
 
-
-  public ContactInformation acceptPermissions ()
-  {
-    String[] permissionsText= quantityTexts.getText().split(" ");
+  public ContactInformation acceptPermissions() {
+    String[] permissionsText = quantityTexts.getText().split(" ");
     int maxPages = Integer.parseInt(permissionsText[2]);
-    for (int i = 0; i < maxPages ; i++) {
+    for (int i = 0; i < maxPages; i++) {
       click(allowButton);
     }
     return new ContactInformation();
   }
-
 
 }

@@ -21,38 +21,29 @@ public class StopWatch extends MobilePage {
     return this;
   }
 
-  private StopWatch stop() {
-    click(playStopButton);
-    return this;
-  }
-
   public StopWatch stopAtTime(String secs) {
-    Waits.isTime(timeElapsedText,"contentDescription", "0 minutes " + secs + " second");
+    Waits.isTime(timeElapsedText, "contentDescription", "0 minutes " + secs + " second");
     click(playStopButton);
     return this;
   }
-
 
   public String readTime() {
     return timeElapsedText.getAttribute("contentDescription");
   }
 
-  public int returnSecs ()
-  {
+  public int returnSecs() {
     String time = readTime();
     String[] timeArray = time.split(" ");
     String secs = timeArray[2];
     return Integer.parseInt(secs);
   }
 
-  public boolean isBetween (int minSecs, int maxSecs)
-  {
-    if (returnSecs() <= maxSecs && returnSecs()>=minSecs)
-    {
-      return true;
-    }
-    return false;
+  public boolean isBetween(int minSecs, int maxSecs) {
+    return returnSecs() <= maxSecs && returnSecs() >= minSecs;
   }
 
-
+  private StopWatch stop() {
+    click(playStopButton);
+    return this;
+  }
 }

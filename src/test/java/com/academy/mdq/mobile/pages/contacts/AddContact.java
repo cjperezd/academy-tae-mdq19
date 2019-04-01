@@ -7,16 +7,16 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import java.util.List;
 
 public class AddContact extends MobilePage {
-  @AndroidFindBy (className="android.widget.EditText")
+  @AndroidFindBy(className = "android.widget.EditText")
   private List<MobileElement> listInputs;
 
-  @AndroidFindBy (id="more_fields")
+  @AndroidFindBy(id = "more_fields")
   private MobileElement moreFieldsButton;
 
-  @AndroidFindBy (id="editor_menu_save_button")
+  @AndroidFindBy(id = "editor_menu_save_button")
   private MobileElement saveContact;
 
-  @AndroidFindBy (id="dialog_container")
+  @AndroidFindBy(id = "dialog_container")
   private MobileElement allowPermissionsContainer;
 
   private MobileElement nameInput;
@@ -25,36 +25,29 @@ public class AddContact extends MobilePage {
 
   private MobileElement emailInput;
 
-
-  public AddContact ()
-  {
+  public AddContact() {
     super();
-
     nameInput = listInputs.get(0);
     phoneInput = listInputs.get(2);
   }
 
-  public AddContact typeName (String name)
-  {
+  public AddContact typeName(String name) {
     nameInput.sendKeys(name);
     return this;
   }
 
-  public AddContact typePhone (String phone)
-  {
+  public AddContact typePhone(String phone) {
     phoneInput.sendKeys(phone);
     return this;
   }
 
-  public AddContact typeEmail (String email)
-  {
+  public AddContact typeEmail(String email) {
     emailInput = listInputs.get(4);
     emailInput.sendKeys(email);
     return this;
   }
 
-  public ContactInformation saveContact ()
-  {
+  public ContactInformation saveContact() {
     click(saveContact);
     return new ContactInformation();
   }

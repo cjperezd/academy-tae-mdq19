@@ -1,40 +1,33 @@
 package com.academy.mdq.mobile.tests.contacts;
 
-import com.academy.mdq.mobile.pages.contacts.AddContact;
 import com.academy.mdq.mobile.pages.contacts.ContactInformation;
 import com.academy.mdq.mobile.pages.contacts.Contacts;
-import com.academy.mdq.mobile.pages.contacts.components.LocateContactMessage;
 import com.academy.mdq.testsuite.BaseTestSuite;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ContactsTest extends BaseTestSuite {
 
-  private String name = "Lucia Corrales";
-  private String phone = "(223) 455-2613";
-  private String email = "corraleslucia@gmail.com";
+  private static final String NAME = "Lucia Corrales";
+  private static final String PHONE = "(223) 455-2613";
+  private static final String EMAIL = "corraleslucia@gmail.com";
 
   @Test
   public void addContactTest() {
-    Contacts contacts = new Contacts();
+    ContactInformation contactCard = new Contacts()
+        .clickAddContactsFloatingButton()
+        .clickKeepLocalButton()
+        .typeName(NAME)
+        .typePhone(PHONE)
+        .typeEmail(EMAIL)
+        .saveContact();
 
-    LocateContactMessage locateMessage = contacts.clickAddContactsFloatingButton();
-
-    AddContact addContact = locateMessage.clickKeepLocalButton()
-        .typeName(name)
-        .typePhone(phone)
-        .typeEmail(email);
-
-    ContactInformation contactCard = addContact.saveContact();
-
-    Assert.assertEquals(name, contactCard.getContactName());
-    Assert.assertEquals(phone, contactCard.getPhone());
-    Assert.assertEquals(email, contactCard.getEmail());
+    assertEquals(NAME, contactCard.getContactName());
+    assertEquals(PHONE, contactCard.getPhone());
+    assertEquals(EMAIL, contactCard.getEmail());
 
     contactCard.deleteContact();
-
-
   }
-
 
 }

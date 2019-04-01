@@ -7,13 +7,10 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 
 public class Clock extends MobilePage {
 
-
   @AndroidFindBy(id = "toolbar")
   private MobileElement toolbarContainer;
 
-  private ToolBar toolbar = new ToolBar(toolbarContainer);
-
   public ToolBar getToolbar() {
-    return toolbar;
+    return new ToolBar(toolbarContainer);
   }
 }

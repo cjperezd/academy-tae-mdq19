@@ -7,22 +7,20 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 
 public class LocateContactMessage extends MobileComponent {
 
-  @AndroidFindBy (id = "left_button")
+  @AndroidFindBy(id = "left_button")
   private MobileElement keepLocalButton;
 
-  @AndroidFindBy (id = "right_button")
+  @AndroidFindBy(id = "right_button")
   private MobileElement addAccount;
 
-  @AndroidFindBy (id = "content")
+  @AndroidFindBy(id = "content")
   private MobileElement messageContainer;
-
 
   public LocateContactMessage(MobileElement container) {
     super(container);
   }
 
-  public AddContact clickKeepLocalButton ()
-  {
+  public AddContact clickKeepLocalButton() {
     click(keepLocalButton);
     return new AddContact();
   }
