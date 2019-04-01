@@ -2,6 +2,7 @@ package com.academy.mdq.webFinal.test;
 
 import com.academy.mdq.testsuite.BaseTestSuite;
 import com.academy.mdq.webFinal.pages.amazon.AmazonHomePage;
+import com.academy.mdq.webFinal.pages.amazon.AmazonPageBook;
 import com.academy.mdq.webFinal.pages.amazon.AmazonResultPage;
 import com.academy.mdq.webFinal.pages.amazon.CartPage;
 import org.junit.Assert;
@@ -21,10 +22,6 @@ public class AmazonTest extends BaseTestSuite {
     Assert.assertTrue("Book name matches expected value", searchedBookName.contains(bookName));
 
     amazonResultPage.getFirstCard().selectBook().addToCart().cartButton();
-
-    CartPage cartPage = new CartPage().clickOnDelete();
-
-    Assert.assertTrue(cartPage.isCartEmpty("Your Shopping Cart is empty."));
 
 //    AmazonPageBook amazonPageBook = amazonResultPage.clickRightBook();
 //    amazonPageBook.addToCart();
