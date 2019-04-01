@@ -19,6 +19,9 @@ public class CartListPage extends WebPage {
   @FindBy(css = ".sc-cart-header h1")
   private WebElement emptyTitle;
 
+  @FindBy(className = "sc-list-item-removed-msg")
+  private WebElement emptyMessage;
+
   private final List<CartItem> items = new ArrayList<>();
 
   public CartListPage() {
@@ -35,9 +38,12 @@ public class CartListPage extends WebPage {
     return this;
   }
 
+  public String emptyTitle() {
+    return isVisible(emptyTitle).getText();
+  }
+
   public String emptyMessage() {
-    isVisible(emptyTitle);
-    return emptyTitle.getText();
+    return isVisible(emptyMessage).getText();
   }
 
 }

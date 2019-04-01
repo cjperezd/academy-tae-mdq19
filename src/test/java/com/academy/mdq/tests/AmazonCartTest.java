@@ -3,10 +3,8 @@ package com.academy.mdq.tests;
 import com.academy.mdq.pages.AmazonHomePage;
 import com.academy.mdq.pages.CartListPage;
 import com.academy.mdq.pages.SearchResultPage;
-import com.academy.mdq.pages.commons.CartItem;
 import com.academy.mdq.pages.commons.ResultCard;
 import com.academy.mdq.testsuite.BaseTestSuite;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -38,7 +36,8 @@ public class AmazonCartTest extends BaseTestSuite {
 
     CartListPage delete = cartPage.deleteItem(0);
 
-    assertEquals("The book has been deleted", delete.emptyMessage().equals("Your Shopping Cart is empty."), true);
+    assertEquals("The cart is empty", delete.emptyTitle().equals("Your Shopping Cart is empty."), true);
+    assertEquals("The book has been deleted", delete.emptyMessage().contains(search), true);
 
   }
 
