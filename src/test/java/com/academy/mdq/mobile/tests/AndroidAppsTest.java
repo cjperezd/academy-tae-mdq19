@@ -13,17 +13,23 @@ public class AndroidAppsTest extends BaseTestSuite {
   @Test
   public void calculatorAdd() {
 
-    float[] numbers = {10000, 5000, 100};
     String expectedResult = "15,100";
-    String actualResult = new CalculatorPage().addition(numbers);
 
-    Assert.assertEquals("the result is " + expectedResult, actualResult.equals(expectedResult), true);
+    String result = new CalculatorPage()
+        .typeNumber("10000")
+        .add()
+        .typeNumber("5000")
+        .add()
+        .typeNumber("100")
+        .equals();
+
+    Assert.assertEquals("the result is " + expectedResult, result.equals(expectedResult), true);
   }
 
   @Test
   public void startChronometer() {
 
-    int waitingSec = 21;
+    int waitingSec = 20;
     int finalSec = new ClockPage().selectChrono().pressButton().setWaitingTime(waitingSec).pressButton().getWaitingSec();
 
     Assert.assertEquals("The time is less than 25 secs", finalSec < 25, true);

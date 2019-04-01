@@ -1,9 +1,11 @@
 package com.academy.mdq.mobile.pages;
 
 import com.academy.mdq.page.mobile.MobilePage;
-import com.academy.mdq.waits.Waits;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.openqa.selenium.WebDriverException;
+
+import static com.academy.mdq.waits.Waits.waitingAttributeContains;
 
 public class ClockPage extends MobilePage {
 
@@ -27,7 +29,10 @@ public class ClockPage extends MobilePage {
   }
 
   public ClockPage setWaitingTime(int sec){
-    Waits.waitingSec(timeClock, sec);
+    if (sec < 60) {
+      String finalTime = "0 minutes " + sec + " seconds";
+      waitingAttributeContains(timeClock, "contentDescription", finalTime);
+    } else throw new WebDriverException("not implemented, seconds < 60");
     return this;
   }
 

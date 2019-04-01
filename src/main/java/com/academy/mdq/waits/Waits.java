@@ -1,6 +1,5 @@
 package com.academy.mdq.waits;
 
-import io.appium.java_client.MobileElement;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -64,9 +63,8 @@ public final class Waits {
     return waiting().until(invisibilityOf(webElement));
   }
 
-  public static boolean waitingSec(MobileElement mobileElement, int sec) {
-    String finalTime = "0 minutes " + sec + " seconds";
-    return waiting().until(attributeContains(mobileElement, "contentDescription", finalTime));
+  public static boolean waitingAttributeContains(WebElement webElement, String attribute, String value) {
+    return waiting().until(attributeContains(webElement, attribute, value));
   }
 
 }
