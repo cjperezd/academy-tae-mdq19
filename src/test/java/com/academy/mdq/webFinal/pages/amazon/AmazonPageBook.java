@@ -6,21 +6,20 @@ import org.openqa.selenium.support.FindBy;
 
 public class AmazonPageBook extends WebPage {
 
-    @FindBy (id = "add-to-cart-button")
-        private WebElement addToCartButton;
+  @FindBy(id = "add-to-cart-button")
+  private WebElement addToCartButton;
 
-    @FindBy (id = "nav-cart")
-        private WebElement cartButton;
+  @FindBy(id = "nav-cart")
+  private WebElement cartButton;
 
 
+  public AmazonPageBook addToCart() {
+    click(addToCartButton);
+    return this;
+  }
 
-    public AmazonPageBook clickOnAddToCart(){
-        click(addToCartButton);
-        return this;
-    }
-
-    public CartPage clickCartButton(){
-        click(cartButton);
-        return new CartPage();
-    }
+  public CartPage cartButton() {
+    click(cartButton);
+    return new CartPage();
+  }
 }
