@@ -10,7 +10,6 @@ public class ResultDetails extends WebPage {
   @FindBy(id = "add-to-cart-button")
   private WebElement addToCartButton;
 
-
   public AddedToCartInfo addToCart() {
     click(addToCartButton);
     return new AddedToCartInfo();

@@ -1,5 +1,4 @@
 package com.academy.mdq.web.pages.books.components;
-
 import com.academy.mdq.page.web.WebComponent;
 import com.academy.mdq.web.pages.books.ResultDetails;
 import org.openqa.selenium.WebElement;
@@ -23,7 +22,6 @@ public class BookResultCard extends WebComponent {
 
   public String getBookPrice() {
     String[] price = bookPrice.getText().split("\n");
-
     return price[0].concat("." + price[1]);
   }
 

@@ -1,35 +1,38 @@
 package com.academy.mdq.web.tests.books;
 
 import com.academy.mdq.testsuite.BaseTestSuite;
-import com.academy.mdq.web.pages.books.ResultDetails;
 import com.academy.mdq.web.pages.books.SearchResults;
-import com.academy.mdq.web.pages.commons.AddedToCartInfo;
+import com.academy.mdq.web.pages.books.components.BookResultCard;
 import com.academy.mdq.web.pages.commons.Cart;
 import com.academy.mdq.web.pages.commons.Home;
-import org.junit.Assert;
 import org.junit.Test;
 
-public class BookTest extends BaseTestSuite {
+import static org.junit.Assert.assertTrue;
 
-  private String bookName = "Embracing the Power of AI";
-  private String bookPrice = "$17.96";
+public class BookTest extends BaseTestSuite {
+  private final static String BOOK_NAME = "Embracing the Power of AI";
+  private final static String BOOK_PRICE = "$17.96";
 
   @Test
   public void SearchBookTest() {
+    SearchResults searchResult = new Home()
+        .searchBy("Books", BOOK_NAME);
 
-    Home homePage = new Home();
-    SearchResults searchResult = homePage.searchByBooks(bookName);
-    //Verify Title and price are Equals To Expected
-    Assert.assertTrue(searchResult.compareResults(bookName, bookPrice));
-    ResultDetails result = searchResult.selectBook();
-    AddedToCartInfo addedInfo = result.addToCart();
-    Cart cart = addedInfo.goToCart();
-    //Verify Title and price are Equals To Expected
-    Assert.assertTrue(cart.compareResults(bookName, bookPrice));
+    BookResultCard resultCard = searchResult.getResultCard(0);
+
+    assertTrue(resultCard.getBookTitle().contains(BOOK_NAME));
+    assertTrue(resultCard.getBookPrice().contains(BOOK_PRICE));
+
+    Cart cart = searchResult.selectCardTitle(0)
+        .addToCart()
+        .goToCart();
+
+    assertTrue(cart.getTitle().contains(BOOK_NAME));
+    assertTrue(cart.getPrice().contains(BOOK_PRICE));
+
     cart.deleteItem();
-    //Verify Empty Cart message is Display
-    Assert.assertEquals("Your Shopping Cart is empty.", cart.emptyCart());
 
-
+    assertTrue(cart.getRemovedInformation().contains(BOOK_NAME)
+        && cart.getRemovedInformation().contains("was removed from Shopping Cart."));
   }
 }

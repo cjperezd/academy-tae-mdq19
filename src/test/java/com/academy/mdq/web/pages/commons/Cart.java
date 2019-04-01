@@ -16,22 +16,22 @@ public class Cart extends WebPage {
   @FindBy(css = ".a-size-small.sc-action-delete")
   private WebElement deleteButton;
 
-  @FindBy(css = ".a-row.sc-cart-header")
-  private WebElement empySign;
+  @FindBy(css = ".sc-list-item-removed-msg.a-padding-medium")
+  private WebElement removedInfomation;
 
-
-  public boolean compareResults(String name, String price) {
-    return bookTitle.getText().contains(name) && bookPrice.getText().equals(price);
+  public String getTitle (){
+    return bookTitle.getText();
   }
-
+  public String getPrice (){
+    return bookPrice.getText();
+  }
   public Cart deleteItem() {
     click(deleteButton);
     return this;
   }
-
-  public String emptyCart() {
-    Waits.isTextPresent(empySign, "Your Shopping Cart is empty");
-    return empySign.getText();
+  public String getRemovedInformation() {
+    Waits.isVisible(removedInfomation);
+    return removedInfomation.getText();
   }
 
 }

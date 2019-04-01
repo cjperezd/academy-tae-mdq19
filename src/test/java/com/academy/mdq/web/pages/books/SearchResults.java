@@ -13,20 +13,21 @@ public class SearchResults extends WebPage {
   @FindBy (css=".s-include-content-margin.s-border-bottom")
   private List<WebElement> resultCardsContainers;
 
-  private List<BookResultCard> bookResultCards = new ArrayList<>();
+  private final List<BookResultCard> bookResultCards = new ArrayList<>();
 
   public SearchResults (){
     super();
     resultCardsContainers.forEach(resultContainer->bookResultCards.add(new BookResultCard(resultContainer)));
   }
 
-  public boolean compareResults(String name, String price) {
-    BookResultCard first = bookResultCards.get(0);
-    return first.getBookTitle().contains(name) && first.getBookPrice().equals(price);
-  }
-  public ResultDetails selectBook ()
+  public BookResultCard getResultCard (int index)
   {
-    return bookResultCards.get(0).selectTitle();
+    return bookResultCards.get(index);
+  }
+
+  public ResultDetails selectCardTitle (int index)
+  {
+    return bookResultCards.get(index).selectTitle();
   }
 
 

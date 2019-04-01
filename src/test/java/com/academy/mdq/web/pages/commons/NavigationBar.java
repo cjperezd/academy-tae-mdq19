@@ -11,16 +11,15 @@ public class NavigationBar extends WebComponent {
   private WebElement searchBoxSelect;
 
   @FindBy(id = "twotabsearchtextbox")
-  private WebElement seacrchBarInput;
+  private WebElement searchBarInput;
 
   @FindBy(css = ".nav-search-submit.nav-sprite")
   private WebElement submitSearchButton;
 
-  @FindBy(css = "#nav-cart .nav-line-2")
+  @FindBy(id="nav-cart")
   private WebElement cartButton;
 
-
-  protected NavigationBar(WebElement container) {
+  public NavigationBar(WebElement container) {
     super(container);
   }
 
@@ -29,8 +28,8 @@ public class NavigationBar extends WebComponent {
     return this;
   }
 
-  public NavigationBar searchTextInput(String searchText) {
-    type(seacrchBarInput, searchText);
+  public NavigationBar typeProduct(String product) {
+    type(searchBarInput, product);
     return this;
   }
 

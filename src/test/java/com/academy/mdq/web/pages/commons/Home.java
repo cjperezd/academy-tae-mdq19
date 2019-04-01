@@ -9,16 +9,10 @@ public class Home extends WebPage {
 
   @FindBy(id = "nav-search")
   private WebElement navBarContainer;
-
   private NavigationBar navBar = new NavigationBar((navBarContainer));
 
-  public SearchResults searchByBooks (String bookName)
+  public SearchResults searchBy (String department, String bookName)
   {
-    navBar.selectSearchDepartment("Books");
-    navBar.searchTextInput(bookName);
-    return navBar.clickSearchButton();
-
-
+    return navBar.selectSearchDepartment(department).typeProduct(bookName).clickSearchButton();
   }
-
 }
