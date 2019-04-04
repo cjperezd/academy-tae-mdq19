@@ -9,15 +9,11 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
 import javax.ws.rs.core.GenericType;
-import java.io.*;
 import java.util.List;
 
+import static com.academy.mdq.properties.ServiceProperties.SERVICE_PROPERTIES;
+
 public final class PostsServiceClient {
-
-  private static final String URL = "http://jsonplaceholder.typicode.com";
-
-  public PostsServiceClient() throws IOException {
-  }
 
   public Response<List<Post>> getAllPosts() {
     javax.ws.rs.core.Response response = client().getAllPosts();
@@ -41,7 +37,7 @@ public final class PostsServiceClient {
 
   private Posts client() {
     ResteasyClient client = new ResteasyClientBuilder().build();
-    ResteasyWebTarget target = client.target(URL);
+    ResteasyWebTarget target = client.target(SERVICE_PROPERTIES.getUrl());
     return target.proxy(Posts.class);
   }
 
