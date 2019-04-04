@@ -64,10 +64,11 @@ public class HotelResults extends WebPage {
     return new PropertyResultsPage();
   }
 
-  public HotelToReservePage selectFirstCard() {
+  public HotelToReservePage selectCard(int card) {
     Waits.areVisible(cardsDiv);
     transformCards();
-    resultCards.get(0).selectCard();
+    if (card < resultCards.size())
+      resultCards.get(card).selectCard();
     return new HotelToReservePage();
   }
 

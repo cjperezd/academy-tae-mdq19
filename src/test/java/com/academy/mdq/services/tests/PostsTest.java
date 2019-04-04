@@ -6,6 +6,7 @@ import com.academy.mdq.services.dtos.response.comments.Comment;
 import com.academy.mdq.services.dtos.response.posts.Post;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -14,6 +15,9 @@ import static org.junit.Assert.assertNotNull;
 public class PostsTest {
 
   private final PostsServiceClient client = new PostsServiceClient();
+
+  public PostsTest() throws IOException {
+  }
 
   @Test
   public void getAllPosts() {
@@ -42,6 +46,26 @@ public class PostsTest {
           assertNotNull(comment.getEmail());
           assertNotNull(comment.getBody());
         });
+  }
+
+  @Test
+  public void createPost() {
+
+    Post newPost = new Post();
+    newPost.setUserId(11);
+    newPost.setId(101);
+    newPost.setTitle("laboriosam dolor voluptates");
+    newPost.setBody("consequatur omnis est praesentium ducimus non iste neque hic deserunt voluptatibus veniam cum et rerum sed");
+
+    int status = client.createPost(newPost);
+    assertEquals(201, status);
+  }
+
+  @Test
+  public void deletePost() {
+
+    int status = client.deletePost(101);
+    assertEquals(404, status);
   }
 
 }

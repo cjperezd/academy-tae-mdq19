@@ -31,4 +31,24 @@ public class Post {
   public String getBody() {
     return body;
   }
+
+  public void setUserId(Integer userId) {
+    this.userId = userId;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public void setBody(String body) {
+    this.body = body;
+  }
+
+  public String toString() {
+    return userId + " / " + id + " / " + title + " / " + body;
+  }
 }

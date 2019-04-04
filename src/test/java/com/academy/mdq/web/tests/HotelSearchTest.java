@@ -55,19 +55,19 @@ public class HotelSearchTest extends BaseTestSuite {
   @Test
   public void reserveHotel() {
     String destination = "Miami Beach";
-    LocalDate checkIn = now().plusDays(3);
+    LocalDate checkIn = now();
 
     HotelToReservePage reservation = new Home()
         .goToHotels()
         .enterDestination(destination)
         .selectCheckIn(checkIn)
-        .selectCheckOut(checkIn.plusDays(10), checkIn.getMonthValue())
+        .selectCheckOut(checkIn.plusDays(7), checkIn.getMonthValue())
         .selectAdults(1)
         .search()
-        .selectFirstCard()
+        .selectCard(0)
         .switchTab(1);
 
-    PaymentPage payment = new HotelToReservePage().reserveFirstRoom().payTotal();
+    PaymentPage payment = reservation.reserveRoom(0).payTotal();
 
     Assert.assertEquals("The Form is displayed", payment.isCardFormVisible(), true);
     Assert.assertEquals("All the inputs are enable", payment.areAllElementsEnable(), true);
