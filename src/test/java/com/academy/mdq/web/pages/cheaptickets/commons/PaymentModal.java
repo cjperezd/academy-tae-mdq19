@@ -1,4 +1,4 @@
-package com.academy.mdq.web.pages.commons;
+package com.academy.mdq.web.pages.cheaptickets.commons;
 
 import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;

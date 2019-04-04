@@ -1,8 +1,8 @@
-package com.academy.mdq.web.pages.hotel;
+package com.academy.mdq.web.pages.cheaptickets.hotel;
 
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.web.pages.commons.PaymentModal;
-import com.academy.mdq.web.pages.hotel.components.ReservationOption;
+import com.academy.mdq.web.pages.cheaptickets.commons.PaymentModal;
+import com.academy.mdq.web.pages.cheaptickets.hotel.components.ReservationOption;
 import com.academy.mdq.waits.Waits;
 
 import org.openqa.selenium.WebElement;

@@ -11,7 +11,7 @@ import java.util.List;
 
 import static java.util.Objects.isNull;
 
-public class ServicesTests {
+public class PostsServiceTest {
   private final PostClient client = new PostClient();
 
   @Test
@@ -32,6 +32,19 @@ public class ServicesTests {
 
     response.getPayload().forEach(comment ->
         Assert.assertFalse("The comment id" + comment.getId() + "is not empty", isNull(comment.getId())));
+  }
+
+
+  @Test
+  public void testAddPostService() {
+    int status = client.addPost(new Post(1, 2, "hello", "World"));
+    Assert.assertEquals(201, status);
+  }
+
+  @Test
+  public void testPostDeleteService() {
+    int status = client.deletePost(1);
+    Assert.assertEquals(204, status);
   }
 
 }

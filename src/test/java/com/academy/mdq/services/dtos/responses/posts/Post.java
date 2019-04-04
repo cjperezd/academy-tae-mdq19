@@ -15,6 +15,13 @@ public class Post{
   @JsonProperty
   private String body;
 
+  public Post(int userId, int id, String title, String body) {
+    this.userId = userId;
+    this.id = id;
+    this.title = title;
+    this.body = body;
+  }
+
   @Override
   public String toString() {
     return "Post{" +

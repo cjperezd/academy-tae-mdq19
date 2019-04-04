@@ -1,13 +1,13 @@
-package com.academy.mdq.web.pages.hotel;
+package com.academy.mdq.web.pages.cheaptickets.hotel;
 
 
-import com.academy.mdq.web.pages.commons.NavigationBar;
+import com.academy.mdq.web.pages.cheaptickets.commons.NavigationBar;
 import com.academy.mdq.page.web.WebPage;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.academy.mdq.web.pages.commons.NavigationBar.Buttons.HOTELS;
+import static com.academy.mdq.web.pages.cheaptickets.commons.NavigationBar.Buttons.HOTELS;
 
 public class HomePage extends WebPage {
 

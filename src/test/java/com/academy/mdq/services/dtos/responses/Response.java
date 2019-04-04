@@ -9,6 +9,11 @@ public class Response <T> {
     this.payload = payload;
   }
 
+  public Response (int status)
+  {
+    this.status = status;
+  }
+
   public int getStatus() {
     return status;
   }

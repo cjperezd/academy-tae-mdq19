@@ -1,10 +1,10 @@
 package com.academy.mdq.web.tests.hotel;
 
 
-import com.academy.mdq.web.pages.hotel.HomePage;
-import com.academy.mdq.web.pages.hotel.HotelPayment;
-import com.academy.mdq.web.pages.hotel.HotelRoomsReservation;
-import com.academy.mdq.web.pages.hotel.HotelSearchResults;
+import com.academy.mdq.web.pages.cheaptickets.hotel.HomePage;
+import com.academy.mdq.web.pages.cheaptickets.hotel.HotelPayment;
+import com.academy.mdq.web.pages.cheaptickets.hotel.HotelRoomsReservation;
+import com.academy.mdq.web.pages.cheaptickets.hotel.HotelSearchResults;
 import com.academy.mdq.testsuite.BaseTestSuite;
 
 

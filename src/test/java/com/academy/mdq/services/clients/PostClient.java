@@ -30,4 +30,14 @@ public final class PostClient {
     return new Response<>(response.getStatus(), response.readEntity(new GenericType<List<Comment>>() {
     }));
   }
+
+  public int addPost(Post post) {
+    javax.ws.rs.core.Response response = client().addPost(post);
+    return response.getStatus();
+  }
+
+  public int deletePost (int id){
+    javax.ws.rs.core.Response response = client().deletePost(id);
+    return response.getStatus();
+  }
 }

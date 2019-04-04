@@ -1,9 +1,9 @@
-package com.academy.mdq.web.pages.hotel.components;
+package com.academy.mdq.web.pages.cheaptickets.hotel.components;
 
 import com.academy.mdq.page.web.WebComponent;
-import com.academy.mdq.web.pages.commons.CalendarPicker;
-import com.academy.mdq.web.pages.hotel.HotelSearch;
-import com.academy.mdq.web.pages.hotel.HotelSearchResults;
+import com.academy.mdq.web.pages.cheaptickets.commons.CalendarPicker;
+import com.academy.mdq.web.pages.cheaptickets.hotel.HotelSearch;
+import com.academy.mdq.web.pages.cheaptickets.hotel.HotelSearchResults;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

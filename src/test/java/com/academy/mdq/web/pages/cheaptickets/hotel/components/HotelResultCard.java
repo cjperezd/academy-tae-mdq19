@@ -1,4 +1,4 @@
-package com.academy.mdq.web.pages.hotel.components;
+package com.academy.mdq.web.pages.cheaptickets.hotel.components;
 
 import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
