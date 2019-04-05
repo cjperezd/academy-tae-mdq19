@@ -11,11 +11,13 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import javax.ws.rs.core.GenericType;
 import java.util.List;
 
+import static com.academy.mdq.properties.ServicesProperties.SERVICES_PROPERTIES;
+
 public final class PostClient {
 
   private IPostsComments client() {
     ResteasyClient client = new ResteasyClientBuilder().build();
-    ResteasyWebTarget target = client.target("http://jsonplaceholder.typicode.com");
+    ResteasyWebTarget target = client.target(SERVICES_PROPERTIES.getUrl());
     return target.proxy(IPostsComments.class);
   }
 

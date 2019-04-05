@@ -1,5 +1,6 @@
 package com.academy.mdq.services.scripts;
 
+import com.academy.mdq.properties.ServicesProperties;
 import com.academy.mdq.services.clients.PostClient;
 import com.academy.mdq.services.dtos.responses.Response;
 import com.academy.mdq.services.dtos.responses.comments.Comment;
@@ -21,7 +22,7 @@ public class PostsServiceTest {
     Assert.assertEquals(200, response.getStatus());
 
     response.getPayload().forEach(post ->
-        Assert.assertFalse("The post id " + post.getId() + " is not empty.", isNull(post.getId())));
+        Assert.assertFalse("Checking that all posts are not empty", isNull(post.getId())));
   }
 
   @Test
@@ -31,7 +32,7 @@ public class PostsServiceTest {
     Assert.assertEquals(200, response.getStatus());
 
     response.getPayload().forEach(comment ->
-        Assert.assertFalse("The comment id" + comment.getId() + "is not empty", isNull(comment.getId())));
+        Assert.assertFalse("checking that all comments are not empty", isNull(comment.getId())));
   }
 
 
