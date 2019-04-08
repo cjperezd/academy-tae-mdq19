@@ -14,4 +14,6 @@ public class ResultPage extends WebPage {
     return new AddToCartResultPage();
   }
 
+
+
 }

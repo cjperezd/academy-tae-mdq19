@@ -1,14 +1,15 @@
 package com.academy.mdq.testsuite;
 
 import com.academy.mdq.logger.Loggeable;
-import org.junit.After;
+import com.academy.mdq.rules.TestFailScreenshot;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.rules.TestRule;
 
 import java.net.MalformedURLException;
 
-import static com.academy.mdq.driver.Drivers.dispose;
 import static com.academy.mdq.driver.Drivers.populateDriver;
 import static com.academy.mdq.platform.Platform.WEB;
 import static com.academy.mdq.properties.TestProperties.TEST_PROPERTIES;
@@ -22,6 +23,9 @@ import static org.junit.Assert.assertEquals;
  * A new suite should inherit BaseTestSuite functionality.
  */
 public abstract class BaseTestSuite implements Loggeable {
+
+  @Rule
+  public final TestRule takeScreenshot = new TestFailScreenshot();
 
   @BeforeClass
   public static void beforeClass() {
@@ -46,10 +50,10 @@ public abstract class BaseTestSuite implements Loggeable {
     }
   }
 
-  @After
-  public void after() {
-    dispose();
-  }
+//  @After
+//  public void after() {
+//    dispose();
+//  }
 
   /**
    * Checks for the equality of two Strings.
