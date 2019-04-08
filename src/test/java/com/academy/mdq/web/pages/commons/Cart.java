@@ -21,11 +21,11 @@ public class Cart extends WebPage {
   private WebElement removedInfomation;
 
   public String getTitle() {
-    return bookTitle.getText();
+    return bookTitle.getText().toLowerCase();
   }
 
   public String getPrice() {
-    return bookPrice.getText();
+    return bookPrice.getText().toLowerCase();
   }
 
   public Cart deleteItem() {
@@ -35,7 +35,7 @@ public class Cart extends WebPage {
 
   public String getRemovedInformation() {
     isVisible(removedInfomation);
-    return removedInfomation.getText();
+    return removedInfomation.getText().toLowerCase();
   }
 
 }

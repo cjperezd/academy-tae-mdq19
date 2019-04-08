@@ -1,33 +1,34 @@
-package com.academy.mdq.web.pages.books.components;
+package com.academy.mdq.web.pages.commons;
 
 import com.academy.mdq.page.web.WebComponent;
 import com.academy.mdq.web.pages.books.ResultDetails;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class BookResultCard extends WebComponent {
+
+public class ResultCard extends WebComponent {
 
   @FindBy(css = ".a-size-medium.a-color-base.a-text-normal")
-  private WebElement bookTitle;
+  private WebElement title;
 
   @FindBy(className = "a-price")
-  private WebElement bookPrice;
+  private WebElement price;
 
-  public BookResultCard(WebElement container) {
+  public ResultCard(WebElement container) {
     super(container);
   }
 
-  public String getBookTitle() {
-    return bookTitle.getText();
+  public String getTitle() {
+    return title.getText().toLowerCase();
   }
 
-  public String getBookPrice() {
-    String[] price = bookPrice.getText().split("\n");
+  public String getPrice() {
+    String[] price = this.price.getText().split("\n");
     return price[0].concat("." + price[1]);
   }
 
   public ResultDetails selectTitle() {
-    click(bookTitle);
+    click(title);
     return new ResultDetails();
   }
 }

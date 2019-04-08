@@ -1,5 +1,6 @@
 package com.academy.mdq.testsuite;
 
+import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.logger.Loggeable;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -46,10 +47,10 @@ public abstract class BaseTestSuite implements Loggeable {
     }
   }
 
-  @After
+  /*@After
   public void after() {
     dispose();
-  }
+  }*/
 
   /**
    * Checks for the equality of two Strings.

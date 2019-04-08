@@ -1,7 +1,6 @@
 package com.academy.mdq.web.pages.commons;
 
 import com.academy.mdq.page.web.WebComponent;
-import com.academy.mdq.web.pages.books.SearchResults;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

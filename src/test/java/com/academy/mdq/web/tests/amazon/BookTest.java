@@ -1,8 +1,8 @@
-package com.academy.mdq.web.tests.books;
+package com.academy.mdq.web.tests.amazon;
 
 import com.academy.mdq.testsuite.BaseTestSuite;
-import com.academy.mdq.web.pages.books.SearchResults;
-import com.academy.mdq.web.pages.books.components.BookResultCard;
+import com.academy.mdq.web.pages.commons.SearchResults;
+import com.academy.mdq.web.pages.commons.ResultCard;
 import com.academy.mdq.web.pages.commons.Cart;
 import com.academy.mdq.web.pages.commons.Home;
 import org.junit.Test;
@@ -13,17 +13,17 @@ public class BookTest extends BaseTestSuite {
 
   private final static String BOOK_NAME = "Embracing the Power of AI";
 
-  private final static String BOOK_PRICE = "$17.96";
+  private final static String BOOK_PRICE = "17.96";
 
   @Test
-  public void SearchBookTest() {
+  public void searchBookTest() {
     SearchResults searchResult = new Home()
         .searchBy("Books", BOOK_NAME);
 
-    BookResultCard resultCard = searchResult.getResultCard(0);
+    ResultCard resultCard = searchResult.getResultCard(0);
 
-    assertTrue("ResultCard contains the name expected", resultCard.getBookTitle().contains(BOOK_NAME));
-    assertTrue("ResultCard contains the price expected", resultCard.getBookPrice().contains(BOOK_PRICE));
+    assertTrue("ResultCard contains the name expected", resultCard.getTitle().contains(BOOK_NAME));
+    assertTrue("ResultCard contains the price expected", resultCard.getPrice().contains(BOOK_PRICE));
 
     Cart cart = searchResult.selectCardTitle(0)
         .addToCart()
@@ -38,5 +38,6 @@ public class BookTest extends BaseTestSuite {
         cart.getRemovedInformation().contains(BOOK_NAME)
             && cart.getRemovedInformation().contains("was removed from Shopping Cart."));
   }
+
 
 }
