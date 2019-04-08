@@ -12,19 +12,19 @@ import java.util.List;
 
 public class CartPage extends WebPage {
 
-  @FindBy (className = "sc-list-item-content")
+    @FindBy(className = "sc-list-item-content")
     private List<WebElement> cardContainer;
 
-  @FindBy(css = ".a-size-small.sc-action-delete")
+    @FindBy(css = ".a-size-small.sc-action-delete")
     private WebElement deleteButton;
 
-  @FindBy(className = "sc-list-item-content")
+    @FindBy(className = "sc-list-item-content")
     private List<WebElement> shoppingCardItems;
 
-  @FindBy (className = "sc-cart-header")
+    @FindBy(className = "sc-cart-header")
     private WebElement cartInformation;
 
-  @FindBy (className = "sc-list-item-removed-msg")
+    @FindBy(className = "sc-list-item-removed-msg")
     private WebElement removedItems;
 
     private List<CartBookCard> listOfCards = new ArrayList<>();
@@ -35,24 +35,24 @@ public class CartPage extends WebPage {
     }
 
 
-  public CartPage clickOnDelete() {
-    click(deleteButton);
-    return this;
-  }
+    public CartPage clickOnDelete() {
+        click(deleteButton);
+        return this;
+    }
 
-  public CartBookCard getFirstCard(){
-      return getCardsOnBookList().stream().findFirst().get();
-  }
+    public CartBookCard getFirstCard() {
+        return getCardsOnBookList().stream().findFirst().get();
+    }
 
-  public String getTitle(){
+    public String getTitle() {
         return getFirstCard().getBookTitle();
-  }
+    }
 
-  public boolean isCartEmpty(String information){
+    public boolean isCartEmpty(String information) {
         Waits.isVisible(removedItems);
         return cartInformation.getText().equals(information);
 
-  }
+    }
 
 
 }

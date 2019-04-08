@@ -8,22 +8,22 @@ import org.openqa.selenium.support.FindBy;
 public class AmazonHomePage extends WebPage {
 
 
-  @FindBy(id = "nav-search")
-  private WebElement searchBarContainer;
+    @FindBy(id = "nav-search")
+    private WebElement searchBarContainer;
 
-  SearchBar searchBar = new SearchBar(searchBarContainer);
+    SearchBar searchBar = new SearchBar(searchBarContainer);
 
-  public AmazonResultPage clickOnGo() {
-    searchBar.search();
-    return new AmazonResultPage();
-  }
+    public AmazonResultPage clickOnGo() {
+        searchBar.search();
+        return new AmazonResultPage();
+    }
 
-  public AmazonHomePage typeText(String bookName) {
-    searchBar.typeBookText(bookName);
-    return this;
-  }
+    public AmazonHomePage typeText(String bookName) {
+        searchBar.typeBookText(bookName);
+        return this;
+    }
 
-  public SearchBar getSearchBar() {
-    return searchBar;
-  }
+    public SearchBar getSearchBar() {
+        return searchBar;
+    }
 }

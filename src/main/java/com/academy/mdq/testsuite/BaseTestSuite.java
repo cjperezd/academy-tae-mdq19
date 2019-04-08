@@ -46,10 +46,10 @@ public abstract class BaseTestSuite implements Loggeable {
     }
   }
 
-  @After
+  /*@After
   public void after() {
     dispose();
-  }
+  }*/
 
   /**
    * Checks for the equality of two Strings.

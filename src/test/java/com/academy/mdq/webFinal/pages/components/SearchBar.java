@@ -11,37 +11,37 @@ import org.openqa.selenium.support.ui.Select;
 
 public class SearchBar extends WebComponent {
 
-  public SearchBar(WebElement container) {
-    super(container);
-  }
+    public SearchBar(WebElement container) {
+        super(container);
+    }
 
-  @FindBy(className = "nav-left")
-  private WebElement categoryButton;
+    @FindBy(className = "nav-left")
+    private WebElement categoryButton;
 
-  @FindBy(className = "nav-search-dropdown")
+    @FindBy(className = "nav-search-dropdown")
     private WebElement categorySelector;
 
-  @FindBy(id = "twotabsearchtextbox")
-  private WebElement textContainer;
+    @FindBy(id = "twotabsearchtextbox")
+    private WebElement textContainer;
 
-  @FindBy(className = "nav-input")
-  private WebElement goButton;
+    @FindBy(className = "nav-input")
+    private WebElement goButton;
 
-  public SearchBar selectCategory(String category) {
-    //click(categoryButton);
-    new Select(categorySelector).selectByVisibleText(category);
-    return this;
-  }
+    public SearchBar selectCategory(String category) {
+        //click(categoryButton);
+        new Select(categorySelector).selectByVisibleText(category);
+        return this;
+    }
 
-  public AmazonResultPage search() {
-    click(goButton);
-    return new AmazonResultPage();
-  }
+    public AmazonResultPage search() {
+        click(goButton);
+        return new AmazonResultPage();
+    }
 
-  public SearchBar typeBookText(String bookName) {
-    type(textContainer, bookName);
-    return this;
-  }
+    public SearchBar typeBookText(String bookName) {
+        type(textContainer, bookName);
+        return this;
+    }
 
 
 }
