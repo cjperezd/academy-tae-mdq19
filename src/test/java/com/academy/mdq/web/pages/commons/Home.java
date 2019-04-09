@@ -11,7 +11,10 @@ public class Home extends WebPage {
 
   private NavigationBar navBar = new NavigationBar(navBarContainer);
 
-  public NavigationBar getNavBar (){ return navBar;}
+  public NavigationBar getNavBar() {
+    return navBar;
+  }
+
 
   public SearchResults searchBy(String department, String product) {
     return navBar.selectSearchDepartment(department).typeProduct(product).clickSearchButton();

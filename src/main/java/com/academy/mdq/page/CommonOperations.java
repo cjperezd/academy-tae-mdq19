@@ -1,8 +1,10 @@
 package com.academy.mdq.page;
 
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebElement;
 
 import static com.academy.mdq.driver.Drivers.getDriver;
+import static com.academy.mdq.reports.Report.getTest;
 import static com.academy.mdq.waits.Waits.isClickable;
 import static com.academy.mdq.waits.Waits.isVisible;
 import static java.util.stream.Stream.of;
@@ -22,6 +24,7 @@ public abstract class CommonOperations {
    * @param webElement the {@link WebElement}
    */
   protected void click(WebElement webElement) {
+    getTest().log(Status.INFO, "Clicking on [" + webElement + "]");
     isClickable(webElement).click();
   }
 
