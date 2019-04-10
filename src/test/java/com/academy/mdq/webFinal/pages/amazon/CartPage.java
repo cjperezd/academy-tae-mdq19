@@ -54,5 +54,9 @@ public class CartPage extends WebPage {
 
     }
 
+    public String getCartInformation(){
+        return cartInformation.getText();
+    }
+
 
 }
