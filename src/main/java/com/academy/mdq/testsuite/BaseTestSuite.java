@@ -2,6 +2,7 @@ package com.academy.mdq.testsuite;
 
 import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.logger.Loggeable;
+import com.aventstack.extentreports.Status;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,6 +14,8 @@ import static com.academy.mdq.driver.Drivers.dispose;
 import static com.academy.mdq.driver.Drivers.populateDriver;
 import static com.academy.mdq.platform.Platform.WEB;
 import static com.academy.mdq.properties.TestProperties.TEST_PROPERTIES;
+import static com.academy.mdq.reports.Report.getNewTest;
+import static com.academy.mdq.reports.Report.getTest;
 import static com.academy.mdq.server.SeleniumStandaloneServer.SERVER;
 import static java.lang.String.format;
 import static junit.framework.Assert.fail;

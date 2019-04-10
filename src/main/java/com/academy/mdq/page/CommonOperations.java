@@ -1,12 +1,14 @@
 package com.academy.mdq.page;
 
-import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebElement;
+
+import java.lang.reflect.Field;
 
 import static com.academy.mdq.driver.Drivers.getDriver;
 import static com.academy.mdq.reports.Report.getTest;
 import static com.academy.mdq.waits.Waits.isClickable;
 import static com.academy.mdq.waits.Waits.isVisible;
+import static com.aventstack.extentreports.Status.INFO;
 import static java.util.stream.Stream.of;
 
 public abstract class CommonOperations {
@@ -24,8 +26,24 @@ public abstract class CommonOperations {
    * @param webElement the {@link WebElement}
    */
   protected void click(WebElement webElement) {
-    getTest().log(Status.INFO, "Clicking on [" + webElement + "]");
+    getTest().log(INFO, String.format("Clicking on [ %s ]", getWebElementName(webElement)));
     isClickable(webElement).click();
+  }
+
+  private String getWebElementName(WebElement webEl) {
+    Field[] fields = this.getClass().getDeclaredFields();
+    for (Field field : fields) {
+      field.setAccessible(true);
+      try {
+        Object fieldValue = field.get(this);
+        if (fieldValue != null && fieldValue == webEl) {
+          return field.getName();
+        }
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
+    return "";
   }
 
   /**

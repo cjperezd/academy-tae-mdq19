@@ -3,6 +3,7 @@ package com.academy.mdq.driver;
 import com.academy.mdq.browser.Browsers;
 import com.academy.mdq.logger.Loggeable;
 import com.academy.mdq.platform.Platform;
+import com.aventstack.extentreports.Status;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -11,6 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static com.academy.mdq.properties.TestProperties.TEST_PROPERTIES;
+import static com.academy.mdq.reports.Report.getTest;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
