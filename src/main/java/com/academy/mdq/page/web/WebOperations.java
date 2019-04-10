@@ -5,8 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import static com.academy.mdq.driver.Drivers.getDriver;
+import static com.academy.mdq.reports.BasicExtentReport.*;
 import static com.academy.mdq.waits.Waits.isTextPresent;
 import static com.academy.mdq.waits.Waits.isVisible;
+import static com.aventstack.extentreports.Status.*;
 
 public abstract class WebOperations extends CommonOperations {
 
@@ -33,6 +35,7 @@ public abstract class WebOperations extends CommonOperations {
    * @param text       the text
    */
   protected boolean type(WebElement webElement, String text) {
+    getTest().log(INFO, "Typing " + text + " on element " + getNameOfElement(webElement));
     isVisible(webElement).sendKeys(text);
     return isTextPresent(webElement, text);
   }
@@ -44,6 +47,7 @@ public abstract class WebOperations extends CommonOperations {
    * @param text       the text to select
    */
   protected void selectByText(WebElement webElement, String text) {
+    getTest().log(INFO, "Selecting " + text + " from " + getNameOfElement(webElement));
     select(webElement).selectByVisibleText(text);
   }
 

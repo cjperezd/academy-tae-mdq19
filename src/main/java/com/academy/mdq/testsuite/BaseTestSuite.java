@@ -1,11 +1,11 @@
 package com.academy.mdq.testsuite;
 
 import com.academy.mdq.logger.Loggeable;
+import com.academy.mdq.reports.BasicExtentReport;
+import com.academy.mdq.rules.ExtendErrorCollector;
 import com.academy.mdq.rules.TestFailScreenshot;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Rule;
+import org.junit.*;
+import org.junit.rules.ErrorCollector;
 import org.junit.rules.TestRule;
 
 import java.net.MalformedURLException;
@@ -25,6 +25,9 @@ import static org.junit.Assert.assertEquals;
 public abstract class BaseTestSuite implements Loggeable {
 
   @Rule
+  public ExtendErrorCollector collector = new ExtendErrorCollector();
+
+  @Rule
   public final TestRule takeScreenshot = new TestFailScreenshot();
 
   @BeforeClass
@@ -36,6 +39,7 @@ public abstract class BaseTestSuite implements Loggeable {
 
   @AfterClass
   public static void afterClass() {
+    BasicExtentReport.endTest();
     if (WEB.equals(TEST_PROPERTIES.getPlatform())) {
       SERVER.stop();
     }

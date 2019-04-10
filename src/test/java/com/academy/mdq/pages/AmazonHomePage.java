@@ -2,7 +2,6 @@ package com.academy.mdq.pages;
 
 import com.academy.mdq.page.web.WebPage;
 import com.academy.mdq.pages.commons.Header;
-import com.academy.mdq.pages.commons.SearchBar;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
