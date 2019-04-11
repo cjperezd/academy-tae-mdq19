@@ -30,7 +30,7 @@ public abstract class CommonOperations {
     isClickable(webElement).click();
   }
 
-  private String getWebElementName(WebElement webEl) {
+  protected String getWebElementName(WebElement webEl) {
     Field[] fields = this.getClass().getDeclaredFields();
     for (Field field : fields) {
       field.setAccessible(true);

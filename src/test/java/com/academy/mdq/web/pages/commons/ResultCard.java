@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 public class ResultCard extends WebComponent {
 
   @FindBy(css = ".a-size-medium.a-color-base.a-text-normal")
-  private WebElement title;
+  private WebElement productNameLink;
 
   @FindBy(className = "a-price")
   private WebElement price;
@@ -18,8 +18,8 @@ public class ResultCard extends WebComponent {
     super(container);
   }
 
-  public String getTitle() {
-    return title.getText().toLowerCase();
+  public String getProductNameLink() {
+    return productNameLink.getText().toLowerCase();
   }
 
   public String getPrice() {
@@ -27,8 +27,8 @@ public class ResultCard extends WebComponent {
     return price[0].concat("." + price[1]);
   }
 
-  public ResultDetails selectTitle() {
-    click(title);
+  public ResultDetails clickProductNameLink() {
+    click(productNameLink);
     return new ResultDetails();
   }
 }

@@ -9,23 +9,23 @@ import static com.academy.mdq.waits.Waits.isVisible;
 public class Cart extends WebPage {
 
   @FindBy(css = ".a-size-medium.sc-product-title.a-text-bold")
-  private WebElement bookTitle;
+  private WebElement productNameText;
 
   @FindBy(css = ".sc-price-sign.a-text-bold")
-  private WebElement bookPrice;
+  private WebElement productPrice;
 
   @FindBy(css = ".a-size-small.sc-action-delete")
   private WebElement deleteButton;
 
   @FindBy(css = ".sc-list-item-removed-msg.a-padding-medium")
-  private WebElement removedInfomation;
+  private WebElement removedInfomationText;
 
   public String getTitle() {
-    return bookTitle.getText().toLowerCase();
+    return productNameText.getText().toLowerCase();
   }
 
   public String getPrice() {
-    return bookPrice.getText().toLowerCase();
+    return productPrice.getText().toLowerCase();
   }
 
   public Cart deleteItem() {
@@ -33,9 +33,9 @@ public class Cart extends WebPage {
     return this;
   }
 
-  public String getRemovedInformation() {
-    isVisible(removedInfomation);
-    return removedInfomation.getText().toLowerCase();
+  public String getRemovedInformationText() {
+    isVisible(removedInfomationText);
+    return removedInfomationText.getText().toLowerCase();
   }
 
 }

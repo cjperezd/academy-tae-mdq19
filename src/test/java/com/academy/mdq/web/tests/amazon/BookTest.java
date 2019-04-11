@@ -22,10 +22,10 @@ public class BookTest extends BaseTestSuite {
 
     ResultCard resultCard = searchResult.getResultCard(0);
 
-    assertTrue("ResultCard contains the name expected", resultCard.getTitle().contains(BOOK_NAME));
+    assertTrue("ResultCard contains the name expected", resultCard.getProductNameLink().contains(BOOK_NAME));
     assertTrue("ResultCard contains the price expected", resultCard.getPrice().contains(BOOK_PRICE));
 
-    Cart cart = searchResult.selectCardTitle(0)
+    Cart cart = searchResult.clickProductName(0)
         .addToCart()
         .goToCart();
 
@@ -35,8 +35,8 @@ public class BookTest extends BaseTestSuite {
     cart.deleteItem();
 
     assertTrue("The delete information contains both book name and 'was removed from shopping cart' indication",
-        cart.getRemovedInformation().contains(BOOK_NAME)
-            && cart.getRemovedInformation().contains("was removed from Shopping Cart."));
+        cart.getRemovedInformationText().contains(BOOK_NAME)
+            && cart.getRemovedInformationText().contains("was removed from Shopping Cart."));
   }
 
 

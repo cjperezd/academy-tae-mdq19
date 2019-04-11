@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import static com.academy.mdq.driver.Drivers.getDriver;
-import static com.academy.mdq.properties.TestProperties.TEST_PROPERTIES;
 import static com.academy.mdq.reports.Report.getTest;
 import static com.academy.mdq.waits.Waits.isTextPresent;
 import static com.academy.mdq.waits.Waits.isVisible;
@@ -36,7 +35,7 @@ public abstract class WebOperations extends CommonOperations {
    * @param text       the text
    */
   protected boolean type(WebElement webElement, String text) {
-    getTest().log(Status.INFO,"Typing [" + text + "] in [" + webElement + "]");
+    getTest().log(Status.INFO, String.format("Typing [%s] in [%s]", text, getWebElementName(webElement)));
     isVisible(webElement).sendKeys(text);
     return isTextPresent(webElement, text);
   }
@@ -48,7 +47,7 @@ public abstract class WebOperations extends CommonOperations {
    * @param text       the text to select
    */
   protected void selectByText(WebElement webElement, String text) {
-    getTest().log(Status.INFO,"Selecting [" + text + "] from " + webElement);
+    getTest().log(Status.INFO, String.format("Selecting [%s] from %s", text, getWebElementName(webElement)));
     select(webElement).selectByVisibleText(text);
   }
 

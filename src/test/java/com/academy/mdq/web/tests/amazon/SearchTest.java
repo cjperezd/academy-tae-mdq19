@@ -1,6 +1,7 @@
 package com.academy.mdq.web.tests.amazon;
 
 import com.academy.mdq.testsuite.BaseTestSuite;
+import com.academy.mdq.web.listeners.AmazonListener;
 import com.academy.mdq.web.listeners.AmazonRuler;
 import com.academy.mdq.web.pages.commons.Cart;
 import com.academy.mdq.web.pages.commons.Home;
@@ -13,11 +14,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
 
 import java.util.Arrays;
 import java.util.Collection;
 
+import static com.academy.mdq.excelutils.ExcelUtils.readExcel;
 import static com.academy.mdq.reports.Report.finishReport;
 import static com.academy.mdq.reports.Report.getNewTest;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -25,15 +26,25 @@ import static org.hamcrest.CoreMatchers.containsString;
 @RunWith(Parameterized.class)
 public class SearchTest extends BaseTestSuite {
 
-  @Parameters
+  private static final String filePath = System.getProperty("user.dir") + "\\ddt\\ddt.xlsx";
+  private static final String sheetName = "Sheet1";
+
+  //WITH PARAMETERS
+//  @Parameterized.Parameters
+//  public static Collection<Object[]> data() {
+//    return Arrays.asList(new Object[][]{
+//        {"Books", "Embracing the Power of AI"},
+//        {"Computers", "ms gp63"},
+//        {"Music, CDs & Vinyl", "the beatles"},
+//        {"Software", "Dictionary"},
+//        {"Video Games", "Looper"}
+//    });
+//  }
+
+  //WITH PARAMETERS FROM EXCEL
+  @Parameterized.Parameters
   public static Collection<Object[]> data() {
-    return Arrays.asList(new Object[][]{
-        {"Books", "Embracing the Power of AI"},
-        {"Computers", "ms gp63"},
-        {"Music, CDs & Vinyl", "the beatles"},
-        {"Software", "Ditionary"},
-        {"Video Games", "Looper"}
-    });
+    return Arrays.asList(readExcel(filePath, sheetName));
   }
 
   @Parameter
@@ -42,15 +53,15 @@ public class SearchTest extends BaseTestSuite {
   @Parameter(1)
   public String productName;
 
-  //@Rule
-  //public AmazonListener ss = new AmazonListener();
+  @Rule
+  public AmazonListener ss = new AmazonListener();
 
   @Rule
   public AmazonRuler ru = new AmazonRuler();
 
   @Before
   public void createTestReport() {
-    getNewTest("Amazon Search Test", "Using [category] : " + category + " and [product Name] : " + productName);
+    getNewTest("Amazon Search Test", "Using [" + category + "] :  and [" + productName + "] : ");
   }
 
   @Test
@@ -59,9 +70,9 @@ public class SearchTest extends BaseTestSuite {
         .searchBy(category, productName);
     ResultCard resultCard = searchResult.getResultCard(0);
 
-    ru.checkThat("ResultCard contains the title expected", resultCard.getTitle(), containsString(productName.toLowerCase()));
+    ru.checkThat("ResultCard contains the title expected", resultCard.getProductNameLink(), containsString(productName.toLowerCase()));
 
-    Cart cart = searchResult.selectCardTitle(0)
+    Cart cart = searchResult.clickProductName(0)
         .addToCart()
         .goToCart();
 
@@ -70,9 +81,9 @@ public class SearchTest extends BaseTestSuite {
     cart.deleteItem();
 
     ru.checkThat("The delete information contains product name.",
-        cart.getRemovedInformation(), containsString(productName.toLowerCase()));
-    ru.checkThat("The delete information contains the expression 'was removed from shopping cart' ",
-        cart.getRemovedInformation(), containsString("was removed from shopping cart."));
+        cart.getRemovedInformationText(), containsString(productName.toLowerCase()));
+    ru.checkThat("The delete information contains the expression 'was removed from shopping cart'",
+        cart.getRemovedInformationText(), containsString("was removed from shopping cart."));
   }
 
   @AfterClass

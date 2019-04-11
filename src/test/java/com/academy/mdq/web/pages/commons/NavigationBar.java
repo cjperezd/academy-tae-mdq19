@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 public class NavigationBar extends WebComponent {
 
   @FindBy(id = "searchDropdownBox")
-  private WebElement searchBoxSelect;
+  private WebElement categoryDropDown;
 
   @FindBy(id = "twotabsearchtextbox")
   private WebElement searchBarInput;
@@ -16,14 +16,14 @@ public class NavigationBar extends WebComponent {
   private WebElement submitSearchButton;
 
   @FindBy(id = "nav-cart")
-  private WebElement cartButton;
+  private WebElement goToCartButton;
 
   public NavigationBar(WebElement container) {
     super(container);
   }
 
   public NavigationBar selectSearchDepartment(String option) {
-    selectByText(searchBoxSelect, option);
+    selectByText(categoryDropDown, option);
     return this;
   }
 
@@ -38,7 +38,7 @@ public class NavigationBar extends WebComponent {
   }
 
   public Cart clickCartButton() {
-    click(cartButton);
+    click(goToCartButton);
     return new Cart();
   }
 

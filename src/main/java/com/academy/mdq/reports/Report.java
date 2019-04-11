@@ -8,13 +8,11 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import net.bytebuddy.utility.RandomString;
 import org.apache.commons.io.FileUtils;
-import org.junit.Before;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.util.Random;
 
 import static com.academy.mdq.properties.ReportProperties.REPORT_PROPERTIES;
 import static com.academy.mdq.properties.TestProperties.TEST_PROPERTIES;
@@ -47,7 +45,7 @@ public class Report {
   }
 
 
-  public static void logScreenShotFailed (Throwable e){
+  public static void logScreenShotFailed(Throwable e) {
     String name = RandomString.make();
     name = System.getProperty("user.dir") + TestWatcher_PROPERTIES.getPath() + name + ".png";
 
@@ -59,8 +57,6 @@ public class Report {
       throw new RuntimeException(e1);
     }
   }
-
-
 
 
 }

@@ -24,8 +24,8 @@ public class SearchResults extends WebPage {
     return resultCards.get(index);
   }
 
-  public ResultDetails selectCardTitle(int index) {
-    return resultCards.get(index).selectTitle();
+  public ResultDetails clickProductName(int index) {
+    return resultCards.get(index).clickProductNameLink();
   }
 
 
