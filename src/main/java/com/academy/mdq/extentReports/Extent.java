@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.io.IOException;
+import static com.academy.mdq.properties.TestProperties.TEST_PROPERTIES;
 
 
 @RunWith(Parameterized.class)
@@ -21,8 +21,10 @@ public class Extent {
     private static ExtentReports extent = getConfigExtent();
     private static ExtentTest test;
 
-    public Extent (){
+    public Extent() {
         test = extent.createTest("AmazonTestReporter");
+        getTest().log(Status.INFO, "Navigating into: " + TEST_PROPERTIES.getBaseUrl());
+
     }
 
 
@@ -43,24 +45,7 @@ public class Extent {
         return extent;
     }
 
-    private boolean failed(boolean condition, ExtentTest test) {
-        return !condition;
-    }
-
-    private boolean passTest(boolean condition, ExtentTest test) {
-        return condition;
-    }
-
-    public void testState(boolean condition, ExtentTest test, String testName) throws IOException {
-        test.log(Status.INFO, testName + " Assert: name product matches with the search");
-        if (failed(condition, test)) {
-            test.log(Status.ERROR, "The test do not pass the " + testName + " Assertion");
-            test.addScreenCaptureFromPath("C:/Users/juan.poli/Desktop/Screenshots");
-        } else if (passTest(condition, test))
-            test.log(Status.PASS, "The " + testName + " Assertion passed the test");
-    }
-
-    public static ExtentTest getTest(){
+    public static ExtentTest getTest() {
         return test;
     }
 }

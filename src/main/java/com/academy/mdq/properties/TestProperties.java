@@ -31,7 +31,7 @@ public enum TestProperties {
   private static final String BROWSER = "browser";
   private static final String DEFAULT_ENVIRONMENT = "qa";
 
-  private Properties properties = new Properties();
+  private static Properties properties = new Properties();
 
   /**
    * Returns the base URL.
@@ -164,7 +164,7 @@ public enum TestProperties {
    * @param key the key
    * @return the value
    */
-  private String get(String key) {
+  private static String get(String key) {
     String environment = getProperty(key);
     if (environment == null) {
       environment = getenv(key);

@@ -2,7 +2,10 @@ package com.academy.mdq.extentReports.errorCollector;
 
 import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.extentReports.Extent;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.MediaEntityModelProvider;
 import com.aventstack.extentreports.Status;
+import net.bytebuddy.utility.RandomString;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matcher;
 import org.junit.rules.ErrorCollector;
@@ -15,7 +18,6 @@ import java.util.concurrent.Callable;
 import static org.junit.Assert.assertThat;
 
 public class CheckError extends ErrorCollector {
-    private String nameTest;
     private Extent extent = new Extent();
 
     @Override
@@ -40,28 +42,24 @@ public class CheckError extends ErrorCollector {
 
     }
 
-    public void setName(String nameTest) {
-        this.nameTest = nameTest;
-    }
-
-    private void failed (){
+    private void failed() {
+        String nameTest = RandomString.make();
         String name = "C:/Users/juan.poli/Desktop/Screenshots/" + nameTest + ".png";
 
         File screenshot = ((TakesScreenshot) Drivers.getDriver().getWebDriver()).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(screenshot, new File(name));
+            extent.getTest().fail("Failed!!", MediaEntityBuilder.createScreenCaptureFromPath(name).build());
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
-        extent.getTest().log(Status.ERROR, "The test do not pass the Assertion");
-        //extent.getTest().addScreenCaptureFromPath("C:/Users/juan.poli/Desktop/Screenshots");
     }
 
-    private void pass(){
+    private void pass() {
         extent.getTest().log(Status.PASS, "The test pass the assertion");
     }
 
-    public void callTear(){
+    public void callTear() {
         extent.tearDown();
     }
 }
