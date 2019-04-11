@@ -1,5 +1,6 @@
 package com.academy.mdq.tests;
 
+import com.academy.mdq.JSONFiles.ReadJSONFile;
 import com.academy.mdq.pages.AmazonHomePage;
 import com.academy.mdq.pages.CartListPage;
 import com.academy.mdq.pages.SearchResultPage;
@@ -14,7 +15,6 @@ import org.junit.runners.Parameterized;
 
 import java.util.Collection;
 
-import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.runners.Parameterized.Parameters;
 
@@ -23,13 +23,14 @@ public class AmazonCartTest extends BaseTestSuite {
 
   @Parameters
   public static Collection<Object[]> data() {
-    return asList(new Object[][]{
-        {"Embracing the Power of AI", "Books", "17.96"},
-        {"handbag", "Women's Fashion", "15.96"},
-        {"Ray-Ban", "Men's Fashion", "178"},
-        {"Yoyo", "Toys & Games", "9.39"},
-        {"Bob Ross", "Arts & Crafts", "9.99"}
-    });
+//    return Arrays.asList(new Object[][] {
+//        {"Embracing the Power of AI", "Books", "17.96"},
+//        {"handbag", "Women's Fashion", "15.96"},
+//        {"Ray-Ban", "Men's Fashion", "178"},
+//        {"Yoyo", "Toys & Games", "9.39"},
+//        {"Bob Ross", "Arts & Crafts", "9.99"}
+//    });
+    return ReadJSONFile.readFile("amazon.json");
   }
 
   private String search;
