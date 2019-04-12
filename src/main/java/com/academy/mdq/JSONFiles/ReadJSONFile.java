@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ReadJSONFile {
 
-  public static Collection<Object[]> readFile(String nameOfFile) {
+  public static Collection<Object[]> readAmazonFile(String nameOfFile, String[] keys) {
     JSONParser jsonParser = new JSONParser();
     List<Object[]> list = new ArrayList<>();
 
@@ -23,7 +23,7 @@ public class ReadJSONFile {
       JSONArray array = (JSONArray)jsonParser.parse(reader);
 
       for (Object o : array) {
-        list.add(createObject((JSONObject)o));
+        list.add(createObject((JSONObject)o, keys));
       }
 
     } catch (FileNotFoundException e) {
@@ -37,10 +37,12 @@ public class ReadJSONFile {
     return (list);
   }
 
-  private static Object[] createObject(JSONObject obj) {
-    return new Object[] {
-        obj.get("search"), obj.get("filter"), obj.get("price")
-    };
+  private static Object[] createObject(JSONObject obj, String[] keys) {
+    List<Object> finalObject = new ArrayList<>();
+    for (int i=0; i<keys.length; i++) {
+      finalObject.add(obj.get(keys[i]));
+    }
+    return finalObject.toArray();
   }
 
 }

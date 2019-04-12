@@ -6,10 +6,9 @@ import com.academy.mdq.pages.CartListPage;
 import com.academy.mdq.pages.SearchResultPage;
 import com.academy.mdq.pages.commons.ResultCard;
 import com.academy.mdq.reports.BasicExtentReport;
+import com.academy.mdq.reports.SendReportEmail;
 import com.academy.mdq.testsuite.BaseTestSuite;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -30,7 +29,8 @@ public class AmazonCartTest extends BaseTestSuite {
 //        {"Yoyo", "Toys & Games", "9.39"},
 //        {"Bob Ross", "Arts & Crafts", "9.99"}
 //    });
-    return ReadJSONFile.readFile("amazon.json");
+    String[] keys = {"search", "filter", "price"};
+    return ReadJSONFile.readAmazonFile("amazon.json", keys);
   }
 
   private String search;
@@ -51,6 +51,11 @@ public class AmazonCartTest extends BaseTestSuite {
   @Before
   public void createTest() {
     BasicExtentReport.startTest("Looking for product: " + search + ", category: " + filter);
+  }
+
+  @AfterClass
+  public static void sendEmail() {
+    SendReportEmail.sendEmail();
   }
 
   @Test

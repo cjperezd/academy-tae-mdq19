@@ -47,6 +47,8 @@ public class WriteJSONFile {
       FileWriter file = new FileWriter("amazon.json")) {
         file.write(amazonList.toJSONString());
         file.flush();
+
+      System.out.println("File written");
     } catch (IOException e) {
       e.printStackTrace();
     }

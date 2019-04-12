@@ -4,8 +4,10 @@ import com.academy.mdq.logger.Loggeable;
 import com.academy.mdq.reports.BasicExtentReport;
 import com.academy.mdq.rules.ExtendErrorCollector;
 import com.academy.mdq.rules.TestFailScreenshot;
-import org.junit.*;
-import org.junit.rules.ErrorCollector;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.rules.TestRule;
 
 import java.net.MalformedURLException;
