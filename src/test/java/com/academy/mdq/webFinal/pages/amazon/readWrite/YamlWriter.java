@@ -5,30 +5,34 @@ import com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class YamlWriter {
 
     private Yaml yaml = new Yaml();
     private String path;
+    private int keyValuen;
+    Map<String, Object> data = new HashMap<>();
 
     public YamlWriter() {
     }
 
-    public void create(String path) throws IOException {
+    public void create(String path, String key, String value) {
         this.path = path;
-        Map<String, Object> data = new LinkedHashMap<>();
-        data.put("Embracing the Power of AI", "Books");
-        data.put("Notebook", "Computers");
-        data.put("Optical Illusioon 3D Glow LED", "Home & Kitchen");
-        data.put("Slide It In", "Music, CDs & Vinyl");
-        data.put("Arduino", "Industrial & Scientific");
 
+        data.put(key, value);
         FileWriter writer;
 
-        writer = new FileWriter(path);
-        yaml.dump(data, writer);
+        try {
+            writer = new FileWriter(path);
+            yaml.dump(data, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int setKeyValues(int n) {
+        return this.keyValuen = n;
     }
 
 }

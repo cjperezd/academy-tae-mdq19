@@ -1,5 +1,6 @@
 package com.academy.mdq.webFinal.test;
 
+import com.academy.mdq.extentReports.EmailReport;
 import com.academy.mdq.extentReports.errorCollector.CheckError;
 import com.academy.mdq.testsuite.BaseTestSuite;
 import com.academy.mdq.webFinal.pages.amazon.AmazonHomePage;
@@ -7,17 +8,15 @@ import com.academy.mdq.webFinal.pages.amazon.AmazonResultPage;
 import com.academy.mdq.webFinal.pages.amazon.CartPage;
 import com.academy.mdq.webFinal.pages.amazon.readWrite.YamlReader;
 import com.academy.mdq.webFinal.pages.amazon.readWrite.YamlWriter;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.yaml.snakeyaml.Yaml;
+import org.testng.annotations.AfterGroups;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.*;
+import java.util.Collection;
 
-import static com.academy.mdq.webFinal.pages.amazon.readWrite.YamlReader.*;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.runners.Parameterized.Parameter;
 import static org.junit.runners.Parameterized.Parameters;
@@ -25,10 +24,12 @@ import static org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
 public class AmazonTest extends BaseTestSuite {
-    private static String cartAssert = "Yourr Shopping Cart is empty.";
+    private static String cartAssert = "Your Shopping Cart is empty.";
     private static String productsPath = "C:/Users/juan.poli/Desktop/Yaml/products.yaml";
     YamlWriter yamlWriter = new YamlWriter();
     static YamlReader yamlReader = new YamlReader();
+    //EmailReport emailReport = new EmailReport();
+
 
 //    @Parameters
 //    public static Collection<Object[]> data() {
@@ -42,8 +43,17 @@ public class AmazonTest extends BaseTestSuite {
 //        });
 //    }
 
+    @Before
+    public void createSearch() {
+        yamlWriter.create(productsPath, "Embracing the Power of AI", "Books");
+        yamlWriter.create(productsPath, "Notebook", "Computers");
+        yamlWriter.create(productsPath, "Optical Illusion 3D Glow LED", "Home & Kitchen");
+        yamlWriter.create(productsPath, "Slide It In", "Music, CDs & Vinyl");
+        yamlWriter.create(productsPath, "Arduino", "Industrial & Scientific");
+    }
+
     @Parameters
-    public static Collection<Object[]> data(){
+    public static Collection<Object[]> data() {
         return yamlReader.getList(productsPath);
     }
 
@@ -57,9 +67,7 @@ public class AmazonTest extends BaseTestSuite {
     public CheckError checkError = new CheckError();
 
     @Test
-    public void myTest() throws IOException, InterruptedException {
-
-        yamlWriter.create(productsPath);
+    public void myTest() throws InterruptedException {
 
         AmazonResultPage amazonResultPage = new AmazonHomePage().getSearchBar().selectCategory(categoryInput).typeBookText(productName).search();
         String searchedBookName = amazonResultPage.getFirstCard().getBookName();
@@ -77,6 +85,12 @@ public class AmazonTest extends BaseTestSuite {
 
         checkError.callTear();
 
+    }
+
+    @AfterClass
+    public static void sendEmails(){
+        EmailReport emailReport = new EmailReport();
+        emailReport.sendEmail();
     }
 
 

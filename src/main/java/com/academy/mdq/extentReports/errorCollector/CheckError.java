@@ -2,9 +2,11 @@ package com.academy.mdq.extentReports.errorCollector;
 
 import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.extentReports.Extent;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.MediaEntityModelProvider;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import net.bytebuddy.utility.RandomString;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matcher;
@@ -13,13 +15,13 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import static org.junit.Assert.assertThat;
 
 public class CheckError extends ErrorCollector {
     private Extent extent = new Extent();
-
     @Override
     public <T> void checkThat(String reason, T value, Matcher<T> matcher) {
         super.checkThat(reason, value, matcher);
@@ -62,4 +64,6 @@ public class CheckError extends ErrorCollector {
     public void callTear() {
         extent.tearDown();
     }
+
+
 }
