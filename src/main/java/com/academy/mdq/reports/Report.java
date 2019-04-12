@@ -7,10 +7,14 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import net.bytebuddy.utility.RandomString;
 import org.apache.commons.io.FileUtils;
+import org.junit.AfterClass;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 
 import static com.academy.mdq.properties.ReportProperties.REPORT_PROPERTIES;
@@ -25,8 +29,9 @@ public class Report {
   private static final ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(getReportPath());
   private static final ExtentReports extent = new ExtentReports();
   private static ExtentTest test;
+  private static String statsFilePath = "C:\\Users\\lucia.corrales\\Desktop\\Proyectos Academy\\WebFinal\\academy-tae-mdq19\\testReport\\stat.txt";
 
-  private static String getReportPath() {
+  public static String getReportPath() {
     return getProperty("user.dir") + REPORT_PROPERTIES.getReportPath() +
         REPORT_PROPERTIES.getReportName() + LocalDate.now() + REPORT_PROPERTIES.getReportExt();
   }
@@ -37,8 +42,8 @@ public class Report {
     logInfo(INFO, format(REPORT_PROPERTIES.navigating(), TEST_PROPERTIES.getBaseUrl()));
   }
 
-  public static void logInfo (Status status, String message){
-    switch (status){
+  public static void logInfo(Status status, String message) {
+    switch (status) {
       case INFO:
         test.info(message);
         break;
@@ -54,8 +59,24 @@ public class Report {
     }
   }
 
-  public static void finishReport() {
-    extent.flush();
+  public static void writeStats() {
+    PrintWriter writer = null;
+    try {
+      writer = new PrintWriter(statsFilePath, "UTF-8");
+      writer.println("RESULTS:");
+      writer.println("Total: " + htmlReporter.getStatusCount().getParentCount());
+      writer.println("Passed = " + htmlReporter.getStatusCount().getParentCountPass());
+      writer.println("Failed = " + htmlReporter.getStatusCount().getParentCountFail());
+      writer.close();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static String getStatsPath (){
+    return statsFilePath;
   }
 
   public static void logScreenShotFailed(String message) {
@@ -69,6 +90,12 @@ public class Report {
     } catch (Exception e1) {
       throw new RuntimeException(e1);
     }
+  }
+
+  @AfterClass
+  public static void finishReport() {
+    extent.flush();
+    writeStats();
   }
 
 }

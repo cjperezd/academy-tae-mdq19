@@ -1,5 +1,6 @@
 package com.academy.mdq.web.tests.amazon;
 
+import com.academy.mdq.reports.Email;
 import com.academy.mdq.testsuite.BaseTestSuite;
 import com.academy.mdq.web.listeners.AmazonListener;
 import com.academy.mdq.web.listeners.AmazonRuler;
@@ -18,9 +19,8 @@ import org.junit.runners.Parameterized.Parameter;
 import java.util.Collection;
 
 import static com.academy.mdq.excelutils.ExcelUtils.readExcel;
-import static com.academy.mdq.reports.Report.finishReport;
 import static com.academy.mdq.reports.Report.startTest;
-import static java.util.Arrays.*;
+import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.containsString;
 
 @RunWith(Parameterized.class)
@@ -88,7 +88,8 @@ public class SearchTest extends BaseTestSuite {
 
   @AfterClass
   public static void finish() {
-    finishReport();
+    Email e = new Email();
+    e.sendEmail();
   }
 
 }
