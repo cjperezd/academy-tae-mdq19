@@ -11,6 +11,10 @@ public enum ReportProperties {
   private static final String REPORT_PATH = "report.path";
   private static final String REPORT_NAME = "report.name";
   private static final String REPORT_EXT = "extension";
+  private static final String NAVIGATING = "navigating";
+  private static final String CLICKING = "clicking";
+  private static final String SELECTING = "selecting";
+  private static final String TYPING = "typing";
 
   private Properties properties = new Properties();
 
@@ -35,6 +39,22 @@ public enum ReportProperties {
 
   public String getReportName() {
     return getProperty(REPORT_NAME);
+  }
+
+  public String navigating() {
+    return getProperty(NAVIGATING);
+  }
+
+  public String clicking() {
+    return getProperty(CLICKING);
+  }
+
+  public String selecting() {
+    return getProperty(SELECTING);
+  }
+
+  public String typing() {
+    return getProperty(TYPING);
   }
 
 }

@@ -15,12 +15,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 
-import java.util.Arrays;
 import java.util.Collection;
 
 import static com.academy.mdq.excelutils.ExcelUtils.readExcel;
 import static com.academy.mdq.reports.Report.finishReport;
-import static com.academy.mdq.reports.Report.getNewTest;
+import static com.academy.mdq.reports.Report.startTest;
+import static java.util.Arrays.*;
 import static org.hamcrest.CoreMatchers.containsString;
 
 @RunWith(Parameterized.class)
@@ -44,7 +44,7 @@ public class SearchTest extends BaseTestSuite {
   //WITH PARAMETERS FROM EXCEL
   @Parameterized.Parameters
   public static Collection<Object[]> data() {
-    return Arrays.asList(readExcel(filePath, sheetName));
+    return asList(readExcel(filePath, sheetName));
   }
 
   @Parameter
@@ -61,7 +61,7 @@ public class SearchTest extends BaseTestSuite {
 
   @Before
   public void createTestReport() {
-    getNewTest("Amazon Search Test", "Using [" + category + "] :  and [" + productName + "] : ");
+    startTest("Amazon Search Test", "Using [" + category + "] :  and [" + productName + "] : ");
   }
 
   @Test

@@ -5,7 +5,8 @@ import org.openqa.selenium.WebElement;
 import java.lang.reflect.Field;
 
 import static com.academy.mdq.driver.Drivers.getDriver;
-import static com.academy.mdq.reports.Report.getTest;
+import static com.academy.mdq.properties.ReportProperties.REPORT_PROPERTIES;
+import static com.academy.mdq.reports.Report.logInfo;
 import static com.academy.mdq.waits.Waits.isClickable;
 import static com.academy.mdq.waits.Waits.isVisible;
 import static com.aventstack.extentreports.Status.INFO;
@@ -26,7 +27,7 @@ public abstract class CommonOperations {
    * @param webElement the {@link WebElement}
    */
   protected void click(WebElement webElement) {
-    getTest().log(INFO, String.format("Clicking on [ %s ]", getWebElementName(webElement)));
+    logInfo(INFO, String.format(REPORT_PROPERTIES.clicking(), getWebElementName(webElement)));
     isClickable(webElement).click();
   }
 
