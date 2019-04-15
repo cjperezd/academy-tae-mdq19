@@ -92,7 +92,6 @@ public class Report {
     }
   }
 
-  @AfterClass
   public static void finishReport() {
     extent.flush();
     writeStats();

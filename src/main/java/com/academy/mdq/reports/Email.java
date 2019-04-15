@@ -8,9 +8,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static com.academy.mdq.properties.EmailProperties.*;
@@ -32,7 +30,7 @@ public class Email {
 
   private DataSource dataSource = new FileDataSource(getReportPath());
 
-  public void sendEmail (){
+  public void sendEmail() {
     Message message = new MimeMessage(session);
     try {
       message.setFrom(new InternetAddress(getUser()));
