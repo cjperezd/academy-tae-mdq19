@@ -5,7 +5,7 @@ import java.util.Properties;
 
 public enum TestWatcherProperties {
 
-    TestWatcher_PROPERTIES;
+  TEST_WATCHER_PROPERTIES;
 
     private static final String FILE_NAME = "testwatcher.properties";
     private static final String FOLDER_PATH = "folderPath";

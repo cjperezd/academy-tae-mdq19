@@ -1,16 +1,10 @@
 package com.academy.mdq.web.tests.amazon;
 
-import com.academy.mdq.reports.Email;
 import com.academy.mdq.testsuite.BaseTestSuite;
-import com.academy.mdq.web.listeners.AmazonListener;
-import com.academy.mdq.web.listeners.AmazonRuler;
 import com.academy.mdq.web.pages.commons.Cart;
 import com.academy.mdq.web.pages.commons.Home;
 import com.academy.mdq.web.pages.commons.ResultCard;
 import com.academy.mdq.web.pages.commons.SearchResults;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -19,16 +13,14 @@ import org.junit.runners.Parameterized.Parameter;
 import java.util.Collection;
 
 import static com.academy.mdq.excelutils.ExcelUtils.readExcel;
-import static com.academy.mdq.reports.Report.finishReport;
-import static com.academy.mdq.reports.Report.startTest;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.containsString;
 
 @RunWith(Parameterized.class)
 public class SearchTest extends BaseTestSuite {
 
-  private static final String filePath = System.getProperty("user.dir") + "\\ddt\\ddt.xlsx";
-  private static final String sheetName = "Sheet1";
+  private static final String FILE_PATH = System.getProperty("user.dir") + "\\src\\test\\resources\\dataFiles\\dataFiles.xlsx";
+  private static final String SHEET_NAME = "Sheet1";
 
   //WITH PARAMETERS
 //  @Parameterized.Parameters
@@ -45,7 +37,7 @@ public class SearchTest extends BaseTestSuite {
   //WITH PARAMETERS FROM EXCEL
   @Parameterized.Parameters
   public static Collection<Object[]> data() {
-    return asList(readExcel(filePath, sheetName));
+    return asList(readExcel(FILE_PATH, SHEET_NAME));
   }
 
   @Parameter
@@ -54,44 +46,26 @@ public class SearchTest extends BaseTestSuite {
   @Parameter(1)
   public String productName;
 
-  @Rule
-  public AmazonListener ss = new AmazonListener();
-
-  @Rule
-  public AmazonRuler ru = new AmazonRuler();
-
-  @Before
-  public void createTestReport() {
-    startTest("Amazon Search Test", "Using [" + category + "] :  and [" + productName + "] : ");
-  }
-
   @Test
   public void searchWithParametersTest() {
     SearchResults searchResult = new Home()
         .searchBy(category, productName);
     ResultCard resultCard = searchResult.getResultCard(0);
 
-    ru.checkThat("ResultCard contains the title expected", resultCard.getProductNameLink(), containsString(productName.toLowerCase()));
+    checkThat("ResultCard contains the title expected", resultCard.getProductNameLink(), containsString(productName.toLowerCase()));
 
     Cart cart = searchResult.clickProductName(0)
         .addToCart()
         .goToCart();
 
-    ru.checkThat("ResultCard from Cart contains the title expected", cart.getTitle(), containsString(productName.toLowerCase()));
+    checkThat("ResultCard from Cart contains the title expected", cart.getTitle(), containsString(productName.toLowerCase()));
 
     cart.deleteItem();
 
-    ru.checkThat("The delete information contains product name.",
+    checkThat("The delete information contains product name.",
         cart.getRemovedInformationText(), containsString(productName.toLowerCase()));
-    ru.checkThat("The delete information contains the expression 'was removed from shopping cart'",
+    checkThat("The delete information contains the expression 'was removed from shopping cart'",
         cart.getRemovedInformationText(), containsString("was removed from shopping cart."));
-  }
-
-  @AfterClass
-  public static void finish() {
-    finishReport();
-    Email e = new Email();
-    e.sendEmail();
   }
 
 }

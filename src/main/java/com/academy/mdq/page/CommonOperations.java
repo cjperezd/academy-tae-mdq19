@@ -10,6 +10,7 @@ import static com.academy.mdq.reports.Report.logInfo;
 import static com.academy.mdq.waits.Waits.isClickable;
 import static com.academy.mdq.waits.Waits.isVisible;
 import static com.aventstack.extentreports.Status.INFO;
+import static java.lang.String.format;
 import static java.util.stream.Stream.of;
 
 public abstract class CommonOperations {
@@ -27,7 +28,7 @@ public abstract class CommonOperations {
    * @param webElement the {@link WebElement}
    */
   protected void click(WebElement webElement) {
-    logInfo(INFO, String.format(REPORT_PROPERTIES.clicking(), getWebElementName(webElement)));
+    logInfo(INFO, format(REPORT_PROPERTIES.clicking(), getWebElementName(webElement)));
     isClickable(webElement).click();
   }
 

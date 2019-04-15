@@ -5,27 +5,35 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class ExcelUtils {
+import static org.slf4j.LoggerFactory.getLogger;
 
-  public static Object[][] readExcel(String filePath, String sheetName) {
-    FileInputStream file = null;
+public final class ExcelUtils {
+
+  private static final Logger LOGGER = getLogger(ExcelUtils.class);
+
+  private static XSSFSheet getSheet(String filePath, String sheetName) {
+    FileInputStream file;
+    XSSFWorkbook wb;
     try {
       file = new FileInputStream(filePath);
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    }
-    XSSFWorkbook wb = null;
-    try {
       wb = new XSSFWorkbook(file);
+      return wb.getSheet(sheetName);
+    } catch (FileNotFoundException e) {
+      LOGGER.error(e.getLocalizedMessage(), e);
     } catch (IOException e) {
-      e.printStackTrace();
+      LOGGER.error(e.getLocalizedMessage(), e);
     }
-    XSSFSheet sheet = wb.getSheet(sheetName);
+    return null;
+  }
+
+  public static Object[][] readExcel(String filePath, String sheetName) {
+    XSSFSheet sheet = getSheet(filePath, sheetName);
     int rowCount = sheet.getLastRowNum();
     int column = sheet.getRow(0).getLastCellNum();
     Object[][] data = new Object[rowCount][column];

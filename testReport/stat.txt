@@ -1,0 +1,6 @@
+RESULTS
+Total: 5
+Passed: 3
+Failed: 2
+	Test Failed: SearchTest // searchWithParametersTest[1]
+	Test Failed: SearchTest // searchWithParametersTest[3]
