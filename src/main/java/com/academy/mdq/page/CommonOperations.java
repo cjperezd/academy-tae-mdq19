@@ -52,7 +52,7 @@ public abstract class CommonOperations {
   }
 
   public String getNameOfElement(WebElement webElement) {
-    String name = "";
+    String name = null;
     for (Field f : this.getClass().getDeclaredFields()) {
       f.setAccessible(true);
       try {

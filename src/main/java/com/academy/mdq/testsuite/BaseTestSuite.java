@@ -3,18 +3,20 @@ package com.academy.mdq.testsuite;
 import com.academy.mdq.logger.Loggeable;
 import com.academy.mdq.reports.BasicExtentReport;
 import com.academy.mdq.rules.ExtendErrorCollector;
-import com.academy.mdq.rules.TestFailScreenshot;
+import com.academy.mdq.rules.TestListener;
+import org.hamcrest.Matcher;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
-import org.junit.rules.TestRule;
 
 import java.net.MalformedURLException;
 
 import static com.academy.mdq.driver.Drivers.populateDriver;
 import static com.academy.mdq.platform.Platform.WEB;
 import static com.academy.mdq.properties.TestProperties.TEST_PROPERTIES;
+import static com.academy.mdq.reports.BasicExtentReport.endTest;
+import static com.academy.mdq.reports.SendReportEmail.sendReport;
 import static com.academy.mdq.server.SeleniumStandaloneServer.SERVER;
 import static java.lang.String.format;
 import static junit.framework.Assert.fail;
@@ -29,8 +31,12 @@ public abstract class BaseTestSuite implements Loggeable {
   @Rule
   public ExtendErrorCollector collector = new ExtendErrorCollector();
 
+  public <T> void checkThat(String reason, T value, Matcher<T> matcher) {
+    collector.checkThat(reason, value, matcher);
+  }
+
   @Rule
-  public final TestRule takeScreenshot = new TestFailScreenshot();
+  public final TestListener listener = new TestListener();
 
   @BeforeClass
   public static void beforeClass() {
@@ -45,6 +51,8 @@ public abstract class BaseTestSuite implements Loggeable {
     if (WEB.equals(TEST_PROPERTIES.getPlatform())) {
       SERVER.stop();
     }
+    endTest();
+    sendReport("ariana.mazzini@globant.com", "Amazon Tests");
   }
 
   @Before

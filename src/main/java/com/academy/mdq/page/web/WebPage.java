@@ -1,8 +1,6 @@
 package com.academy.mdq.page.web;
 
 import com.academy.mdq.driver.Driver;
-import com.academy.mdq.reports.BasicExtentReport;
-import com.aventstack.extentreports.Status;
 
 import static com.academy.mdq.driver.Drivers.getDriver;
 import static com.academy.mdq.reports.BasicExtentReport.*;

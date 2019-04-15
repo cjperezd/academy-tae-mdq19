@@ -2,11 +2,16 @@ package com.academy.mdq.JSONFiles;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
 
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 public class WriteJSONFile {
+
+  private static final Logger LOGGER = getLogger(WriteJSONFile.class);
 
   @SuppressWarnings("unchecked")
   public static void main( String[] args ) {
@@ -44,13 +49,13 @@ public class WriteJSONFile {
     amazonList.add(obj5);
 
     try (
-      FileWriter file = new FileWriter("amazon.json")) {
+      FileWriter file = new FileWriter("src/test/resources/amazon.json")) {
         file.write(amazonList.toJSONString());
         file.flush();
 
       System.out.println("File written");
     } catch (IOException e) {
-      e.printStackTrace();
+      LOGGER.error(e.getMessage(), e);
     }
   }
 

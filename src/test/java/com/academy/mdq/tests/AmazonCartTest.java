@@ -5,10 +5,8 @@ import com.academy.mdq.pages.AmazonHomePage;
 import com.academy.mdq.pages.CartListPage;
 import com.academy.mdq.pages.SearchResultPage;
 import com.academy.mdq.pages.commons.ResultCard;
-import com.academy.mdq.reports.BasicExtentReport;
-import com.academy.mdq.reports.SendReportEmail;
 import com.academy.mdq.testsuite.BaseTestSuite;
-import org.junit.*;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -30,7 +28,7 @@ public class AmazonCartTest extends BaseTestSuite {
 //        {"Bob Ross", "Arts & Crafts", "9.99"}
 //    });
     String[] keys = {"search", "filter", "price"};
-    return ReadJSONFile.readAmazonFile("amazon.json", keys);
+    return ReadJSONFile.readFile("src/test/resources/amazon.json", keys);
   }
 
   private String search;
@@ -43,21 +41,6 @@ public class AmazonCartTest extends BaseTestSuite {
     this.price = price;
   }
 
-  @BeforeClass
-  public static void startReport() {
-    BasicExtentReport.startReport();
-  }
-
-  @Before
-  public void createTest() {
-    BasicExtentReport.startTest("Looking for product: " + search + ", category: " + filter);
-  }
-
-  @AfterClass
-  public static void sendEmail() {
-    SendReportEmail.sendEmail();
-  }
-
   @Test
   public void saveInCart() {
 
@@ -67,7 +50,7 @@ public class AmazonCartTest extends BaseTestSuite {
 
     ResultCard firstCard = resultPage.getResultCard(0);
 
-    collector.checkThat("The name of the product is correct", firstCard.getTitle().toLowerCase(), containsString(search.toLowerCase()));
+    checkThat("The name of the product is correct", firstCard.getTitle().toLowerCase(), containsString(search.toLowerCase()));
     collector.checkThat("The price of the product is correct", firstCard.getOriginalPrice(), containsString(price));
 
     CartListPage cartPage = resultPage
@@ -75,12 +58,12 @@ public class AmazonCartTest extends BaseTestSuite {
         .addToCard()
         .goToCart();
 
-    collector.checkThat("The product in the cart list is correct", cartPage.getCartItem(0).getTitle().toLowerCase(), containsString(search.toLowerCase()));
+    checkThat("The product in the cart list is correct", cartPage.getCartItem(0).getTitle().toLowerCase(), containsString(search.toLowerCase()));
 
     CartListPage delete = cartPage.deleteItem(0);
 
-    collector.checkThat("The cart is empty", delete.emptyTitle(), containsString("Your Shopping Cart is empty."));
-    collector.checkThat("The product has been deleted", delete.emptyMessage(), containsString("was removed from Shopping Cart"));
+    checkThat("The cart is empty", delete.emptyTitle(), containsString("Your Shopping Cart is empty."));
+    checkThat("The product has been deleted", delete.emptyMessage(), containsString("was removed from Shopping Cart"));
 
   }
 }

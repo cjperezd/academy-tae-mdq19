@@ -1,21 +1,31 @@
 package com.academy.mdq.reports;
 
+import org.slf4j.Logger;
+
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.LinkedHashMap;
 import java.util.Properties;
+
+import static org.slf4j.LoggerFactory.getLogger;
 
 public class SendReportEmail {
 
-  public static void sendEmail() {
+  private static final Logger LOGGER = getLogger(SendReportEmail.class);
+
+  public static void sendReport(String destination, String subject) {
+
+    String origin = "anona1316@gmail.com";
+    String password = "Anonimus12345";
 
     Properties props = new Properties();
 
@@ -28,64 +38,76 @@ public class SendReportEmail {
     Session session = Session.getDefaultInstance(props,
         new javax.mail.Authenticator() {
           protected PasswordAuthentication getPasswordAuthentication() {
-            return new PasswordAuthentication("anona1316@gmail.com", "Anonimus12345");
+            return new PasswordAuthentication(origin, password);
           }
         });
     try {
 
       Message message = new MimeMessage(session);
-      message.setFrom(new InternetAddress("anona1316@gmail.com"));
-      message.setRecipients(Message.RecipientType.TO,InternetAddress.parse("ari.mazzini.98@gmail.com"));
+      message.setFrom(new InternetAddress(origin));
+      message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(destination));
 
-      // Add the subject link
-      message.setSubject("Amazon Tests");
+      message.setSubject(subject);
 
-      // Create object to add multimedia type content
-      BodyPart messageBodyPart1 = new MimeBodyPart();
-
-      String content;
-
-      try {
-        content = new String(Files.readAllBytes(Paths.get("src/test/resources/reports/testsInfo.txt")));
-        messageBodyPart1.setText(content);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-
-      // Create another object to add another content
-      MimeBodyPart messageBodyPart2 = new MimeBodyPart();
-
-      // Mention the file which you want to send
-      String filename = "src/test/resources/reports/ExtentReportResults.html";
-
-      // Create data source and pass the filename
-      DataSource source = new FileDataSource(filename);
-
-      // set the handler
-      messageBodyPart2.setDataHandler(new DataHandler(source));
-
-      // set the file
-      messageBodyPart2.setFileName(filename);
-
-      // Create object of MimeMultipart class
       Multipart multipart = new MimeMultipart();
 
-      // add body part 1
-      multipart.addBodyPart(messageBodyPart2);
+      multipart.addBodyPart(readFile("src/test/resources/reports/testsInfo.txt"));
 
-      // add body part 2
-      multipart.addBodyPart(messageBodyPart1);
+      multipart.addBodyPart(addFile("src/test/resources/reports/ExtentReportResults.html"));
 
-      // set the content
       message.setContent(multipart);
 
-      // finally send the email
       Transport.send(message);
 
       System.out.println("=====Email Sent=====");
 
-    } catch (MessagingException e) {
-      throw new RuntimeException(e);
+    } catch (AddressException e2) {
+      LOGGER.error(e2.getMessage(), e2);
+    } catch (MessagingException e3) {
+      LOGGER.error(e3.getMessage(), e3);
     }
   }
+
+  private static BodyPart readFile(String path) {
+    BodyPart messageBody = new MimeBodyPart();
+    String content;
+    try {
+      content = new String(Files.readAllBytes(Paths.get(path)));
+      messageBody.setText(content);
+    } catch (IOException e) {
+      LOGGER.error(e.getMessage(), e);
+    } catch (MessagingException e) {
+      LOGGER.error(e.getMessage(), e);
+    }
+    return messageBody;
+  }
+
+  private static BodyPart addFile(String path) {
+    MimeBodyPart messageBody = new MimeBodyPart();
+    String filename = path;
+    DataSource source = new FileDataSource(filename);
+    try {
+      messageBody.setDataHandler(new DataHandler(source));
+      messageBody.setFileName(filename);
+    } catch (MessagingException e) {
+      LOGGER.error(e.getMessage(), e);
+    }
+    return messageBody;
+  }
+
+  public static void writeTestInfo(String filePath, LinkedHashMap<Object, Object> map) {
+    PrintWriter writer;
+    try {
+      writer = new PrintWriter(filePath + "/testsInfo.txt", "UTF-8");
+      map.forEach((k,v) -> writer.println(String.format("%S %S", k, v)));
+      writer.close();
+    } catch (FileNotFoundException e) {
+      LOGGER.error(e.getMessage(), e);
+    } catch (UnsupportedEncodingException e) {
+      LOGGER.error(e.getMessage(), e);
+    }
+  }
+
+
+
 }

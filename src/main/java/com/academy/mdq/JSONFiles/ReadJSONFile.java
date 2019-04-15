@@ -4,6 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,13 +13,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 public class ReadJSONFile {
 
-  public static Collection<Object[]> readAmazonFile(String nameOfFile, String[] keys) {
+  private static final Logger LOGGER = getLogger(ReadJSONFile.class);
+
+  public static Collection<Object[]> readFile(String filePath, String[] keys) {
     JSONParser jsonParser = new JSONParser();
     List<Object[]> list = new ArrayList<>();
 
-    try (FileReader reader = new FileReader(nameOfFile)) {
+    try (FileReader reader = new FileReader(filePath)) {
 
       JSONArray array = (JSONArray)jsonParser.parse(reader);
 
@@ -27,11 +32,11 @@ public class ReadJSONFile {
       }
 
     } catch (FileNotFoundException e) {
-      e.printStackTrace();
+      LOGGER.error(e.getMessage(), e);
     } catch (IOException e) {
-      e.printStackTrace();
+      LOGGER.error(e.getMessage(), e);
     } catch (ParseException e) {
-      e.printStackTrace();
+      LOGGER.error(e.getMessage(), e);
     }
 
     return (list);

@@ -2,55 +2,51 @@ package com.academy.mdq.reports;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import org.junit.AfterClass;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+
+import static com.academy.mdq.reports.SendReportEmail.writeTestInfo;
+import static com.aventstack.extentreports.Status.*;
 
 public class BasicExtentReport {
 
-  static ExtentHtmlReporter htmlReporter;
-  static List<ExtentTest> test = new ArrayList<>();
-  static ExtentReports extent;
   static String reportFolder = "src/test/resources/reports";
+  static final ExtentHtmlReporter HTMLREPORTER = new ExtentHtmlReporter(reportFolder + "/ExtentReportResults.html");
+  static ExtentReports EXTENT = new ExtentReports();
+  static List<ExtentTest> TESTS = new ArrayList<>();
 
   public static ExtentTest getTest() {
-    return test.get(test.size()-1);
+    return TESTS.get(TESTS.size()-1);
   }
 
-  public static void startReport() {
-    htmlReporter = new ExtentHtmlReporter(reportFolder + "/ExtentReportResults.html");
-    extent = new ExtentReports();
-    extent.attachReporter(htmlReporter);
-  }
-
-  public static void startTest(String description) {
-    test.add(extent.createTest("AmazonTest", description));
+  public static void startTest(String testName, String description) {
+    EXTENT.attachReporter(HTMLREPORTER);
+    TESTS.add(EXTENT.createTest(testName, description));
   }
 
   @AfterClass
   public static void endTest() {
-    extent.flush();
-    writeFile();
+    EXTENT.flush();
+    LinkedHashMap<Object, Object> values = new LinkedHashMap<>();
+    values.put("Total of Tests: ", HTMLREPORTER.getTestList().size());
+    values.put("Total of PASSED Tests: ", HTMLREPORTER.getStatusCount().getParentCountPass());
+    HTMLREPORTER.getTestList().stream()
+        .filter(t -> t.getStatus().equals(PASS))
+        .forEach(t -> values.put(t.getID(), t.getDescription()));
+    values.put("Total of FAILED Tests: ", HTMLREPORTER.getStatusCount().getParentCountFail());
+    HTMLREPORTER.getTestList().stream()
+        .filter(t -> t.getStatus().equals(FAIL))
+        .forEach(t -> values.put(t.getID(), t.getDescription()));
+    values.put("Total of SKIPPED Tests: ", HTMLREPORTER.getStatusCount().getParentCountSkip());
+    HTMLREPORTER.getTestList().stream()
+        .filter(t -> t.getStatus().equals(SKIP))
+        .forEach(t -> values.put(t.getID(), t.getDescription()));
+    writeTestInfo(reportFolder, values);
   }
 
-  private static void writeFile() {
-    PrintWriter writer;
-    try {
-      writer = new PrintWriter(reportFolder + "/testsInfo.txt", "UTF-8");
-      writer.println("Total Tests: " + htmlReporter.getTestList().size());
-      writer.println("   Test PASSED: " + htmlReporter.getStatusCount().getParentCountPass());
-      writer.println("   Test FAILED: " + htmlReporter.getStatusCount().getParentCountFail());
-      writer.println("   Test SKIPPED: " + htmlReporter.getStatusCount().getParentCountSkip());
-      writer.close();
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
-    }
-  }
 }
