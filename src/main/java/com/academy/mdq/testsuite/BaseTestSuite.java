@@ -1,7 +1,6 @@
 package com.academy.mdq.testsuite;
 
 import com.academy.mdq.logger.Loggeable;
-import com.academy.mdq.reports.BasicExtentReport;
 import com.academy.mdq.rules.ExtendErrorCollector;
 import com.academy.mdq.rules.TestListener;
 import org.hamcrest.Matcher;
@@ -16,6 +15,7 @@ import static com.academy.mdq.driver.Drivers.populateDriver;
 import static com.academy.mdq.platform.Platform.WEB;
 import static com.academy.mdq.properties.TestProperties.TEST_PROPERTIES;
 import static com.academy.mdq.reports.BasicExtentReport.endTest;
+import static com.academy.mdq.reports.BasicExtentReport.getTest;
 import static com.academy.mdq.reports.SendReportEmail.sendReport;
 import static com.academy.mdq.server.SeleniumStandaloneServer.SERVER;
 import static java.lang.String.format;
@@ -47,7 +47,7 @@ public abstract class BaseTestSuite implements Loggeable {
 
   @AfterClass
   public static void afterClass() {
-    BasicExtentReport.endTest();
+    endTest();
     if (WEB.equals(TEST_PROPERTIES.getPlatform())) {
       SERVER.stop();
     }
@@ -61,6 +61,7 @@ public abstract class BaseTestSuite implements Loggeable {
       populateDriver(TEST_PROPERTIES.getPlatform(), TEST_PROPERTIES.getBrowser());
     } catch (MalformedURLException e) {
       fail("Unable to populateDriver an instance of the getDriver, please check the configuration.");
+      getTest().skip(e.getMessage());
     }
   }
 

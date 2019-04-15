@@ -1,6 +1,5 @@
 package com.academy.mdq.tests;
 
-import com.academy.mdq.JSONFiles.ReadJSONFile;
 import com.academy.mdq.pages.AmazonHomePage;
 import com.academy.mdq.pages.CartListPage;
 import com.academy.mdq.pages.SearchResultPage;
@@ -12,6 +11,7 @@ import org.junit.runners.Parameterized;
 
 import java.util.Collection;
 
+import static com.academy.mdq.JSONFiles.ReadJSONFile.readFile;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.runners.Parameterized.Parameters;
 
@@ -20,15 +20,8 @@ public class AmazonCartTest extends BaseTestSuite {
 
   @Parameters
   public static Collection<Object[]> data() {
-//    return Arrays.asList(new Object[][] {
-//        {"Embracing the Power of AI", "Books", "17.96"},
-//        {"handbag", "Women's Fashion", "15.96"},
-//        {"Ray-Ban", "Men's Fashion", "178"},
-//        {"Yoyo", "Toys & Games", "9.39"},
-//        {"Bob Ross", "Arts & Crafts", "9.99"}
-//    });
     String[] keys = {"search", "filter", "price"};
-    return ReadJSONFile.readFile("src/test/resources/amazon.json", keys);
+    return readFile("src/test/resources/amazon.json", keys);
   }
 
   private String search;
@@ -51,7 +44,7 @@ public class AmazonCartTest extends BaseTestSuite {
     ResultCard firstCard = resultPage.getResultCard(0);
 
     checkThat("The name of the product is correct", firstCard.getTitle().toLowerCase(), containsString(search.toLowerCase()));
-    collector.checkThat("The price of the product is correct", firstCard.getOriginalPrice(), containsString(price));
+    checkThat("The price of the product is correct", firstCard.getOriginalPrice(), containsString(price));
 
     CartListPage cartPage = resultPage
         .selectCard(0)

@@ -21,4 +21,8 @@ public class AmazonHomePage extends WebPage {
     return navBar.enterSearch(search);
   }
 
+  public AmazonHomePage changeLanguage(String language) {
+    return navBar.changeLanguage(language);
+  }
+
 }

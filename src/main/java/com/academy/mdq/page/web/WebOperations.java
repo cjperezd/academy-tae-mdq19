@@ -2,6 +2,7 @@ package com.academy.mdq.page.web;
 
 import com.academy.mdq.page.CommonOperations;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import static com.academy.mdq.driver.Drivers.getDriver;
@@ -53,6 +54,11 @@ public abstract class WebOperations extends CommonOperations {
 
   private Select select(WebElement webElement) {
     return new Select(webElement);
+  }
+
+  protected void hover(WebElement webElement) {
+    Actions actions = new Actions(getDriver().getWebDriver());
+    actions.moveToElement(webElement).perform();
   }
 
 }
