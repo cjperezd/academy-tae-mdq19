@@ -47,7 +47,7 @@ public abstract class WebOperations extends CommonOperations {
     select(webElement).selectByVisibleText(text);
   }
 
-  private Select select(WebElement webElement) {
+  protected Select select(WebElement webElement) {
     return new Select(webElement);
   }
 
