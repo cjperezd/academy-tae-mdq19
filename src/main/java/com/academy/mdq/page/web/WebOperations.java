@@ -1,6 +1,8 @@
 package com.academy.mdq.page.web;
 
+import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.page.CommonOperations;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
@@ -59,6 +61,11 @@ public abstract class WebOperations extends CommonOperations {
   protected void hover(WebElement webElement) {
     Actions actions = new Actions(getDriver().getWebDriver());
     actions.moveToElement(webElement).perform();
+  }
+
+  protected void scroll(WebElement webElement) {
+    JavascriptExecutor js =(JavascriptExecutor)Drivers.getDriver().getWebDriver();
+    js.executeScript("arguments[0].scrollIntoView(false);", webElement);
   }
 
 }

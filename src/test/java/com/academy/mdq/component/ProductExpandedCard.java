@@ -4,7 +4,7 @@ import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ProductFullCard extends WebComponent {
+public class ProductExpandedCard extends WebComponent {
 
   @FindBy(className = "box-grid__item__image")
   private WebElement photoImg;
@@ -18,11 +18,11 @@ public class ProductFullCard extends WebComponent {
   @FindBy(css = ".box-grid__item--expanded .box-grid__item__content__description")
   private WebElement descriptionDiv;
 
-  public ProductFullCard(WebElement container) {
+  public ProductExpandedCard(WebElement container) {
     super(container);
   }
 
-  public String getCardTitle() {
+  public String getTitle() {
     return cardTitle.getText();
   }
 

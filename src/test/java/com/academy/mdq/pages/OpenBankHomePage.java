@@ -1,12 +1,12 @@
 package com.academy.mdq.pages;
 
 import com.academy.mdq.component.ProductCard;
-import com.academy.mdq.component.ProductFullCard;
+import com.academy.mdq.component.ProductExpandedCard;
 import com.academy.mdq.component.commons.ToolBar;
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class OpenBankHomePage extends WebPage {
   @FindBy(className = "openbank-topbar__layout")
   private WebElement toolBarDiv;
 
-  @FindBy(id = "product-search")
+  @FindBy(css = "section#product-search")
   private WebElement searchProductContainer;
 
   @FindBy(css = "input#product-search")
@@ -56,7 +56,7 @@ public class OpenBankHomePage extends WebPage {
 
   private final List<ProductCard> cards = new ArrayList<>();
 
-  private final ProductFullCard fullCard = new ProductFullCard(fullCardDiv);
+  private final ProductExpandedCard fullCard = new ProductExpandedCard(fullCardDiv);
 
   public OpenBankHomePage() {
     if (cookiesBarDiv.isDisplayed())
@@ -66,7 +66,7 @@ public class OpenBankHomePage extends WebPage {
   }
 
   public String getSearchBarText() {
-    click(searchProductContainer);
+    scroll(searchProductContainer);
     return searchBarInput.getAttribute("aria-label");
   }
 
@@ -75,7 +75,7 @@ public class OpenBankHomePage extends WebPage {
    * @return true is there are results, false if the were no results
    */
   public OpenBankHomePage typeInSearchBar(String search) {
-    click(searchProductContainer);
+    scroll(searchProductContainer);
     if (fullCardDiv.isDisplayed())
       click(closeFullCardButton);
     if (closeButton.isDisplayed())
@@ -95,8 +95,7 @@ public class OpenBankHomePage extends WebPage {
     return productsResultDiv.isDisplayed() || fullCardDiv.isDisplayed();
   }
 
-  public OpenBankHomePage selectACard(int card) {
-
+  public ProductExpandedCard selectACard(int card) {
     if (fullCardDiv.isDisplayed()) {
       click(closeFullCardButton);
       areVisible(cardsDiv);
@@ -107,7 +106,7 @@ public class OpenBankHomePage extends WebPage {
       isVisible(fullCardDiv);
     }
 
-    return this;
+    return fullCard;
   }
 
   public ProductCard getProductCard(int card) {
@@ -115,18 +114,6 @@ public class OpenBankHomePage extends WebPage {
       click(closeFullCardButton);
 
     return cards.get(card);
-  }
-
-  public String getFullCardTitle() {
-    return fullCard.getCardTitle();
-  }
-
-  public String getFullCardDescription() {
-    return fullCard.getDescriptionDiv();
-  }
-
-  public String getFullCardIconSrc() {
-    return fullCard.getIconSrc();
   }
 
   public int totalCards() {
@@ -138,39 +125,8 @@ public class OpenBankHomePage extends WebPage {
     return toolBar.selectLanguage(lang);
   }
 
-  public boolean topButtonMatch(String buttonName) {
-    return toolBar.topButtonMatch(buttonName);
+  public ToolBar getToolBar() {
+    return toolBar;
   }
 
-  public boolean bottomButtonMatch(String buttonName) {
-    return toolBar.bottomButtonMatch(buttonName);
-  }
-
-  public boolean topBarActionMatch(String actionName) {
-    return toolBar.topBarActionMatch(actionName);
-  }
-
-  public boolean isTopButtonEnable(String buttonName) {
-    return toolBar.isTopButtonEnable(buttonName);
-  }
-
-  public boolean isBottomButtonEnable(String buttonName) {
-    return toolBar.isBottomButtonEnable(buttonName);
-  }
-
-  public boolean isTopBarActionEnable(String actionName) {
-    return toolBar.isTopBarActionEnable(actionName);
-  }
-
-  public boolean isTopButtonClickable(String buttonName) {
-    return toolBar.isTopButtonClickable(buttonName);
-  }
-
-  public boolean isBottomButtonClickable(String buttonName) {
-    return toolBar.isBottomButtonClickable(buttonName);
-  }
-
-  public boolean isTopBarActionClickable(String actionName) {
-    return toolBar.isTopBarActionClickable(actionName);
-  }
 }

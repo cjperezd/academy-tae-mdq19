@@ -4,8 +4,6 @@ import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.academy.mdq.waits.Waits.isVisible;
-
 public class ProductCard extends WebComponent {
 
   @FindBy(css = "a.box-grid__item__wrapper")
@@ -25,10 +23,10 @@ public class ProductCard extends WebComponent {
   }
 
   public void selectFullCard() {
-    click(isVisible(fullCardLink));
+    click(fullCardLink);
   }
 
-  public String getCardTitle() {
+  public String getTitle() {
     return cardTitle.getText();
   }
 
