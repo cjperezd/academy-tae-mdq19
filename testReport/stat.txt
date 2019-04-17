@@ -1,4 +1,4 @@
 RESULTS
-Total: 1
-Passed: 1
+Total: 2
+Passed: 2
 Failed: 0

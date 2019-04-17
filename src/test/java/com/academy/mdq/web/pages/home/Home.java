@@ -1,14 +1,12 @@
 package com.academy.mdq.web.pages.home;
 
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.waits.Waits;
 import com.academy.mdq.web.pages.commons.TopBar;
 import com.academy.mdq.web.pages.home.components.productSearch.FullCard;
 import com.academy.mdq.web.pages.home.components.productSearch.ProductResultsComponent;
 import com.academy.mdq.web.pages.home.components.productSearch.SearchBar;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Home extends WebPage {
   @FindBy(id = "block-openbank-topbar")
@@ -23,11 +21,11 @@ public class Home extends WebPage {
   @FindBy(id = "product-search-results")
   private WebElement searchResults;
 
+  @FindBy(css = "#product-search .container")
+  private WebElement searchContainer;
+
   @FindBy(id = "product-search-fullcard")
   private WebElement fullCardContainer;
-
-  @FindBy(id="bloque-highlight")
-  private WebElement elementBeforeSearch;
 
   public boolean areResultsEmpty() {
     return emptySearchResults.isDisplayed();
@@ -41,12 +39,12 @@ public class Home extends WebPage {
     return new ProductResultsComponent(searchResults);
   }
 
-  public FullCard getFullCard() {
+  public FullCard getFullCard(){
     return new FullCard(fullCardContainer);
   }
 
   public SearchBar getSearchBar() {
-    scrollUntilElement(elementBeforeSearch);
+    scrollIntoElement(searchContainer);
     return new SearchBar(searchBarContainer);
   }
 

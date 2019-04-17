@@ -41,7 +41,8 @@ public class FullCard extends WebComponent {
     return cardTitle.getText();
   }
 
-  public void clickCloseButton() {
+  public FullCard clickCloseButton() {
     click(closeButton);
+    return this;
   }
 }

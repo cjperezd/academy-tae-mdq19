@@ -24,9 +24,8 @@ public class SearchCard extends WebComponent {
     return cardTitle.getText();
   }
 
-  public SearchCard clickCardTitle() {
+  public void clickCardTitle() {
     click(cardTitle);
-    return this;
   }
 
 }

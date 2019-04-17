@@ -27,3 +27,4 @@ target/
 #IntelliJ IDEA files
 .idea/
 *.iml
+testReport/screenshots/
