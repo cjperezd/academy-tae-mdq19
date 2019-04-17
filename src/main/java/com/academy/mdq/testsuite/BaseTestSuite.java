@@ -1,17 +1,22 @@
 package com.academy.mdq.testsuite;
 
 import com.academy.mdq.logger.Loggeable;
-import org.junit.After;
+import com.academy.mdq.rules.ExtendErrorCollector;
+import com.academy.mdq.rules.TestListener;
+import org.hamcrest.Matcher;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 
 import java.net.MalformedURLException;
 
-import static com.academy.mdq.driver.Drivers.dispose;
 import static com.academy.mdq.driver.Drivers.populateDriver;
 import static com.academy.mdq.platform.Platform.WEB;
 import static com.academy.mdq.properties.TestProperties.TEST_PROPERTIES;
+import static com.academy.mdq.reports.BasicExtentReport.endTest;
+import static com.academy.mdq.reports.BasicExtentReport.getTest;
+import static com.academy.mdq.reports.SendReportEmail.sendReport;
 import static com.academy.mdq.server.SeleniumStandaloneServer.SERVER;
 import static java.lang.String.format;
 import static junit.framework.Assert.fail;
@@ -23,6 +28,16 @@ import static org.junit.Assert.assertEquals;
  */
 public abstract class BaseTestSuite implements Loggeable {
 
+  @Rule
+  public ExtendErrorCollector collector = new ExtendErrorCollector();
+
+  public <T> void checkThat(String reason, T value, Matcher<T> matcher) {
+    collector.checkThat(reason, value, matcher);
+  }
+
+  @Rule
+  public final TestListener listener = new TestListener();
+
   @BeforeClass
   public static void beforeClass() {
     if (WEB.equals(TEST_PROPERTIES.getPlatform())) {
@@ -32,9 +47,12 @@ public abstract class BaseTestSuite implements Loggeable {
 
   @AfterClass
   public static void afterClass() {
+    endTest();
     if (WEB.equals(TEST_PROPERTIES.getPlatform())) {
       SERVER.stop();
     }
+    endTest();
+    sendReport("ariana.mazzini@globant.com", "Amazon Tests");
   }
 
   @Before
@@ -43,13 +61,14 @@ public abstract class BaseTestSuite implements Loggeable {
       populateDriver(TEST_PROPERTIES.getPlatform(), TEST_PROPERTIES.getBrowser());
     } catch (MalformedURLException e) {
       fail("Unable to populateDriver an instance of the getDriver, please check the configuration.");
+      getTest().skip(e.getMessage());
     }
   }
 
-  @After
-  public void after() {
-    dispose();
-  }
+//  @After
+//  public void after() {
+//    dispose();
+//  }
 
   /**
    * Checks for the equality of two Strings.
