@@ -6,21 +6,22 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.notNullValue;
 
+public class OKEngTest extends BaseTestSuite {
 
-public class OKTest extends BaseTestSuite {
     private int idx = 0;
     private String cardName;
-    private String textAnimation = " Busca aquí nuestros productos y servicios";
+    private String textAnimation = " Find here our products and services";
 
     @Test
-    public void myTest() throws InterruptedException {
+    public void myTest() {
 
-        HomePage homePage = new HomePage();
+        HomePage homePage = new HomePage().clickLanguageSelector().clickLanguage();
         int size = homePage.getCardsOnList().size();
 
         checkThat("Text animation matches",homePage.getInputTextAnimation(), containsString(textAnimation));
-        homePage.clickCloseCookiesButton();
+
 
         for (int i = 0; i < size; i++) {
             cardName = homePage.getCardName(i);
@@ -29,13 +30,14 @@ public class OKTest extends BaseTestSuite {
             homePage.clickCloseFullCard();
         }
 
-        homePage.typeNoExistsProduct();
+
+        homePage.typeNoExistsProductEN();
         homePage.clickOnSearchButton();
-        checkThat("No exist description match: ", homePage.getNoExistsDescription(), containsString("No hemos encontrado"));
+        checkThat("No exist description match: ", homePage.getNoExistsDescription(), CoreMatchers.containsString("We haven't found"));
         homePage.clickOnNoSearchButton();
 
-        homePage.typeExistsProduct().clickOnSearchButton();
-        //checkThat("No text Visible: ", homePage.getNoExistsDescription(), CoreMatchers.containsString(""));
+        homePage.typeExistsProductEN().clickOnSearchButton();
+        checkThat("No text Visible: ", homePage.getCardsOnList().get(0), notNullValue());
         homePage.clickOnNoSearchButton();
 
 

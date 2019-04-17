@@ -19,8 +19,8 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class EmailReport {
     final String username = "pruebareporteglo@gmail.com";
     final String password = "PruebaReporte123";
-    private static final String filePath = "C:/Users/juan.poli/Desktop/Reports/MyReport.html";
-    private static final String fileResumePath = "C:/Users/juan.poli/Desktop/Reports/resume.txt";
+    private static final String filePath = "C:/Users/juan.poli/Desktop/OKReports/MyReportOK.html";
+    private static final String fileResumePath = "C:/Users/juan.poli/Desktop/OKReports/resumeOK.txt";
 
     private static final Logger LOGGER = getLogger(ErrorCollector.class);
 

@@ -16,25 +16,25 @@ import java.io.UnsupportedEncodingException;
 import static com.academy.mdq.properties.TestProperties.TEST_PROPERTIES;
 
 
-@RunWith(Parameterized.class)
+
 public class Extent {
 
     private static ExtentHtmlReporter htmlReporter;
-    private static String name = "MyOKReport";
+    private static String name = "MyReportOK";
     private static ExtentReports extent = getConfigExtent();
     private static ExtentTest test;
     private static int countPass = 0;
     private static int countFailed = 0;
 
     public Extent() {
-        test = extent.createTest("AmazonTestReporter");
+        test = extent.createTest("OKTestReporter");
         getTest().log(Status.INFO, "Navigating into: " + TEST_PROPERTIES.getBaseUrl());
     }
 
 
     @BeforeClass
     private static void config() {
-        htmlReporter = new ExtentHtmlReporter("C:/Users/juan.poli/Desktop/Reports/" + name + ".html");
+        htmlReporter = new ExtentHtmlReporter("C:/Users/juan.poli/Desktop/OKReports/" + name + ".html");
         extent = new com.aventstack.extentreports.ExtentReports();
         extent.attachReporter(htmlReporter);
     }
@@ -73,7 +73,7 @@ public class Extent {
     private void createResume() {
         PrintWriter writer = null;
         try {
-            writer = new PrintWriter("C:/Users/juan.poli/Desktop/Reports/okResume.txt", "UTF-8");
+            writer = new PrintWriter("C:/Users/juan.poli/Desktop/OKReports/ResumeOK.txt", "UTF-8");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {

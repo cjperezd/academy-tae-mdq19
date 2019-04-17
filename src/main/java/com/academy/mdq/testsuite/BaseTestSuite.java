@@ -1,14 +1,16 @@
 package com.academy.mdq.testsuite;
 
+import com.academy.mdq.extentReports.EmailReport;
+import com.academy.mdq.extentReports.errorCollector.CheckError;
 import com.academy.mdq.logger.Loggeable;
-import org.junit.After;
+import org.hamcrest.Matcher;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 
 import java.net.MalformedURLException;
 
-import static com.academy.mdq.driver.Drivers.dispose;
 import static com.academy.mdq.driver.Drivers.populateDriver;
 import static com.academy.mdq.platform.Platform.WEB;
 import static com.academy.mdq.properties.TestProperties.TEST_PROPERTIES;
@@ -21,7 +23,12 @@ import static org.junit.Assert.assertEquals;
  * BaseTestSuite represents the base suite for all the test suites in the test automation project.
  * A new suite should inherit BaseTestSuite functionality.
  */
+
 public abstract class BaseTestSuite implements Loggeable {
+
+
+  @Rule
+  public CheckError checkError = new CheckError();
 
   @BeforeClass
   public static void beforeClass() {
@@ -46,10 +53,10 @@ public abstract class BaseTestSuite implements Loggeable {
     }
   }
 
-  @After
+  /*@After
   public void after() {
     dispose();
-  }
+  }*/
 
   /**
    * Checks for the equality of two Strings.
@@ -61,4 +68,18 @@ public abstract class BaseTestSuite implements Loggeable {
     assertEquals(format("Error: Expected '%s', but was '%s'", expected, actual), expected, actual);
   }
 
+  public <T> void checkThat(String reason, T value, Matcher<T> matcher) {
+    checkError.checkThat(reason, value, matcher);
+  }
+
+  public void callTear() {
+    checkError.callTear();
+  }
+
+
+  @AfterClass
+    public static void sendEmails() {
+        EmailReport emailReport = new EmailReport();
+        emailReport.sendEmail();
+    }
 }
