@@ -1,21 +1,20 @@
-package com.academy.mdq.oKWeb.pages.oKPage.oKpages;
+package com.academy.mdq.okweb.pages.okpage.okpages;
 
-import com.academy.mdq.oKWeb.pages.oKPage.components.*;
+import com.academy.mdq.okweb.pages.okpage.components.*;
+import com.academy.mdq.okweb.pages.okpage.components.commons.SectionsBar;
+import com.academy.mdq.okweb.pages.okpage.components.commons.TopBar;
 import com.academy.mdq.page.web.WebPage;
-import javafx.scene.control.ScrollToEvent;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.remote.server.handler.interactions.touch.Scroll;
 import org.openqa.selenium.support.FindBy;
+import sun.rmi.runtime.Log;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePage extends WebPage {
+import static com.academy.mdq.driver.Drivers.getDriver;
 
+public class HomePage extends WebPage {
 
 
     @FindBy(className = "box-grid__item")
@@ -37,35 +36,43 @@ public class HomePage extends WebPage {
     private WebElement cookiesCloseButton;
 
     @FindBy(className = "openbank-topbar__top")
-    private WebElement toolbarContainer;
+    private WebElement topbarContainer;
 
     @FindBy(className = "differential-and-characteristic__title")  //ELIMINAR
     private WebElement justForTest;
 
-    @FindBy (css = "#product-search .container")
+    @FindBy(css = "#product-search .container")
     private WebElement searchContainer;
 
-    @FindBy (id = "product-search-results-cards")
+    @FindBy(id = "product-search-results-cards")
     private WebElement cardsContainer;
+
+    @FindBy(className = "openbank-topbar__bottom")
+    private WebElement sectionsBarContainer;
+
+    @FindBy(className = "openbank-topbar__actions__access")
+    private WebElement loginButton;
 
     private ProductSearchBar productSearchBar;
     private ProductCard productCard;
     private ProductFullCard productFullCard;
     private TopBar topBar;
     private ProductCardContainer productCardContainer;
+    private SectionsBar sectionsBar;
+    private Login login;
 
 
     public HomePage() {
         this.productSearchBar = new ProductSearchBar(productSearchbarContainer);
         this.productCard = new ProductCard(oneCardContainer);
         this.productFullCard = new ProductFullCard(fullCardContainer);
-        this.topBar = new TopBar(toolbarContainer);
+        this.topBar = new TopBar(topbarContainer);
         this.productCardContainer = new ProductCardContainer(cardsContainer);
+        this.sectionsBar = new SectionsBar(sectionsBarContainer);
+        this.login = new Login();
     }
 
     List<ProductFullCard> productFullCardList = new ArrayList<>();
-
-
 
 
     private List<ProductFullCard> getFullCardsOnList() {
@@ -102,7 +109,7 @@ public class HomePage extends WebPage {
         return productFullCard;
     }
 
-    public ProductCardContainer getProductCardContainer(){
+    public ProductCardContainer getProductCardContainer() {
         return productCardContainer;
     }
 
@@ -110,8 +117,22 @@ public class HomePage extends WebPage {
         return topBar;
     }
 
-    public HomePage scrollPage(){
+    public SectionsBar getSectionsBar(){
+        return sectionsBar;
+    }
+
+    public HomePage scrollPage() {
         scroll(searchContainer);
         return this;
     }
+
+    public Login clickLogin(){
+        click(loginButton);
+        return new Login();
+    }
+
+    public Login getLogin(){
+        return login;
+    }
+
 }

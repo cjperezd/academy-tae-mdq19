@@ -1,13 +1,12 @@
-package com.academy.mdq.oKWeb.test;
+package com.academy.mdq.okweb.test;
 
-import com.academy.mdq.oKWeb.pages.oKPage.components.ProductCardContainer;
-import com.academy.mdq.oKWeb.pages.oKPage.oKpages.HomePage;
+import com.academy.mdq.okweb.pages.okpage.okpages.HomePage;
 import com.academy.mdq.testsuite.BaseTestSuite;
 import org.junit.Test;
 
-import static com.academy.mdq.oKWeb.pages.oKPage.components.ProductCardContainer.*;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static com.academy.mdq.okweb.pages.okpage.components.ProductCardContainer.getCardsOnList;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
 
 public class OKEngTest extends BaseTestSuite {
 
@@ -20,12 +19,11 @@ public class OKEngTest extends BaseTestSuite {
 
         HomePage homePage = new HomePage();
         homePage.getTopBar().clickLanguageSelector().clickLanguage();
-        int size =  homePage.getProductCardContainer().getCardsOnList().size();
+        int size = homePage.getProductCardContainer().getCardsOnList().size();
 
         homePage.scrollPage();
 
-        checkThat("Text animation matches",homePage.getProductSearchBar().getInputTextAnimation(), containsString(textAnimation));
-
+        checkThat("Text animation matches", homePage.getProductSearchBar().getInputTextAnimation(), containsString(textAnimation));
 
 
         for (int i = 0; i < size; i++) {
@@ -44,6 +42,23 @@ public class OKEngTest extends BaseTestSuite {
         homePage.getProductSearchBar().clickOnSearchButton();
         checkThat("No text Visible: ", getCardsOnList().get(0), notNullValue());
         homePage.getProductSearchBar().clickOnNoSearchButton();
+
+        for (int i = 0; i < homePage.getTopBar().getWebElementsSize(); i++) {
+            checkThat("Buttons appear: ", homePage.getTopBar().getText(i), notNullValue());
+        }
+
+        checkThat("Login button correct name: ", homePage.getSectionsBar().isCorrectLoginName(), is(true));
+        checkThat("Register button correct name: ", homePage.getSectionsBar().isCorrectRegisterName(), is(true));
+
+        for (int i=0; i< homePage.getSectionsBar().getOptionsSize();i++){
+            checkThat("Sections button exists: ", homePage.getSectionsBar().getSectionsTexts(i), notNullValue());
+            checkThat("Are displayed sections buttons: ", homePage.getSectionsBar().areButtonsDisplayed(i),is(true));
+        }
+
+        checkThat("Login/Register buttons displayed",homePage.getSectionsBar().areAccountBottonsDisplayed(),is(true));
+
+
+
 
         callTear();
     }

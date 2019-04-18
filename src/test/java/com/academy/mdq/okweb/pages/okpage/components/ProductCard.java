@@ -1,10 +1,9 @@
-package com.academy.mdq.oKWeb.pages.oKPage.components;
+package com.academy.mdq.okweb.pages.okpage.components;
 
 import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductCard extends WebComponent {

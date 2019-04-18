@@ -1,4 +1,4 @@
-package com.academy.mdq.oKWeb.pages.oKPage.components;
+package com.academy.mdq.okweb.pages.okpage.components;
 
 import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
@@ -12,6 +12,7 @@ public class ProductCardContainer extends WebComponent {
     @FindBy(className = "box-grid__item")
     private static List<WebElement> cardContainer;
 
+
     private static List<ProductCard> productCardList = new ArrayList<>();
 
     public ProductCardContainer(WebElement container) {
@@ -23,9 +24,6 @@ public class ProductCardContainer extends WebComponent {
         cardContainer.forEach(card -> productCardList.add(new ProductCard(card)));
         return productCardList;
     }
-
-
-
 
 
 }

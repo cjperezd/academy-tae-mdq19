@@ -69,4 +69,9 @@ public abstract class WebOperations extends CommonOperations {
         js.executeScript("arguments[0].scrollIntoView(false);", webElement);
     }
 
+    protected void hover(WebElement webElement) {
+        Actions actions = new Actions(getDriver().getWebDriver());
+        actions.moveToElement(webElement).perform();
+    }
+
 }
