@@ -1,5 +1,6 @@
 package com.academy.mdq.oKWeb.pages.oKPage.components;
 
+import com.academy.mdq.oKWeb.pages.oKPage.oKpages.HomePage;
 import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,36 +24,50 @@ public class ProductSearchBar extends WebComponent {
     @FindBy (className = "autocomplete-list")
     private WebElement autocompleteTextButton;
 
-    @FindBy (id = "product-search")
-    private WebElement searchContainer;
-
     @FindBy(className = "typewriter-animation")
     private WebElement typeAnimation;
 
+    private String noExists = "Libros";
+    private String exists = "Fondos de inversión";
+
+    private String noExistsEN = "Foots";
+    private String existsEN = "Investment Funds";
 
 
-    public WebElement getProductInput() {
-        return productInput;
+
+    public ProductSearchBar clickOnSearchButton() {
+        click(searchButton);
+        return this;
     }
 
-
-    public WebElement getSearchButton() {
-        return searchButton;
+    public ProductSearchBar clickOnNoSearchButton() {
+        click(noSearchButton);
+        return this;
     }
 
-    public WebElement getNoSearchButton() {
-        return noSearchButton;
+    public String getInputTextAnimation() {
+        //scrollTo();
+        return typeAnimation.getText();
     }
 
-    public WebElement getAutocompleteTextButton(){
-        return autocompleteTextButton;
+    public ProductSearchBar typeNoExistsProduct() {
+        type(productInput, noExists);
+        return this;
     }
 
-    public WebElement getSearchContainer() {
-        return searchContainer;
+    public ProductSearchBar typeExistsProduct() {
+        type(productInput, exists);
+        return this;
     }
 
-    public WebElement getTypeAnimation() {
-        return typeAnimation;
+    public ProductSearchBar typeNoExistsProductEN() {
+        type(productInput, noExistsEN);
+        return this;
     }
+
+    public ProductSearchBar typeExistsProductEN() {
+        type(productInput, existsEN);
+        return this;
+    }
+
 }

@@ -4,7 +4,6 @@ import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TopBar extends WebComponent {
@@ -25,11 +24,13 @@ public class TopBar extends WebComponent {
 
 
 
-    public List<WebElement> getLanguageOptions(){
-        return languageOptions;
+    public TopBar clickLanguageSelector() {
+        click(languageSelector);
+        return this;
     }
 
-    public WebElement getLanguageSelector() {
-        return languageSelector;
+    public TopBar clickLanguage() {
+        click(languageOptions.get(1));
+        return this;
     }
 }

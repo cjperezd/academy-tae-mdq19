@@ -1,8 +1,16 @@
 package com.academy.mdq.page.web;
 
+import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.page.CommonOperations;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Coordinates;
+import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.support.ui.Select;
+
+import java.sql.Driver;
 
 import static com.academy.mdq.driver.Drivers.getDriver;
 import static com.academy.mdq.waits.Waits.isTextPresent;
@@ -10,45 +18,55 @@ import static com.academy.mdq.waits.Waits.isVisible;
 
 public abstract class WebOperations extends CommonOperations {
 
-  /**
-   * Navigates to the URL.
-   *
-   * @param url the URL
-   */
-  protected void goTo(String url) {
-    getDriver().getWebDriver().get(url);
-  }
+    /**
+     * Navigates to the URL.
+     *
+     * @param url the URL
+     */
+    protected void goTo(String url) {
+        getDriver().getWebDriver().get(url);
+    }
 
-  /**
-   * Refresh the page.
-   */
-  protected void refresh() {
-    getDriver().getWebDriver().navigate().refresh();
-  }
+    /**
+     * Refresh the page.
+     */
+    protected void refresh() {
+        getDriver().getWebDriver().navigate().refresh();
+    }
 
-  /**
-   * Types on the element.
-   *
-   * @param webElement the {@link WebElement}
-   * @param text       the text
-   */
-  protected boolean type(WebElement webElement, String text) {
-    isVisible(webElement).sendKeys(text);
-    return isTextPresent(webElement, text);
-  }
+    /**
+     * Types on the element.
+     *
+     * @param webElement the {@link WebElement}
+     * @param text       the text
+     */
+    protected boolean type(WebElement webElement, String text) {
+        isVisible(webElement).sendKeys(text);
+        return isTextPresent(webElement, text);
+    }
 
-  /**
-   * Selects an option by text from an HTML Select.
-   *
-   * @param webElement the {@link WebElement}
-   * @param text       the text to select
-   */
-  protected void selectByText(WebElement webElement, String text) {
-    select(webElement).selectByVisibleText(text);
-  }
+    /**
+     * Selects an option by text from an HTML Select.
+     *
+     * @param webElement the {@link WebElement}
+     * @param text       the text to select
+     */
+    protected void selectByText(WebElement webElement, String text) {
+        select(webElement).selectByVisibleText(text);
+    }
 
-  protected Select select(WebElement webElement) {
-    return new Select(webElement);
-  }
+    protected Select select(WebElement webElement) {
+        return new Select(webElement);
+    }
+
+    protected void scrollTo() {
+        JavascriptExecutor js = (JavascriptExecutor) getDriver().getWebDriver();
+        js.executeScript("window.scrollBy(0,700)");
+    }
+
+    protected void scroll(WebElement webElement) {
+        JavascriptExecutor js =(JavascriptExecutor)Drivers.getDriver().getWebDriver();
+        js.executeScript("arguments[0].scrollIntoView(false);", webElement);
+    }
 
 }

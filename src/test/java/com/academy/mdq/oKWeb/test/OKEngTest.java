@@ -1,10 +1,11 @@
 package com.academy.mdq.oKWeb.test;
 
+import com.academy.mdq.oKWeb.pages.oKPage.components.ProductCardContainer;
 import com.academy.mdq.oKWeb.pages.oKPage.oKpages.HomePage;
 import com.academy.mdq.testsuite.BaseTestSuite;
-import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
+import static com.academy.mdq.oKWeb.pages.oKPage.components.ProductCardContainer.*;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
@@ -17,29 +18,32 @@ public class OKEngTest extends BaseTestSuite {
     @Test
     public void myTest() {
 
-        HomePage homePage = new HomePage().clickLanguageSelector().clickLanguage();
-        int size = homePage.getCardsOnList().size();
+        HomePage homePage = new HomePage();
+        homePage.getTopBar().clickLanguageSelector().clickLanguage();
+        int size =  homePage.getProductCardContainer().getCardsOnList().size();
 
-        checkThat("Text animation matches",homePage.getInputTextAnimation(), containsString(textAnimation));
+        homePage.scrollPage();
+
+        checkThat("Text animation matches",homePage.getProductSearchBar().getInputTextAnimation(), containsString(textAnimation));
+
 
 
         for (int i = 0; i < size; i++) {
-            cardName = homePage.getCardName(i);
-            homePage.clickOnCard(i);
+            cardName = homePage.getProductCard().getCardName(i);
+            homePage.getProductCard().clickOnCard(i);
             checkThat("Card Name equals to full card name: ", homePage.getFullCardName(), containsString(cardName));
-            homePage.clickCloseFullCard();
+            homePage.getProductFullCard().clickCloseFullCard();
         }
 
 
-        homePage.typeNoExistsProductEN();
-        homePage.clickOnSearchButton();
-        checkThat("No exist description match: ", homePage.getNoExistsDescription(), CoreMatchers.containsString("We haven't found"));
-        homePage.clickOnNoSearchButton();
+        homePage.getProductSearchBar().typeNoExistsProductEN().clickOnSearchButton();
+        checkThat("No exist description match: ", homePage.getNoExistsDescription(), containsString("We haven't found"));
+        homePage.getProductSearchBar().clickOnNoSearchButton();
 
-        homePage.typeExistsProductEN().clickOnSearchButton();
-        checkThat("No text Visible: ", homePage.getCardsOnList().get(0), notNullValue());
-        homePage.clickOnNoSearchButton();
-
+        homePage.getProductSearchBar().typeExistsProductEN();
+        homePage.getProductSearchBar().clickOnSearchButton();
+        checkThat("No text Visible: ", getCardsOnList().get(0), notNullValue());
+        homePage.getProductSearchBar().clickOnNoSearchButton();
 
         callTear();
     }

@@ -1,14 +1,15 @@
 package com.academy.mdq.oKWeb.pages.oKPage.oKpages;
 
-import com.academy.mdq.oKWeb.pages.oKPage.components.ProductCard;
-import com.academy.mdq.oKWeb.pages.oKPage.components.ProductFullCard;
-import com.academy.mdq.oKWeb.pages.oKPage.components.ProductSearchBar;
-import com.academy.mdq.oKWeb.pages.oKPage.components.TopBar;
+import com.academy.mdq.oKWeb.pages.oKPage.components.*;
 import com.academy.mdq.page.web.WebPage;
+import javafx.scene.control.ScrollToEvent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.remote.server.handler.interactions.touch.Scroll;
 import org.openqa.selenium.support.FindBy;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,6 @@ import java.util.List;
 public class HomePage extends WebPage {
 
 
-    @FindBy(className = "box-grid__item")
-    private List<WebElement> cardContainer;
 
     @FindBy(className = "box-grid__item")
     private WebElement oneCardContainer;
@@ -40,16 +39,20 @@ public class HomePage extends WebPage {
     @FindBy(className = "openbank-topbar__top")
     private WebElement toolbarContainer;
 
-    private String noExists = "Libros";
-    private String exists = "Fondos de inversión";
+    @FindBy(className = "differential-and-characteristic__title")  //ELIMINAR
+    private WebElement justForTest;
 
-    private String noExistsEN = "Foots";
-    private String existsEN = "Investment Funds";
+    @FindBy (css = "#product-search .container")
+    private WebElement searchContainer;
+
+    @FindBy (id = "product-search-results-cards")
+    private WebElement cardsContainer;
 
     private ProductSearchBar productSearchBar;
     private ProductCard productCard;
     private ProductFullCard productFullCard;
     private TopBar topBar;
+    private ProductCardContainer productCardContainer;
 
 
     public HomePage() {
@@ -57,78 +60,29 @@ public class HomePage extends WebPage {
         this.productCard = new ProductCard(oneCardContainer);
         this.productFullCard = new ProductFullCard(fullCardContainer);
         this.topBar = new TopBar(toolbarContainer);
+        this.productCardContainer = new ProductCardContainer(cardsContainer);
     }
 
-
-    List<ProductCard> productCardList = new ArrayList<>();
     List<ProductFullCard> productFullCardList = new ArrayList<>();
 
 
-    public List<ProductCard> getCardsOnList() {
-        cardContainer.forEach(card -> productCardList.add(new ProductCard(card)));
-        return productCardList;
-    }
+
 
     private List<ProductFullCard> getFullCardsOnList() {
         fullCardContainerList.forEach(card -> productFullCardList.add(new ProductFullCard(card)));
         return productFullCardList;
     }
 
-    private ProductFullCard getFirstCard() {
+    private ProductFullCard getFirstFullCard() {
         return getFullCardsOnList().stream().findFirst().get();
     }
 
-    public HomePage clickOnSearchButton() {
-        click(productSearchBar.getSearchButton());
-        return this;
-    }
-
-    public HomePage clickOnNoSearchButton() {
-        click(productSearchBar.getNoSearchButton());
-        return this;
-    }
-
-    public HomePage clickOnCard(int idx) {
-        click(getCardsOnList().get(idx).getImage());
-        return this;
-    }
-
-    public String getCardName(int idx) {
-        return getCardsOnList().get(idx).getCardTitle();
-    }
-
     public String getFullCardName() {
-        return getFirstCard().getTitle();
-    }
-
-
-    public String getInputTextAnimation() {
-        click(productSearchBar.getSearchContainer());
-        return productSearchBar.getTypeAnimation().getText();
-    }
-
-    public HomePage typeNoExistsProduct() {
-        type(productSearchBar.getProductInput(), noExists);
-        return this;
-    }
-
-    public HomePage typeExistsProduct() {
-        type(productSearchBar.getProductInput(), exists);
-        return this;
-    }
-
-    public HomePage clickCloseFullCard() {
-        click(productFullCard.getCloseButton());
-        return this;
+        return getFirstFullCard().getTitle();
     }
 
     public String getNoExistsDescription() {
         return resultSearchNoExistText.getText();
-    }
-
-    public HomePage clickAutocomplete() {
-        click(productSearchBar.getAutocompleteTextButton());
-        return this;
     }
 
     public HomePage clickCloseCookiesButton() {
@@ -136,23 +90,28 @@ public class HomePage extends WebPage {
         return this;
     }
 
-    public HomePage clickLanguageSelector() {
-        click(topBar.getLanguageSelector());
-        return this;
+    public ProductSearchBar getProductSearchBar() {
+        return productSearchBar;
     }
 
-    public HomePage clickLanguage() {
-        click(topBar.getLanguageOptions().get(1));
-        return this;
+    public ProductCard getProductCard() {
+        return productCard;
     }
 
-    public HomePage typeNoExistsProductEN() {
-        type(productSearchBar.getProductInput(), noExistsEN);
-        return this;
+    public ProductFullCard getProductFullCard() {
+        return productFullCard;
     }
 
-    public HomePage typeExistsProductEN() {
-        type(productSearchBar.getProductInput(), existsEN);
+    public ProductCardContainer getProductCardContainer(){
+        return productCardContainer;
+    }
+
+    public TopBar getTopBar() {
+        return topBar;
+    }
+
+    public HomePage scrollPage(){
+        scroll(searchContainer);
         return this;
     }
 }

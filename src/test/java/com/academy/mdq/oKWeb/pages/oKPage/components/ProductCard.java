@@ -4,6 +4,9 @@ import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProductCard extends WebComponent {
 
     public ProductCard(WebElement container) {
@@ -13,23 +16,26 @@ public class ProductCard extends WebComponent {
     @FindBy(className = "img-responsive")  //For clicking...
     private WebElement image;
 
-
     @FindBy(className = "box-grid__item__title")
     private WebElement cardTitle;
 
     @FindBy(className = "box-grid__item__content__description")
     private WebElement cardDescription;
 
+    @FindBy(className = "box-grid__item")
+    private List<WebElement> cardContainer;
+
 
     public String getCardTitle() {
         return cardTitle.getText();
     }
 
-    public WebElement getImage() {
-        return image;
+    public ProductCard clickOnCard(int idx) {
+        click(ProductCardContainer.getCardsOnList().get(idx).image);
+        return this;
     }
 
-    public WebElement getCardDescription() {
-        return cardDescription;
+    public String getCardName(int idx) {
+        return ProductCardContainer.getCardsOnList().get(idx).getCardTitle();
     }
 }
