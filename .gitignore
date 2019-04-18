@@ -24,6 +24,8 @@ hs_err_pid*
 
 target/
 
+testReport/screenshots/
+
 #IntelliJ IDEA files
 .idea/
 *.iml

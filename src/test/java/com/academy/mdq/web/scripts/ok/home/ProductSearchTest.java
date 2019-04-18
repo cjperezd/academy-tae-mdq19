@@ -1,7 +1,7 @@
 package com.academy.mdq.web.scripts.ok.home;
 
 import com.academy.mdq.testsuite.BaseTestSuite;
-import com.academy.mdq.web.pages.commons.TopBar;
+import com.academy.mdq.web.pages.commons.ToolBarComponents.TopBar;
 import com.academy.mdq.web.pages.home.Home;
 import com.academy.mdq.web.pages.home.components.ProductSearchComponent;
 import com.academy.mdq.web.pages.home.components.productSearch.ExpandedSearchCard;
@@ -12,7 +12,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
-public class HomeTest extends BaseTestSuite {
+public class ProductSearchTest extends BaseTestSuite {
 
   private static final String INPUT_TEXT_ES = "Busca aquí nuestros productos y servicios";
   private static final String INPUT_TEXT_EN = "Find here our products and services";
@@ -57,7 +57,7 @@ public class HomeTest extends BaseTestSuite {
   @Test
   public void productSearchTestEN() {
     TopBar esTopBar = new Home().getTopBar();
-    ProductSearchComponent productSearchComponent = esTopBar.clickLanguageButton().clickENLanguegeButton().getProductSearchComponent();
+    ProductSearchComponent productSearchComponent = esTopBar.clickLanguageButton().clickENLanguageButton().getProductSearchComponent();
     SearchBar searchBar = productSearchComponent.getSearchBar();
 
     checkThat("The AutoText is equals to the one expected.", searchBar.getAutoTextFromSearchInput(),
@@ -90,7 +90,6 @@ public class HomeTest extends BaseTestSuite {
         equalTo(true));
 
     searchBar.clickCloseButton();
-
   }
 
 }
