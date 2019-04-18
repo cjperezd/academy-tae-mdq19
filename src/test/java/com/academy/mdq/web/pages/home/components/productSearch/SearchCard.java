@@ -4,6 +4,8 @@ import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static com.academy.mdq.waits.Waits.isVisible;
+
 public class SearchCard extends WebComponent {
 
   @FindBy(css = ".box-grid__item__icon img")
@@ -17,15 +19,18 @@ public class SearchCard extends WebComponent {
   }
 
   public String getSrcIcon() {
+    isVisible(cardIcon);
     return cardIcon.getAttribute("src");
   }
 
   public String getCardTitle() {
+    isVisible(cardTitle);
     return cardTitle.getText();
   }
 
-  public void clickCardTitle() {
+  public SearchCard clickCardTitle() {
     click(cardTitle);
+    return this;
   }
 
 }

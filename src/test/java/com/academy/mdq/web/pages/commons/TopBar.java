@@ -1,10 +1,13 @@
 package com.academy.mdq.web.pages.commons;
 
 import com.academy.mdq.page.web.WebComponent;
+import com.academy.mdq.web.pages.home.Home;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+
+import static com.academy.mdq.waits.Waits.areVisible;
 
 public class TopBar extends WebComponent {
 
@@ -30,6 +33,7 @@ public class TopBar extends WebComponent {
 
   public TopBar(WebElement container) {
     super(container);
+    areVisible(buttons);
     helpButton = buttons.get(0);
     contactUsButton = buttons.get(1);
     faqButton = buttons.get(2);
@@ -37,13 +41,13 @@ public class TopBar extends WebComponent {
     languageButton = buttons.get(4);
   }
 
-  public TopBar clickLanguageButton(){
+  public TopBar clickLanguageButton() {
     click(languageButton);
     return this;
   }
 
-  public TopBar clickENLanguegeButton(){
+  public Home clickENLanguegeButton() {
     click(enLanguageButton);
-    return this;
+    return new Home();
   }
 }

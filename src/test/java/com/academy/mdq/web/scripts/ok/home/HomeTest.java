@@ -3,51 +3,52 @@ package com.academy.mdq.web.scripts.ok.home;
 import com.academy.mdq.testsuite.BaseTestSuite;
 import com.academy.mdq.web.pages.commons.TopBar;
 import com.academy.mdq.web.pages.home.Home;
-import com.academy.mdq.web.pages.home.components.productSearch.FullCard;
+import com.academy.mdq.web.pages.home.components.ProductSearchComponent;
+import com.academy.mdq.web.pages.home.components.productSearch.ExpandedSearchCard;
 import com.academy.mdq.web.pages.home.components.productSearch.SearchBar;
 import com.academy.mdq.web.pages.home.components.productSearch.SearchCard;
 import org.junit.Test;
-
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
 public class HomeTest extends BaseTestSuite {
 
+  private static final String INPUT_TEXT_ES = "Busca aquí nuestros productos y servicios";
+  private static final String INPUT_TEXT_EN = "Find here our products and services";
+
   @Test
   public void productSearchTestES() {
-    Home home = new Home();
-    SearchBar searchBar = home.getSearchBar();
+    ProductSearchComponent productSearchComponent = new Home().getProductSearchComponent();
+    SearchBar searchBar = productSearchComponent.getSearchBar();
 
     checkThat("The AutoText is equals to the one expected.", searchBar.getAutoTextFromSearchInput(),
-        equalTo("Busca aquí nuestros productos y servicios"));
+        equalTo(INPUT_TEXT_ES));
 
-    for (SearchCard card : home.getProductResultsComponent().getCards()) {
+    for (SearchCard card : productSearchComponent.getCards()) {
       String title = card.getCardTitle();
       String icon = card.getSrcIcon();
-      card.clickCardTitle();
-      FullCard fullCard = home.getFullCard();
-      checkThat("The search card title is equals to the full card title shown.", title, equalTo(fullCard.getCardTitle()));
-      checkThat("The search card icon is equals to the full card icon shown.", icon, equalTo(fullCard.getSrcIcon()));
-      fullCard.clickCloseButton();
+      ExpandedSearchCard expandedSearchCard = productSearchComponent.clickSearchCard(card);
+      checkThat("The search card title is equals to the full card title shown.", title, equalTo(expandedSearchCard.getCardTitle()));
+      checkThat("The search card icon is equals to the full card icon shown.", icon, equalTo(expandedSearchCard.getSrcIcon()));
+      expandedSearchCard.clickCloseButton();
     }
 
     searchBar.typeProduct("tarjeta")
         .clickSearchButton();
 
-    checkThat("The product searched exists", home.areResults(),
+    checkThat("The product searched exists", productSearchComponent.areResults(),
         equalTo(true));
-    checkThat("The empty result section is not display", home.areResultsEmpty(),
+    checkThat("The empty result section is not display", productSearchComponent.areResultsEmpty(),
         equalTo(false));
 
     searchBar.clickCloseButton()
         .typeProduct("tarjetasssss")
         .clickSearchButton();
 
-    checkThat("The product searched does not exists", home.areResults(),
+    checkThat("The product searched does not exists", productSearchComponent.areResults(),
         equalTo(false));
-    checkThat("The empty result section is display", home.areResultsEmpty(),
+    checkThat("The empty result section is display", productSearchComponent.areResultsEmpty(),
         equalTo(true));
 
     searchBar.clickCloseButton();
@@ -55,46 +56,41 @@ public class HomeTest extends BaseTestSuite {
 
   @Test
   public void productSearchTestEN() {
-    Home homeES = new Home();
-    TopBar topBar = homeES.getTopBar();
-    topBar.clickLanguageButton().clickENLanguegeButton();
-    Home homeEN = new Home();
-
-    SearchBar searchBar = homeEN.getSearchBar();
+    TopBar esTopBar = new Home().getTopBar();
+    ProductSearchComponent productSearchComponent = esTopBar.clickLanguageButton().clickENLanguegeButton().getProductSearchComponent();
+    SearchBar searchBar = productSearchComponent.getSearchBar();
 
     checkThat("The AutoText is equals to the one expected.", searchBar.getAutoTextFromSearchInput(),
-        equalTo("Find here our products and services"));
+        equalTo(INPUT_TEXT_EN));
 
-    List<SearchCard> previewCards = homeEN.getProductResultsComponent().getCards();
-
-    for (SearchCard card : previewCards) {
+    for (SearchCard card : productSearchComponent.getCards()) {
       String title = card.getCardTitle();
       String icon = card.getSrcIcon();
-      card.clickCardTitle();
-      FullCard fullCard = homeEN.getFullCard();
-      checkThat("The search card title is equals to the full card title shown.", title, equalTo(fullCard.getCardTitle()));
-      checkThat("The search card icon is equals to the full card icon shown.", icon, equalTo(fullCard.getSrcIcon()));
-      homeEN.getFullCard().clickCloseButton();
+      ExpandedSearchCard expandedSearchCard = productSearchComponent.clickSearchCard(card);
+      checkThat("The search card title is equals to the full card title shown.", title, equalTo(expandedSearchCard.getCardTitle()));
+      checkThat("The search card icon is equals to the full card icon shown.", icon, equalTo(expandedSearchCard.getSrcIcon()));
+      expandedSearchCard.clickCloseButton();
     }
 
     searchBar.typeProduct("card")
         .clickSearchButton();
 
-    checkThat("The product searched exists", homeEN.areResults(),
+    checkThat("The product searched exists", productSearchComponent.areResults(),
         equalTo(true));
-    checkThat("The empty result section is not display", homeEN.areResultsEmpty(),
+    checkThat("The empty result section is not display", productSearchComponent.areResultsEmpty(),
         equalTo(false));
 
     searchBar.clickCloseButton()
         .typeProduct("cardsssss")
         .clickSearchButton();
 
-    checkThat("The product searched does not exists", homeEN.areResults(),
+    checkThat("The product searched does not exists", productSearchComponent.areResults(),
         equalTo(false));
-    checkThat("The empty result section is display", homeEN.areResultsEmpty(),
+    checkThat("The empty result section is display", productSearchComponent.areResultsEmpty(),
         equalTo(true));
 
     searchBar.clickCloseButton();
+
   }
 
 }

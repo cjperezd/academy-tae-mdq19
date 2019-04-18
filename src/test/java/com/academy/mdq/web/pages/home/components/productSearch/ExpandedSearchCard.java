@@ -6,7 +6,9 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class FullCard extends WebComponent {
+import static com.academy.mdq.waits.Waits.isVisible;
+
+public class ExpandedSearchCard extends WebComponent {
 
   @FindBy(css = ".box-grid__item__image img")
   private WebElement cardImage;
@@ -29,7 +31,7 @@ public class FullCard extends WebComponent {
   @FindBy(className = "close-icon")
   private WebElement closeButton;
 
-  public FullCard(WebElement container) {
+  public ExpandedSearchCard(WebElement container) {
     super(container);
   }
 
@@ -38,10 +40,11 @@ public class FullCard extends WebComponent {
   }
 
   public String getCardTitle() {
+    isVisible(cardTitle);
     return cardTitle.getText();
   }
 
-  public FullCard clickCloseButton() {
+  public ExpandedSearchCard clickCloseButton() {
     click(closeButton);
     return this;
   }

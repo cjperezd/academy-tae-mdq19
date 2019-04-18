@@ -4,6 +4,8 @@ import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static com.academy.mdq.waits.Waits.isVisible;
+
 public class SearchBar extends WebComponent {
 
   @FindBy(css = ".product-search__autocomplete [aria-label]")
@@ -23,6 +25,7 @@ public class SearchBar extends WebComponent {
   }
 
   public String getAutoTextFromSearchInput() {
+    isVisible(productSearchInput);
     return productSearchInput.getAttribute("aria-label");
   }
 
