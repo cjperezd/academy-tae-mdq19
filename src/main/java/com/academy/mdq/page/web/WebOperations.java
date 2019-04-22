@@ -7,6 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.academy.mdq.driver.Drivers.getDriver;
 import static com.academy.mdq.reports.BasicExtentReport.*;
 import static com.academy.mdq.waits.Waits.isTextPresent;
@@ -38,7 +41,7 @@ public abstract class WebOperations extends CommonOperations {
    * @param text       the text
    */
   protected boolean type(WebElement webElement, String text) {
-    getTest().log(INFO, "Typing " + text + " on element " + getNameOfElement(webElement));
+    getTest().log(INFO, "Typing '" + text + "' on element '" + getNameOfElement(webElement) + "'");
     isVisible(webElement).sendKeys(text);
     return isTextPresent(webElement, text);
   }
@@ -50,7 +53,7 @@ public abstract class WebOperations extends CommonOperations {
    * @param text       the text to select
    */
   protected void selectByText(WebElement webElement, String text) {
-    getTest().log(INFO, "Selecting " + text + " from " + getNameOfElement(webElement));
+    getTest().log(INFO, "Selecting '" + text + "' from '" + getNameOfElement(webElement) + "'");
     select(webElement).selectByVisibleText(text);
   }
 
@@ -66,6 +69,11 @@ public abstract class WebOperations extends CommonOperations {
   protected void scroll(WebElement webElement) {
     JavascriptExecutor js =(JavascriptExecutor)Drivers.getDriver().getWebDriver();
     js.executeScript("arguments[0].scrollIntoView(false);", webElement);
+  }
+
+  public void openNewTab(int tab) {
+    List<String> windowsHandles = new ArrayList<>(Drivers.getDriver().getWebDriver().getWindowHandles());
+    Drivers.getDriver().getWebDriver().switchTo().window(windowsHandles.get(tab));
   }
 
 }

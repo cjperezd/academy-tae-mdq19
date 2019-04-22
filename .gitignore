@@ -26,5 +26,5 @@ target/
 
 #IntelliJ IDEA files
 .idea/
-src/test/resources/reports
+src/test/resources/reports/
 *.iml

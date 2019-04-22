@@ -27,10 +27,9 @@ public final class ExtendErrorCollector extends ErrorCollector {
 
   @Override
   public <T> void checkThat(final String reason, final T value, final Matcher<T> matcher) {
-    getTest().log(INFO, "Checking if: " + reason);
     this.checkSucceeds((Callable<Object>) () -> {
       Assert.assertThat(reason, value, matcher);
-      getTest().log(PASS, "Check passed");
+      getTest().log(PASS, "Checked that '" + reason + "'");
       return value;
     });
   }

@@ -3,6 +3,8 @@ package com.academy.mdq.page;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
+import java.util.Iterator;
 
 import static com.academy.mdq.driver.Drivers.getDriver;
 import static com.academy.mdq.reports.BasicExtentReport.*;
@@ -26,7 +28,7 @@ public abstract class CommonOperations {
    * @param webElement the {@link WebElement}
    */
   protected void click(WebElement webElement) {
-    getTest().log(INFO, "Clicking on " + getNameOfElement(webElement));
+    getTest().log(INFO, "Clicking on '" + getNameOfElement(webElement) + "'");
     isClickable(webElement).click();
   }
 
@@ -63,6 +65,12 @@ public abstract class CommonOperations {
       } catch (IllegalAccessException e) {
         e.printStackTrace();
       }
+    }
+    if (name == null) {
+      name = webElement.getText();
+    }
+    if (name.equals("")) {
+      name = webElement.getAttribute("title");
     }
     return name;
   }

@@ -1,12 +1,13 @@
 package com.academy.mdq.pages;
 
+import com.academy.mdq.component.Login;
 import com.academy.mdq.component.ProductCard;
 import com.academy.mdq.component.ProductExpandedCard;
-import com.academy.mdq.component.commons.ToolBar;
+import com.academy.mdq.component.commons.MenuBar;
+import com.academy.mdq.component.commons.TopBar;
 import com.academy.mdq.page.web.WebPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +17,14 @@ import static com.academy.mdq.waits.Waits.isVisible;
 
 public class OpenBankHomePage extends WebPage {
 
-  @FindBy(css = "#block-openbank-topbar #cookies-policy")
-  private WebElement cookiesBarDiv;
-
   @FindBy(css = "#block-openbank-topbar .cookies-policy__close-icon")
   private WebElement topBarCloseButton;
 
-  @FindBy(className = "openbank-topbar__layout")
-  private WebElement toolBarDiv;
+  @FindBy(className = "openbank-topbar__top")
+  private WebElement topBarDiv;
+
+  @FindBy(className = "openbank-topbar__bottom")
+  private WebElement menuBarDiv;
 
   @FindBy(css = "section#product-search")
   private WebElement searchProductContainer;
@@ -52,14 +53,18 @@ public class OpenBankHomePage extends WebPage {
   @FindBy(className = "box-grid__item")
   private List<WebElement> cardsDiv;
 
-  private final ToolBar toolBar = new ToolBar(toolBarDiv);
+  @FindBy(id = "secLog")
+  private WebElement loginDiv;
+
+  private final TopBar topBar = new TopBar(topBarDiv);
+  private final MenuBar menuBar = new MenuBar(menuBarDiv);
 
   private final List<ProductCard> cards = new ArrayList<>();
 
   private final ProductExpandedCard fullCard = new ProductExpandedCard(fullCardDiv);
 
   public OpenBankHomePage() {
-    if (cookiesBarDiv.isDisplayed())
+    if (topBarCloseButton.isDisplayed())
       click(topBarCloseButton);
     areVisible(cardsDiv);
     cardsDiv.stream().forEach(card -> cards.add(new ProductCard(card)));
@@ -121,12 +126,20 @@ public class OpenBankHomePage extends WebPage {
   }
 
   public OpenBankHomePage changeLanguage(String lang) {
-    isVisible(toolBarDiv);
-    return toolBar.selectLanguage(lang);
+    isVisible(topBarDiv);
+    return topBar.selectLanguage(lang);
   }
 
-  public ToolBar getToolBar() {
-    return toolBar;
+  public TopBar getTopBar() {
+    return topBar;
+  }
+
+  public MenuBar getMenuBar() {
+    return menuBar;
+  }
+
+  public Login selectLogin() {
+    return menuBar.selectLogin();
   }
 
 }
