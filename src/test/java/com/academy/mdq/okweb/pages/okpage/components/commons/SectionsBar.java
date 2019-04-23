@@ -1,5 +1,6 @@
 package com.academy.mdq.okweb.pages.okpage.components.commons;
 
+import com.academy.mdq.okweb.pages.okpage.okpages.OpenDiscountsPage;
 import com.academy.mdq.okweb.pages.okpage.okpages.PromotionAndDiscountsPage;
 import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
@@ -47,6 +48,11 @@ public class SectionsBar extends WebComponent {
     public SectionsBar clickOnPromotionsAndDiscounts() {
         click(sections.get(1));
         return this;
+    }
+
+    public OpenDiscountsPage clickOnOpenDiscounts() {
+        click(navigationPromotionsSection.get(7));
+        return new OpenDiscountsPage();
     }
 
     public PromotionAndDiscountsPage clickPromotionAndDiscounts(){

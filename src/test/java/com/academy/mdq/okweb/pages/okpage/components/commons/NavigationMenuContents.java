@@ -22,8 +22,6 @@ public class NavigationMenuContents extends WebComponent {
     public NavigationMenuContents(WebElement container) {
         super(container);
         this.navigationMenuLeftContents = new NavigationMenuLeftContents(navigationMenuContentLeft.get(0));
-
-        //TODO: Quitar el new de este lugar y hacerlo por cada vez que clickeo en la correspondiente seccion
         this.navigationMenuRightContents = new NavigationMenuRightContents(navigatonMenuContentRight.get(0));
     }
 

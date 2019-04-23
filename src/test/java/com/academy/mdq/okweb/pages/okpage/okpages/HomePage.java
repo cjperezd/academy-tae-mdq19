@@ -1,6 +1,7 @@
 package com.academy.mdq.okweb.pages.okpage.okpages;
 
 import com.academy.mdq.okweb.pages.okpage.components.*;
+import com.academy.mdq.okweb.pages.okpage.components.commons.Footer;
 import com.academy.mdq.okweb.pages.okpage.components.commons.NavigationMenuContents;
 import com.academy.mdq.okweb.pages.okpage.components.commons.SectionsBar;
 import com.academy.mdq.okweb.pages.okpage.components.commons.TopBar;
@@ -50,6 +51,9 @@ public class HomePage extends WebPage {
     @FindBy(className = "navigation-menu__item-content")
     private List<WebElement> navigationMenuContentsList;
 
+    @FindBy (className = "footer-menu__top")
+    private WebElement footerContainer;
+
 
     private ProductSearchBar productSearchBar;
     private ProductCard productCard;
@@ -59,6 +63,7 @@ public class HomePage extends WebPage {
     private SectionsBar sectionsBar;
     private Login login;
     private NavigationMenuContents navigationMenuContents;
+    private Footer footer;
 
 
     public HomePage() {
@@ -70,6 +75,7 @@ public class HomePage extends WebPage {
         this.sectionsBar = new SectionsBar(sectionsBarContainer);
         this.login = new Login();
         this.navigationMenuContents = new NavigationMenuContents(navigationMenuContentsList.get(0));
+        this.footer = new Footer(footerContainer);
     }
 
     List<ProductFullCard> productFullCardList = new ArrayList<>();
@@ -126,6 +132,11 @@ public class HomePage extends WebPage {
         return this;
     }
 
+    public HomePage scrollToFooter(){
+        scroll(footerContainer);
+        return this;
+    }
+
     public Login clickLogin() {
         click(loginButton);
         return new Login();
@@ -137,6 +148,10 @@ public class HomePage extends WebPage {
 
     public NavigationMenuContents getNavigationMenuContents() {
         return navigationMenuContents;
+    }
+
+    public Footer getFooter (){
+        return footer;
     }
 
 

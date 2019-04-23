@@ -74,71 +74,116 @@ public class OKTest extends BaseTestSuite {
 
         //TEST 3
 
-        homePage.getSectionsBar().clickOnProducts();
+//        homePage.getSectionsBar().clickOnProducts();
+////
+////        for (int i = 0; i < homePage.getNavigationMenuContents().getNavigationMenuLeftContentsForSize().getSectionsSize(); i++) {
+////
+////            homePage.getNavigationMenuContents().getNavigationMenuLeftContents(i).clickSection(i);
+////            checkThat("Are the texts Equals: ", homePage.getNavigationMenuContents().areTheSameTexts(i), is(true));
+////        }
+////
 //
-//        for (int i = 0; i < homePage.getNavigationMenuContents().getNavigationMenuLeftContentsForSize().getSectionsSize(); i++) {
 //
-//            homePage.getNavigationMenuContents().getNavigationMenuLeftContents(i).clickSection(i);
-//            checkThat("Are the texts Equals: ", homePage.getNavigationMenuContents().areTheSameTexts(i), is(true));
-//        }
+//        homePage.getNavigationMenuContents().getNavigationMenuLeftContents(4).clickSection(4);
+//        checkThat("is the url right: ", homePage.getNavigationMenuContents().getNavigationMenuRightContents().isopenSolidarioUrlRight(urlOpenSolidario), is(true));
 //
-
-
-        homePage.getNavigationMenuContents().getNavigationMenuLeftContents(4).clickSection(4);
-        checkThat("is the url right: ",homePage.getNavigationMenuContents().getNavigationMenuRightContents().isopenSolidarioUrlRight(urlOpenSolidario),is(true));
-
-        OpenSolidarioPage openSolidarioPage = homePage.getNavigationMenuContents().getNavigationMenuRightContents().clickOpenSolidario();
-        checkThat("are banners visible: ", openSolidarioPage.areBannersVisible(),is(true));
-        checkThat("is mini banner button visible: ", openSolidarioPage.isMinibannerButtonVisible(1),is(true));
-
-
-
-
-        openSolidarioPage.getHomePage().getSectionsBar().clickOnProducts();
-
-        openSolidarioPage.getHomePage().getNavigationMenuContents().getNavigationMenuLeftContents(3).clickSection(3);
-        checkThat("is url right: ", openSolidarioPage.getHomePage().getNavigationMenuContents().getNavigationMenuRightContents().isDepositOpenUrlRight(urlDepositOpen),is(true));
-
-        DepositOpenPage depositOpenPage = openSolidarioPage.getHomePage().getNavigationMenuContents().getNavigationMenuRightContents().clickDepositOpenSection();
-        checkThat("Are banners visible: ", depositOpenPage.areBannersVisible(),is(true));
-        checkThat("is mini banner button visible: ", depositOpenPage.isMinibannerButtonVisible(0),is(true));
-        checkThat("Is risk container visible: ", depositOpenPage.isRiskContainerVisible(),is(true));
-
-
-
-
-
-        depositOpenPage.getHomePage().getSectionsBar().clickOnProducts();
-
-        depositOpenPage.getHomePage().getNavigationMenuContents().getNavigationMenuLeftContents(2).clickSection(2);
-        checkThat("is url right: ", depositOpenPage.getHomePage().getNavigationMenuContents().getNavigationMenuRightContents().isHipotecaOpenUrlRight(urlHipotecasOpen),is(true));
-
-        HipotecaOpenPage hipotecaOpenPage = depositOpenPage.getHomePage().getNavigationMenuContents().getNavigationMenuRightContents().clickHipotecasOpenSection();
-        checkThat("Are banners visible: ", hipotecaOpenPage.areBannersVisible(),is(true));
-        checkThat("is mini banner button visible: ", hipotecaOpenPage.isMinibannerButtonVisible(1),is(true));
-
-
-
-
-
-        hipotecaOpenPage.getHomePage().getSectionsBar().clickOnProducts();
-
-        hipotecaOpenPage.getHomePage().getNavigationMenuContents().getNavigationMenuLeftContents(2).clickSection(2);
-        checkThat("is url right: ", hipotecaOpenPage.getHomePage().getNavigationMenuContents().getNavigationMenuRightContents().isPrestamosyCreditosUrlRight(urlPrestamosyCreditos),is(true));
-
-        PrestamosyCreditosPage prestamosyCreditosPage = hipotecaOpenPage.getHomePage().getNavigationMenuContents().getNavigationMenuRightContents().clickPrestamosyCreditosSection();
-        checkThat("Are banners visible: ", prestamosyCreditosPage.areBannersVisible(),is(true));
-        checkThat("is mini banner button visible: ", prestamosyCreditosPage.isMinibannerButtonVisible(0),is(true));
+//        OpenSolidarioPage openSolidarioPage = homePage.getNavigationMenuContents().getNavigationMenuRightContents().clickOpenSolidario();
+//        checkThat("are banners visible: ", openSolidarioPage.areBannersVisible(), is(true));
+//        checkThat("is mini banner button visible: ", openSolidarioPage.isMinibannerButtonVisible(1), is(true));
+//
+//
+//        openSolidarioPage.getHomePage().getSectionsBar().clickOnProducts();
+//
+//        openSolidarioPage.getHomePage().getNavigationMenuContents().getNavigationMenuLeftContents(3).clickSection(3);
+//        checkThat("is url right: ", openSolidarioPage.getHomePage().getNavigationMenuContents().getNavigationMenuRightContents().isDepositOpenUrlRight(urlDepositOpen), is(true));
+//
+//        DepositOpenPage depositOpenPage = openSolidarioPage.getHomePage().getNavigationMenuContents().getNavigationMenuRightContents().clickDepositOpenSection();
+//        checkThat("Are banners visible: ", depositOpenPage.areBannersVisible(), is(true));
+//        checkThat("is mini banner button visible: ", depositOpenPage.isMinibannerButtonVisible(0), is(true));
+//        checkThat("Is risk container visible: ", depositOpenPage.isRiskContainerVisible(), is(true));
+//
+//
+//        depositOpenPage.getHomePage().getSectionsBar().clickOnProducts();
+//
+//        depositOpenPage.getHomePage().getNavigationMenuContents().getNavigationMenuLeftContents(2).clickSection(2);
+//        checkThat("is url right: ", depositOpenPage.getHomePage().getNavigationMenuContents().getNavigationMenuRightContents().isHipotecaOpenUrlRight(urlHipotecasOpen), is(true));
+//
+//        HipotecaOpenPage hipotecaOpenPage = depositOpenPage.getHomePage().getNavigationMenuContents().getNavigationMenuRightContents().clickHipotecasOpenSection();
+//        checkThat("Are banners visible: ", hipotecaOpenPage.areBannersVisible(), is(true));
+//        checkThat("is mini banner button visible: ", hipotecaOpenPage.isMinibannerButtonVisible(1), is(true));
+//
+//
+//        hipotecaOpenPage.getHomePage().getSectionsBar().clickOnProducts();
+//
+//        hipotecaOpenPage.getHomePage().getNavigationMenuContents().getNavigationMenuLeftContents(2).clickSection(2);
+//        checkThat("is url right: ", hipotecaOpenPage.getHomePage().getNavigationMenuContents().getNavigationMenuRightContents().isPrestamosyCreditosUrlRight(urlPrestamosyCreditos), is(true));
+//
+//        PrestamosyCreditosPage prestamosyCreditosPage = hipotecaOpenPage.getHomePage().getNavigationMenuContents().getNavigationMenuRightContents().clickPrestamosyCreditosSection();
+//        checkThat("Are banners visible: ", prestamosyCreditosPage.areBannersVisible(), is(true));
+//        checkThat("is mini banner button visible: ", prestamosyCreditosPage.isMinibannerButtonVisible(0), is(true));
 
 
         //TEST 4
 
-        PromotionAndDiscountsPage promotionAndDiscountsPage = homePage.getSectionsBar().clickOnPromotionsAndDiscounts().clickPromotionAndDiscounts();
-        System.out.println("TITLE: " +promotionAndDiscountsPage.getTitleFirstCard());
+//        PromotionAndDiscountsPage promotionAndDiscountsPage = homePage.getSectionsBar().clickOnPromotionsAndDiscounts().clickPromotionAndDiscounts();
+//        int sizePromotionCards = promotionAndDiscountsPage.listOfCardsSize();
+//        for (int i = 0; i < sizePromotionCards; i++) {
+//            checkThat("Are all the cards displayed: ", promotionAndDiscountsPage.areCardsDisplayed(i), is(true));
+//            checkThat("Are all cards elements displayed: ", promotionAndDiscountsPage.areAllElementsVisible(i), is(true));
+//            checkThat("Are all links ok: ", promotionAndDiscountsPage.getPromotionCard().areLinkOk(i), is(true));
+//        }
+//
+//        for (int i = 0; i < sizePromotionCards-1; i++) {
+//            PromoCardPage promoCardPage = promotionAndDiscountsPage.clickOnCards(i);
+//            checkThat("Are banners and CTA displayed: ", promoCardPage.areElementsVisible(0), is(true));
+//            promotionAndDiscountsPage = promoCardPage.getSectionBar().clickOnPromotionsAndDiscounts().clickPromotionAndDiscounts();
+//        }
+//
+//
+//        OnePercentPage onePercentPage = promotionAndDiscountsPage.clickOnOnePercentCard();
+//        checkThat("Are banners displayed: ",onePercentPage.areElementsVisible(),is(true));
 
-        //TODO: Continuar con esto, devuelve bien el titulo de la primer card
+
+        //TEST 5
+
+//        OpenDiscountsPage openDiscountsPage = homePage.getSectionsBar().clickOnPromotionsAndDiscounts().clickOnOpenDiscounts();
+//        int sizeCategories = openDiscountsPage.getDiscountsMenu().categoriesSize();
+//        for (int i=0;i<sizeCategories;i++) {
+//            checkThat("Are categories visible: ", openDiscountsPage.getDiscountsMenu().areCategoriesVisible(i),is(true));
+//            checkThat("Is the richt category: ", openDiscountsPage.isTheRightCategory(i),is(true));
+//        }
+//
+//        int sizeCardList = openDiscountsPage.getSizeOfCardList();
+//
+//        for (int i=0;i<sizeCardList;i++){
+//            checkThat("Are elements of all cards visible: ",openDiscountsPage.areCardsElementsVisible(i),is(true));
+//        }
+
+        //TEST 6
+
+//        homePage.scrollToFooter();
+//        checkThat("Are footer elements visible: ", homePage.getFooter().areElementsVisible(), is(true));
+//        PrensaPage prensaPage = homePage.getFooter().clickPrensa();
+//        int sizePrensaCardsList = prensaPage.getPrensaCardListSize();
+//        for (int i = 0; i < sizePrensaCardsList; i++){
+//            checkThat("Are content visible: ",prensaPage.areCardsContentVisible(i),is(true));
+//        }
 
 
-        callTear();
+        //TEST 7
+
+        checkThat("Is ayuda urgente visible: ",homePage.getTopBar().isAyudaUrgenteVisible(),is(true));
+        HelpPage helpPage = homePage.getTopBar().clickHelp();
+        checkThat("All elements are displayed: ",helpPage.areAllElementsDisplayed(),is(true));
+        int sizeOfHelpPageCards = helpPage.getHelpCardsSize();
+        for(int i=0;i<sizeOfHelpPageCards;i++){
+            checkThat("All elements of the cards are displayed: ", helpPage.areContentsVisible(i),is(true));
+        }
+
+
+
+
+
+            callTear();
     }
 }
