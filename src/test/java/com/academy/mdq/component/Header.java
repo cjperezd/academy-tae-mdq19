@@ -1,7 +1,6 @@
 package com.academy.mdq.component;
 
 import com.academy.mdq.page.web.WebComponent;
-import com.academy.mdq.waits.Waits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

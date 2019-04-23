@@ -3,6 +3,7 @@ package com.academy.mdq.pages;
 import com.academy.mdq.component.Login;
 import com.academy.mdq.component.ProductCard;
 import com.academy.mdq.component.ProductExpandedCard;
+import com.academy.mdq.component.commons.FooterTop;
 import com.academy.mdq.component.commons.MenuBar;
 import com.academy.mdq.component.commons.TopBar;
 import com.academy.mdq.page.web.WebPage;
@@ -56,12 +57,17 @@ public class OpenBankHomePage extends WebPage {
   @FindBy(id = "secLog")
   private WebElement loginDiv;
 
+  @FindBy(className = "footer-menu__top")
+  private WebElement footerTopDiv;
+
   private final TopBar topBar = new TopBar(topBarDiv);
   private final MenuBar menuBar = new MenuBar(menuBarDiv);
 
   private final List<ProductCard> cards = new ArrayList<>();
 
   private final ProductExpandedCard fullCard = new ProductExpandedCard(fullCardDiv);
+
+  private final FooterTop footerTop = new FooterTop(footerTopDiv);
 
   public OpenBankHomePage() {
     if (topBarCloseButton.isDisplayed())
@@ -140,6 +146,11 @@ public class OpenBankHomePage extends WebPage {
 
   public Login selectLogin() {
     return menuBar.selectLogin();
+  }
+
+  public FooterTop getFooterTop() {
+    scroll(footerTopDiv);
+    return footerTop;
   }
 
 }

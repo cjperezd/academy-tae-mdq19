@@ -71,9 +71,4 @@ public abstract class WebOperations extends CommonOperations {
     js.executeScript("arguments[0].scrollIntoView(false);", webElement);
   }
 
-  public void openNewTab(int tab) {
-    List<String> windowsHandles = new ArrayList<>(Drivers.getDriver().getWebDriver().getWindowHandles());
-    Drivers.getDriver().getWebDriver().switchTo().window(windowsHandles.get(tab));
-  }
-
 }

@@ -1,7 +1,8 @@
 package com.academy.mdq.component;
 
 import com.academy.mdq.page.web.WebComponent;
-import com.academy.mdq.waits.Waits;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -10,10 +11,10 @@ import static com.academy.mdq.waits.Waits.isVisible;
 
 public class SmallBanner extends WebComponent {
 
-  @FindBy(className = "heading-4")
+  @FindBy(css = ".small-banner__contents [class*=\"heading\"]")
   private WebElement titleSpan;
 
-  @FindBy(className = "button")
+  @FindBy(css = ".small-banner__contents .button--primary")
   private WebElement buttonLink;
 
   public SmallBanner(WebElement webElement) {
@@ -25,7 +26,11 @@ public class SmallBanner extends WebComponent {
   }
 
   public boolean isButtonEnable() {
-    return isClickable(buttonLink).isEnabled();
+    try {
+      return isClickable(buttonLink).isEnabled();
+    } catch(TimeoutException e) {
+      return true;
+    }
   }
 
 }

@@ -1,14 +1,18 @@
 package com.academy.mdq.tests;
 
 import com.academy.mdq.component.*;
+import com.academy.mdq.component.commons.FooterTop;
 import com.academy.mdq.component.commons.MenuBar;
 import com.academy.mdq.component.commons.TopBar;
+import com.academy.mdq.driver.Drivers;
 import com.academy.mdq.pages.*;
 import com.academy.mdq.testsuite.BaseTestSuite;
 import org.junit.Test;
 
-import static com.academy.mdq.component.ProductsMenu.*;
-import static com.academy.mdq.component.ProductsMenu.Items.*;
+import static com.academy.mdq.component.ProductsMenu.Items;
+import static com.academy.mdq.component.ProductsMenu.Items.DEPOSITOS;
+import static com.academy.mdq.component.ProductsMenu.Items.FINANCIACION;
+import static com.academy.mdq.pages.DescuentosOpenPage.Categories.MODA;
 import static org.hamcrest.CoreMatchers.*;
 
 public class OpenBankHomeTest extends BaseTestSuite {
@@ -83,28 +87,28 @@ public class OpenBankHomeTest extends BaseTestSuite {
   }
 
   @Test
-  public void checkTopBar() {
+  public void verifyTopBar() {
 
     OpenBankHomePage home = new OpenBankHomePage();
     TopBar topBar = home.getTopBar();
     MenuBar menuBar = home.getMenuBar();
 
-    checkThat("Ayuda Urgente button is visible", topBar.isButtonVisible("Ayuda Urgente"), is(true));
-    checkThat("Ayuda Urgente button is enable", topBar.isButtonEnable("Ayuda Urgente"), is(true));
-    checkThat("Ayuda Urgente button URL is correct", topBar.getButtonURL("Ayuda Urgente"), containsString("https://www.openbank.es/ayuda-urgente"));
+    checkThat("Ayuda Urgente button is visible", topBar.isAyudaUrgenteButtonVisible(), is(true));
+    checkThat("Ayuda Urgente button is enable", topBar.isAyudaUrgenteButtonEnable(), is(true));
+    checkThat("Ayuda Urgente button URL is correct", topBar.getAyudaUrgenteURL(), containsString("https://www.openbank.es/ayuda-urgente"));
 
-    checkThat("Contáctanos button is visible", topBar.isButtonVisible("Contáctanos"), is(true));
-    checkThat("Contáctanos button is enable", topBar.isButtonEnable("Contáctanos"), is(true));
-    checkThat("Contáctanos button URL is correct", topBar.getButtonURL("Contáctanos"), containsString("https://www.openbank.es/contacto"));
+    checkThat("Contáctanos button is visible", topBar.isContactanosButtonVisible(), is(true));
+    checkThat("Contáctanos button is enable", topBar.isCajerosButtonEnable(), is(true));
+    checkThat("Contáctanos button URL is correct", topBar.getContactanosURL(), containsString("https://www.openbank.es/contacto"));
 
 
-    checkThat("Preguntas Frecuentes button is visible", topBar.isButtonVisible("Preguntas Frecuentes"), is(true));
-    checkThat("Preguntas Frecuentes button is enable", topBar.isButtonEnable("Preguntas Frecuentes"), is(true));
-    checkThat("Preguntas Frecuentes button URL is correct", topBar.getButtonURL("Preguntas Frecuentes"), containsString("https://www.openbank.es/ayuda"));
+    checkThat("Preguntas Frecuentes button is visible", topBar.isPreguntasFrecuentesButtonVisible(), is(true));
+    checkThat("Preguntas Frecuentes button is enable", topBar.isPreguntasFrecuentesButtonEnable(), is(true));
+    checkThat("Preguntas Frecuentes button URL is correct", topBar.getPreguntasFrecuentesURL(), containsString("https://www.openbank.es/ayuda"));
 
-    checkThat("Cajeros button is visible", topBar.isButtonVisible("Cajeros"), is(true));
-    checkThat("Cajeros button is enable", topBar.isButtonEnable("Cajeros"), is(true));
-    checkThat("Cajeros button URL is correct", topBar.getButtonURL("Cajeros"), containsString("https://www.openbank.es/cajeros-oficinas"));
+    checkThat("Cajeros button is visible", topBar.isCajerosButtonVisible(), is(true));
+    checkThat("Cajeros button is enable", topBar.isCajerosButtonEnable(), is(true));
+    checkThat("Cajeros button URL is correct", topBar.getCajerosURL(), containsString("https://www.openbank.es/cajeros-oficinas"));
 
     checkThat("Language button is visible", topBar.isLanguageButtonVisible(), is(true));
     checkThat("Language button is enable", topBar.isLanguageButtonEnable(), is(true));
@@ -137,7 +141,7 @@ public class OpenBankHomeTest extends BaseTestSuite {
   }
 
   @Test
-  public void checkProductsMenu() {
+  public void verifyProductsMenu() {
 
     String[] items = {"Cuentas", "Tarjetas", "Financiación", "Depósitos", "Servicios y Herramientas", "Openbank Wealth"};
 
@@ -194,6 +198,104 @@ public class OpenBankHomeTest extends BaseTestSuite {
     checkThat("Header title is correct", header.getHeaderTitle(), containsString("Depósito Open 13 meses"));
     checkThat("Banner is visible", banner.isTitleVisible() && banner.isButtonEnable(), is(true));
     checkThat("Risk section is visible", riskSidebar.isTextVisible(), is(true));
+
+  }
+
+  @Test
+  public void verifyPromotions() {
+
+    String[] links = {"promocion-amazon-alexa-echo-dot-0419",
+        "promo-casa-del-libro",
+        "gana-100-euros-gestion-discrecional",
+        "descuentos-estaciones-servicio-galp-cataluna",
+        "sorteo-samsung-galaxy-watch",
+        "aplazar-compras-pagos-5",
+        "ahorrar-dinero-consigue-premios",
+        "invertir-bolsa",
+        "sorteo-tarjetas-500-euros-carburante",
+        "promocion-nomina-cumplenomina"
+    };
+
+    PromocionesPage promocionesPage = new OpenBankHomePage().getMenuBar().selectPromociones();
+
+    for (int i = 0; i < promocionesPage.totalOfCards(); i++) {
+      PromotionCard card = promocionesPage.getCard(i);
+      checkThat("Promotion card number " + i + " background image is visible", card.isImgPictureVisible(), is(true));
+      checkThat("Promotion card number " + i + " title is visible", card.isTitleDivVisible(), is(true));
+      checkThat("Promotion card number " + i + " description is visible", card.isDescriptionDivVisible(), is(true));
+      checkThat("Promotion card number " + i + " button is enable", card.isCtaDivEnable(), is(true));
+      checkThat("The link of the cards is correct", card.getLink(), containsString(links[i]));
+    }
+
+    for (int i=0; i < promocionesPage.totalOfCards(); i++) {
+      PromoPage promoPage = promocionesPage.getCard(i).select();
+
+      Header header = promoPage.getHeader();
+      SmallBanner banner = header.getSmallBanner();
+      checkThat("Header is visible", header.isTitleVisible() && header.isImgVisible(), is(true));
+      checkThat("Banner is visible", banner.isTitleVisible() && banner.isButtonEnable(), is(true));
+
+      Drivers.getDriver().getWebDriver().navigate().back();
+      promocionesPage = new PromocionesPage();
+    }
+
+  }
+
+  @Test
+  public void verifyDiscounts() {
+
+    DescuentosOpenPage descuentosOpenPage = new OpenBankHomePage().getMenuBar().selectDescuentosOpen();
+
+    checkThat("All categories are visible", descuentosOpenPage.areCategoriesVisible(), is(true));
+
+    descuentosOpenPage.selectCategory(MODA);
+
+    checkThat("Title of category " + MODA + " is visible", descuentosOpenPage.isTitleVisible(MODA), is(true));
+
+    for (int i=0; i<descuentosOpenPage.totalOfCards(); i++) {
+      DiscountCard card = descuentosOpenPage.getDiscountCard(i);
+      checkThat("Card number " + (i+1) + " title is visible", card.isTitleDivVisible(), is(true));
+      checkThat("Card number " + (i+1) + " description is visible", card.isDescriptionDivVisible(), is(true));
+      checkThat("Card number " + (i+1) + " button is visible", card.isCtaButtonVisible(), is(true));
+    }
+
+  }
+
+  @Test
+  public void verifyPrensa() {
+
+    FooterTop footerTop = new OpenBankHomePage().getFooterTop();
+
+    checkThat("Footer is visible", footerTop.areAllOptionsVisible(), is(true));
+
+    PrensaPage prensaPage = footerTop.selectPrensa();
+
+    for (int i=0; i<prensaPage.totalOfNews(); i++) {
+      NewSection newSection = prensaPage.getNewSection(i);
+      checkThat("Section number " + (i+1) + " img is visible", newSection.isImgVisible(), is(true));
+      checkThat("Section number " + (i+1) + " date is visible", newSection.isDateVisible(), is(true));
+      checkThat("Section number " + (i+1) + " title is visible", newSection.isTitleVisible(), is(true));
+      checkThat("Section number " + (i+1) + " description is visible", newSection.isDescriptionVisible(), is(true));
+    }
+  }
+
+  @Test
+  public void verifyAyudaUrgente() {
+
+    TopBar topBar = new OpenBankHomePage().getTopBar();
+
+    checkThat("Ayuda Urgente button is visible", topBar.isAyudaUrgenteIconVisible(), is(true));
+    checkThat("Ayuda Urgente icon is correct", topBar.isAyudaUrgenteButtonEnable(), equalTo("icon-ayuda-urgente"));
+
+    AyudaUrgentePage ayudaUrgentePage = topBar.selectAyudaUrgente();
+
+    for (int i=0; i < ayudaUrgentePage.totalOfCards(); i++) {
+      HelpCard helpCard = ayudaUrgentePage.getHelpCard(i);
+      checkThat("Card number " + (i+1) + " icon is visible", helpCard.isIconVisible(), is(true));
+      checkThat("Card number " + (i+1) + " icon is correct", helpCard.getIconImg(), equalTo("/assets/2017-05/Tarjetas.svg"));
+      checkThat("Card number " + (i+1) + " title is visible", helpCard.isTitleVisible(), is(true));
+      checkThat("Card number " + (i+1) + " description is visible", helpCard.isTextVisible(), is(true));
+    }
 
   }
 

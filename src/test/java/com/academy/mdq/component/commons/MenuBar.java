@@ -3,6 +3,8 @@ package com.academy.mdq.component.commons;
 import com.academy.mdq.component.Login;
 import com.academy.mdq.component.ProductsMenu;
 import com.academy.mdq.page.web.WebComponent;
+import com.academy.mdq.pages.DescuentosOpenPage;
+import com.academy.mdq.pages.PromocionesPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -83,6 +85,18 @@ public class MenuBar extends WebComponent {
   public ProductsMenu selectProductsMenu() {
     click(productsButton);
     return new ProductsMenu(productsContainer);
+  }
+
+  public PromocionesPage selectPromociones() {
+    click(promButton);
+    promOptions.stream().filter(o -> o.getText().equals("Promociones")).findFirst().ifPresent(WebElement::click);
+    return new PromocionesPage();
+  }
+
+  public DescuentosOpenPage selectDescuentosOpen() {
+    click(promButton);
+    promOptions.stream().filter(o -> o.getText().equals("Descuentos Open")).findFirst().ifPresent(WebElement::click);
+    return new DescuentosOpenPage();
   }
 
   public boolean isPromContainerVisible() {

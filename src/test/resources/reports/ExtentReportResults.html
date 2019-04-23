@@ -46,7 +46,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>Apr 22, 2019 05:17:04 PM</span>
+                    <span class='label suite-start-time blue darken-3'>Apr 23, 2019 05:42:22 PM</span>
 				</a>
 			</li>
 			<li>
@@ -72,6 +72,7 @@
 				</a>
 				<ul id='tests-toggle' class='dropdown-content'>
 											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
 					<li class='divider'></li>
 					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
 				</ul>
@@ -122,10 +123,10 @@
 					<canvas id='parent-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>1</span> test(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='0%'><span class='strong'>0</span> test(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='100%'>1</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -137,10 +138,10 @@
 					<canvas id='child-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='50%'><span class='strong'>25</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='54.167%'><span class='strong'>13</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='50%'>25</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='20.833%'>5</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='25%'>6</span> others
 				</div>
 			</div>
 		</div>
@@ -155,19 +156,19 @@
 			<ul id='test-collection' class='test-collection'>
 				
 				
-				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='1'>
 					<div class='test-heading'>
 						<span class='test-name'>OpenBankHomeTest</span>
-						<span class='test-time'>Apr 22, 2019 05:17:04 PM</span>
-						<span class='test-status right pass'>pass</span>
+						<span class='test-time'>Apr 23, 2019 05:42:22 PM</span>
+						<span class='test-status right fail'>fail</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>Apr 22, 2019 05:17:04 PM</span>
-	<span class='label end-time'>Apr 22, 2019 05:17:48 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 44s+90ms</span>
+	<span class='label start-time'>Apr 23, 2019 05:42:22 PM</span>
+	<span class='label end-time'>Apr 23, 2019 05:43:14 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 51s+924ms</span>
 </div>
-	<div class='test-desc'>checkProductsMenu </div>
+	<div class='test-desc'>verifyAyudaUrgente </div>
 	<div class='test-steps'>
 		<table class='bordered table-results'>
 			<thead>
@@ -180,253 +181,123 @@
 			<tbody>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:17 PM</td>
+					<td class='timestamp'>5:43:00 PM</td>
 					<td class='step-details'>Navigating to: https://www.openbank.es/</td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:17 PM</td>
+					<td class='timestamp'>5:43:00 PM</td>
 					<td class='step-details'>At page: com.academy.mdq.pages.OpenBankHomePage</td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:17 PM</td>
+					<td class='timestamp'>5:43:00 PM</td>
 					<td class='step-details'>Clicking on 'topBarCloseButton'</td>
 				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:17 PM</td>
-					<td class='step-details'>Clicking on 'productsButton'</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:20 PM</td>
-					<td class='step-details'>Clicking on 'Cuentas'</td>
-				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:21 PM</td>
-					<td class='step-details'>Checked that 'Item 'Cuentas' selection was correct'</td>
+					<td class='timestamp'>5:43:02 PM</td>
+					<td class='step-details'>Checked that 'Ayuda Urgente button is visible'</td>
 				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:21 PM</td>
-					<td class='step-details'>Checked that 'Item 'Cuentas' title matches navegation title'</td>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:43:04 PM</td>
+					<td class='step-details'>Type of error: AssertionError<img data-featherlight='C:/Users/ariana.mazzini/Desktop/academy-web-final/academy-tae-mdq19src/test/resources/reports/screenshots/92gG3fLX.png' width='10%' src='C:/Users/ariana.mazzini/Desktop/academy-web-final/academy-tae-mdq19src/test/resources/reports/screenshots/92gG3fLX.png' data-src='C:/Users/ariana.mazzini/Desktop/academy-web-final/academy-tae-mdq19src/test/resources/reports/screenshots/92gG3fLX.png'></td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:22 PM</td>
-					<td class='step-details'>Clicking on 'Tarjetas'</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:22 PM</td>
-					<td class='step-details'>Checked that 'Item 'Tarjetas' selection was correct'</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:22 PM</td>
-					<td class='step-details'>Checked that 'Item 'Tarjetas' title matches navegation title'</td>
+					<td class='timestamp'>5:43:04 PM</td>
+					<td class='step-details'>Clicking on '  Ayuda Urgente'</td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:22 PM</td>
-					<td class='step-details'>Clicking on 'Financiación'</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:23 PM</td>
-					<td class='step-details'>Checked that 'Item 'Financiación' selection was correct'</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:23 PM</td>
-					<td class='step-details'>Checked that 'Item 'Financiación' title matches navegation title'</td>
+					<td class='timestamp'>5:43:12 PM</td>
+					<td class='step-details'>Navigating to: https://www.openbank.es/ayuda-urgente</td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:23 PM</td>
-					<td class='step-details'>Clicking on 'Depósitos'</td>
+					<td class='timestamp'>5:43:12 PM</td>
+					<td class='step-details'>At page: com.academy.mdq.pages.AyudaUrgentePage</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:26 PM</td>
-					<td class='step-details'>Checked that 'Item 'Depósitos' selection was correct'</td>
+					<td class='timestamp'>5:43:12 PM</td>
+					<td class='step-details'>Checked that 'Card number 1 icon is visible'</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:43:12 PM</td>
+					<td class='step-details'>Type of error: AssertionError<img data-featherlight='C:/Users/ariana.mazzini/Desktop/academy-web-final/academy-tae-mdq19src/test/resources/reports/screenshots/lNfVKI9s.png' width='10%' src='C:/Users/ariana.mazzini/Desktop/academy-web-final/academy-tae-mdq19src/test/resources/reports/screenshots/lNfVKI9s.png' data-src='C:/Users/ariana.mazzini/Desktop/academy-web-final/academy-tae-mdq19src/test/resources/reports/screenshots/lNfVKI9s.png'></td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:26 PM</td>
-					<td class='step-details'>Checked that 'Item 'Depósitos' title matches navegation title'</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:26 PM</td>
-					<td class='step-details'>Clicking on 'Servicios y Herramientas'</td>
+					<td class='timestamp'>5:43:12 PM</td>
+					<td class='step-details'>Checked that 'Card number 1 title is visible'</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:27 PM</td>
-					<td class='step-details'>Checked that 'Item 'Servicios y Herramientas' selection was correct'</td>
+					<td class='timestamp'>5:43:12 PM</td>
+					<td class='step-details'>Checked that 'Card number 1 description is visible'</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:27 PM</td>
-					<td class='step-details'>Checked that 'Item 'Servicios y Herramientas' title matches navegation title'</td>
+					<td class='timestamp'>5:43:12 PM</td>
+					<td class='step-details'>Checked that 'Card number 2 icon is visible'</td>
 				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:27 PM</td>
-					<td class='step-details'>Clicking on 'Openbank Wealth'</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:28 PM</td>
-					<td class='step-details'>Checked that 'Item 'Openbank Wealth' selection was correct'</td>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:43:13 PM</td>
+					<td class='step-details'>Type of error: AssertionError<img data-featherlight='C:/Users/ariana.mazzini/Desktop/academy-web-final/academy-tae-mdq19src/test/resources/reports/screenshots/odbs8BX2.png' width='10%' src='C:/Users/ariana.mazzini/Desktop/academy-web-final/academy-tae-mdq19src/test/resources/reports/screenshots/odbs8BX2.png' data-src='C:/Users/ariana.mazzini/Desktop/academy-web-final/academy-tae-mdq19src/test/resources/reports/screenshots/odbs8BX2.png'></td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:28 PM</td>
-					<td class='step-details'>Checked that 'Item 'Openbank Wealth' title matches navegation title'</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:29 PM</td>
-					<td class='step-details'>Clicking on 'Financiación'</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:33 PM</td>
-					<td class='step-details'>Navigating to: https://www.openbank.es/hipoteca-open</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:33 PM</td>
-					<td class='step-details'>At page: com.academy.mdq.pages.HipotecasOpenPage</td>
+					<td class='timestamp'>5:43:13 PM</td>
+					<td class='step-details'>Checked that 'Card number 2 title is visible'</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:33 PM</td>
-					<td class='step-details'>Checked that 'Header is visible'</td>
+					<td class='timestamp'>5:43:13 PM</td>
+					<td class='step-details'>Checked that 'Card number 2 description is visible'</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:33 PM</td>
-					<td class='step-details'>Checked that 'Header title is correct'</td>
+					<td class='timestamp'>5:43:13 PM</td>
+					<td class='step-details'>Checked that 'Card number 3 icon is visible'</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:43:13 PM</td>
+					<td class='step-details'>Type of error: AssertionError<img data-featherlight='C:/Users/ariana.mazzini/Desktop/academy-web-final/academy-tae-mdq19src/test/resources/reports/screenshots/hcvBLMTc.png' width='10%' src='C:/Users/ariana.mazzini/Desktop/academy-web-final/academy-tae-mdq19src/test/resources/reports/screenshots/hcvBLMTc.png' data-src='C:/Users/ariana.mazzini/Desktop/academy-web-final/academy-tae-mdq19src/test/resources/reports/screenshots/hcvBLMTc.png'></td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:33 PM</td>
-					<td class='step-details'>Checked that 'Banner is visible'</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:33 PM</td>
-					<td class='step-details'>Clicking on 'productsButton'</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:34 PM</td>
-					<td class='step-details'>Clicking on 'Financiación'</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:38 PM</td>
-					<td class='step-details'>Navigating to: https://www.openbank.es/comparador-prestamos-creditos</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:38 PM</td>
-					<td class='step-details'>At page: com.academy.mdq.pages.PrestamosYCreditosPage</td>
+					<td class='timestamp'>5:43:14 PM</td>
+					<td class='step-details'>Checked that 'Card number 3 title is visible'</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:38 PM</td>
-					<td class='step-details'>Checked that 'Header is visible'</td>
+					<td class='timestamp'>5:43:14 PM</td>
+					<td class='step-details'>Checked that 'Card number 3 description is visible'</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:38 PM</td>
-					<td class='step-details'>Checked that 'Header title is correct'</td>
+					<td class='timestamp'>5:43:14 PM</td>
+					<td class='step-details'>Checked that 'Card number 4 icon is visible'</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>5:43:14 PM</td>
+					<td class='step-details'>Type of error: AssertionError<img data-featherlight='C:/Users/ariana.mazzini/Desktop/academy-web-final/academy-tae-mdq19src/test/resources/reports/screenshots/cRvvm1Vm.png' width='10%' src='C:/Users/ariana.mazzini/Desktop/academy-web-final/academy-tae-mdq19src/test/resources/reports/screenshots/cRvvm1Vm.png' data-src='C:/Users/ariana.mazzini/Desktop/academy-web-final/academy-tae-mdq19src/test/resources/reports/screenshots/cRvvm1Vm.png'></td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:38 PM</td>
-					<td class='step-details'>Checked that 'Banner is visible'</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:38 PM</td>
-					<td class='step-details'>Clicking on 'productsButton'</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:39 PM</td>
-					<td class='step-details'>Clicking on 'Financiación'</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:44 PM</td>
-					<td class='step-details'>Navigating to: https://www.openbank.es/credito-inmediato-proteccion-descubierto</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:44 PM</td>
-					<td class='step-details'>At page: com.academy.mdq.pages.ProteccionDeDescubiertoPage</td>
+					<td class='timestamp'>5:43:14 PM</td>
+					<td class='step-details'>Checked that 'Card number 4 title is visible'</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:44 PM</td>
-					<td class='step-details'>Checked that 'Header is visible'</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:44 PM</td>
-					<td class='step-details'>Checked that 'Header title is correct'</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:44 PM</td>
-					<td class='step-details'>Checked that 'Banner is visible'</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:44 PM</td>
-					<td class='step-details'>Clicking on 'productsButton'</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:45 PM</td>
-					<td class='step-details'>Clicking on 'Depósitos'</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:48 PM</td>
-					<td class='step-details'>Navigating to: https://www.openbank.es/deposito-plazo-fijo-13-meses</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>5:17:48 PM</td>
-					<td class='step-details'>At page: com.academy.mdq.pages.DepositoPage</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:48 PM</td>
-					<td class='step-details'>Checked that 'Header is visible'</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:48 PM</td>
-					<td class='step-details'>Checked that 'Header title is correct'</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:48 PM</td>
-					<td class='step-details'>Checked that 'Banner is visible'</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>5:17:48 PM</td>
-					<td class='step-details'>Checked that 'Risk section is visible'</td>
+					<td class='timestamp'>5:43:14 PM</td>
+					<td class='step-details'>Checked that 'Card number 4 description is visible'</td>
 				</tr>
 			</tbody>
 		</table>
@@ -474,25 +345,25 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>50</div>
+					<div class='panel-lead'>24</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Apr 22, 2019 05:17:04 PM</div>
+					<div class='panel-lead'>Apr 23, 2019 05:42:22 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Apr 22, 2019 05:17:49 PM</div>
+			 		<div class='panel-lead'>Apr 23, 2019 05:43:16 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>0h 0m 45s+3ms</div>
+					<div class='panel-lead'>0h 0m 54s+286ms</div>
 				</div>
 			</div>
 		</div>
@@ -505,22 +376,22 @@
 
 		<script>
 			var statusGroup = {
-				passParent: 1,
-				failParent: 0,
+				passParent: 0,
+				failParent: 1,
 				fatalParent: 0,
 				errorParent: 0,
 				warningParent: 0,
 				skipParent: 0,
-				exceptionsParent: 0,
+				exceptionsParent: 1,
 				
-				passChild: 25,
-				failChild: 0,
+				passChild: 13,
+				failChild: 5,
 				fatalChild: 0,
 				errorChild: 0,
 				warningChild: 0,
 				skipChild: 0,
-				infoChild: 25,
-				exceptionsChild: 0,
+				infoChild: 6,
+				exceptionsChild: 5,
 				
 				passGrandChild: 0,
 				failGrandChild: 0,
