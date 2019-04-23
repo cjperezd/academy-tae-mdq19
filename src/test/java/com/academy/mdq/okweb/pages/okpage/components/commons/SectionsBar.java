@@ -1,14 +1,11 @@
 package com.academy.mdq.okweb.pages.okpage.components.commons;
 
-import com.academy.mdq.okweb.pages.okpage.components.Login;
+import com.academy.mdq.okweb.pages.okpage.okpages.PromotionAndDiscountsPage;
 import com.academy.mdq.page.web.WebComponent;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-
-import static com.academy.mdq.driver.Drivers.getDriver;
 
 public class SectionsBar extends WebComponent {
 
@@ -28,6 +25,9 @@ public class SectionsBar extends WebComponent {
     @FindBy(className = "navigation-menu__item-content")
     private List<WebElement> navigationMenuList;
 
+    @FindBy(className = "navigation-submenu__item")
+    private List<WebElement> navigationPromotionsSection;
+
     private MenuContents menuContents;
     private String whoWeAreUrl = "https://www.openbank.es/quienes-somos";
     private String registerUrl = "https://www.openbank.es/hazte-cliente";
@@ -39,6 +39,22 @@ public class SectionsBar extends WebComponent {
     }
 
 
+    public SectionsBar clickOnProducts() {
+        click(sections.get(0));
+        return this;
+    }
+
+    public SectionsBar clickOnPromotionsAndDiscounts() {
+        click(sections.get(1));
+        return this;
+    }
+
+    public PromotionAndDiscountsPage clickPromotionAndDiscounts(){
+        click(navigationPromotionsSection.get(6));
+        return new PromotionAndDiscountsPage();
+    }
+
+
     public int navigationMenuListSize() {
         return navigationMenuList.size();
     }
@@ -46,11 +62,6 @@ public class SectionsBar extends WebComponent {
     public boolean isRegisterAttributeRight() {
         return registerUrl.equals(register.getAttribute("href"));
     }
-
-//    public boolean isLoginContentDisplayed() {
-//        click(login);
-//        return getDriver().getWebDriver().findElement(By.id("secLog")).isDisplayed();
-//    }
 
 
     public boolean isContentDisplayed(int idx) {
@@ -86,7 +97,7 @@ public class SectionsBar extends WebComponent {
         return register.isDisplayed() && login.isDisplayed();
     }
 
-    public MenuContents getMenuContents(){
+    public MenuContents getMenuContents() {
         return this.menuContents;
     }
 
@@ -97,7 +108,6 @@ public class SectionsBar extends WebComponent {
     private String getLoginText() {
         return login.getText();
     }
-
 
 
 }

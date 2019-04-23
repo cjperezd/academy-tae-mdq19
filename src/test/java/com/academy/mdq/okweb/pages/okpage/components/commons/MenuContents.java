@@ -11,6 +11,8 @@ public class MenuContents extends WebComponent {
     @FindBy (className = "navigation-submenu__option-title")
     private List<WebElement> submenuTitles;
 
+    //navigation-submenu__item-content
+
     public MenuContents(WebElement container) {
         super(container);
     }

@@ -4,6 +4,7 @@ import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import static com.academy.mdq.driver.Drivers.getDriver;
 import static com.academy.mdq.extentReports.Extent.getTest;
@@ -28,6 +29,12 @@ public abstract class CommonOperations {
     protected void click(WebElement webElement) {
         getTest().log(Status.INFO, "clicking on " + getElement(webElement) + "");
         isClickable(webElement).click();
+    }
+
+
+    protected void clickList(List<WebElement> webElements, int idx) {
+        getTest().log(Status.INFO, "clicking on " + getListElement(webElements, idx) + "");
+        isClickable(webElements.get(idx)).click();
     }
 
     /**
@@ -59,6 +66,24 @@ public abstract class CommonOperations {
             try {
                 Object fieldValue = field.get(this);
                 if (fieldValue != null && fieldValue == webElement) {
+                    name = field.getName();
+                }
+
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return name;
+    }
+
+    public String getListElement(List<WebElement> webElements, int idx) {
+        Field[] fields = this.getClass().getDeclaredFields();
+        String name = "Not found";
+        for (Field field : this.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            try {
+                Object fieldValue = field.get(this);
+                if (fieldValue != null && fieldValue == webElements.get(idx).getClass().getName()) {
                     name = field.getName();
                 }
 

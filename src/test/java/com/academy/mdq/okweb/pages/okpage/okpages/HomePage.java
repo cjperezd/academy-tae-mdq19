@@ -1,18 +1,15 @@
 package com.academy.mdq.okweb.pages.okpage.okpages;
 
 import com.academy.mdq.okweb.pages.okpage.components.*;
+import com.academy.mdq.okweb.pages.okpage.components.commons.NavigationMenuContents;
 import com.academy.mdq.okweb.pages.okpage.components.commons.SectionsBar;
 import com.academy.mdq.okweb.pages.okpage.components.commons.TopBar;
 import com.academy.mdq.page.web.WebPage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.academy.mdq.driver.Drivers.getDriver;
 
 public class HomePage extends WebPage {
 
@@ -38,9 +35,6 @@ public class HomePage extends WebPage {
     @FindBy(className = "openbank-topbar__top")
     private WebElement topbarContainer;
 
-    @FindBy(className = "differential-and-characteristic__title")  //ELIMINAR
-    private WebElement justForTest;
-
     @FindBy(css = "#product-search .container")
     private WebElement searchContainer;
 
@@ -53,6 +47,10 @@ public class HomePage extends WebPage {
     @FindBy(className = "openbank-topbar__actions__access")
     private WebElement loginButton;
 
+    @FindBy(className = "navigation-menu__item-content")
+    private List<WebElement> navigationMenuContentsList;
+
+
     private ProductSearchBar productSearchBar;
     private ProductCard productCard;
     private ProductFullCard productFullCard;
@@ -60,6 +58,7 @@ public class HomePage extends WebPage {
     private ProductCardContainer productCardContainer;
     private SectionsBar sectionsBar;
     private Login login;
+    private NavigationMenuContents navigationMenuContents;
 
 
     public HomePage() {
@@ -70,6 +69,7 @@ public class HomePage extends WebPage {
         this.productCardContainer = new ProductCardContainer(cardsContainer);
         this.sectionsBar = new SectionsBar(sectionsBarContainer);
         this.login = new Login();
+        this.navigationMenuContents = new NavigationMenuContents(navigationMenuContentsList.get(0));
     }
 
     List<ProductFullCard> productFullCardList = new ArrayList<>();
@@ -117,7 +117,7 @@ public class HomePage extends WebPage {
         return topBar;
     }
 
-    public SectionsBar getSectionsBar(){
+    public SectionsBar getSectionsBar() {
         return sectionsBar;
     }
 
@@ -126,13 +126,18 @@ public class HomePage extends WebPage {
         return this;
     }
 
-    public Login clickLogin(){
+    public Login clickLogin() {
         click(loginButton);
         return new Login();
     }
 
-    public Login getLogin(){
+    public Login getLogin() {
         return login;
     }
+
+    public NavigationMenuContents getNavigationMenuContents() {
+        return navigationMenuContents;
+    }
+
 
 }
