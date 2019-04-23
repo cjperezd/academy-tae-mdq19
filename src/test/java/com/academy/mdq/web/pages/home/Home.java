@@ -1,6 +1,7 @@
 package com.academy.mdq.web.pages.home;
 
 import com.academy.mdq.page.web.WebPage;
+import com.academy.mdq.web.pages.commons.Footer;
 import com.academy.mdq.web.pages.commons.ToolBarComponents.NavBar;
 import com.academy.mdq.web.pages.commons.ToolBarComponents.TopBar;
 import com.academy.mdq.web.pages.home.components.ProductSearchComponent;
@@ -19,6 +20,9 @@ public class Home extends WebPage {
   @FindBy(css = "#product-search .container")
   private WebElement searchContainer;
 
+  @FindBy(className = "footer-menu__top")
+  private WebElement footerContainer;
+
   public TopBar getTopBar() {
     isVisible(topBarContainer);
     return new TopBar(topBarContainer);
@@ -32,6 +36,10 @@ public class Home extends WebPage {
   public ProductSearchComponent getProductSearchComponent() {
     isVisible(searchContainer);
     return new ProductSearchComponent(searchContainer);
+  }
+
+  public Footer getFooter(){
+    return new Footer(footerContainer);
   }
 
 }

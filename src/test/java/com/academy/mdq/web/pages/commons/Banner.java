@@ -1,4 +1,4 @@
-package com.academy.mdq.web.pages.products.components;
+package com.academy.mdq.web.pages.commons;
 
 import com.academy.mdq.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
@@ -15,7 +15,7 @@ public class Banner extends WebComponent {
   @FindBy(className = "small-banner---wrapper")
   private WebElement boxImage;
 
-  @FindBy(className = "heading-4")
+  @FindBy(css = ".heading-4, .heading-1--content")
   private WebElement boxText;
 
   @FindBy(css = ".small-banner---wrapper .button")
@@ -46,11 +46,27 @@ public class Banner extends WebComponent {
   }
 
   public boolean isBoxButtonVisible (){
-    return boxButton.isDisplayed();
+    boolean bool = false;
+    try{
+      bool = boxButton.isDisplayed();
+    }catch (Exception e1) {
+    bool = false;
+  }
+    finally {
+      return bool;
+    }
   }
 
   public boolean isBoxButtonEnabled (){
-    return boxButton.isEnabled();
+    boolean bool = false;
+    try{
+      bool = boxButton.isEnabled();
+    }catch (Exception e1) {
+      bool = false;
+    }
+    finally {
+      return bool;
+    }
   }
 
 }

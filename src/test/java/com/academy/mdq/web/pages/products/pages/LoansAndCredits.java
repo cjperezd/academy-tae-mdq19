@@ -1,7 +1,7 @@
 package com.academy.mdq.web.pages.products.pages;
 
 import com.academy.mdq.page.web.WebPage;
-import com.academy.mdq.web.pages.products.components.Banner;
+import com.academy.mdq.web.pages.commons.Banner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

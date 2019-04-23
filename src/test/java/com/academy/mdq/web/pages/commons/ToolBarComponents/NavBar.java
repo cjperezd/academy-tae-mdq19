@@ -2,6 +2,8 @@ package com.academy.mdq.web.pages.commons.ToolBarComponents;
 
 import com.academy.mdq.page.web.WebComponent;
 import com.academy.mdq.web.pages.commons.ToolBarComponents.products.ProductsMenu;
+import com.academy.mdq.web.pages.promotionsanddiscounts.Discounts;
+import com.academy.mdq.web.pages.promotionsanddiscounts.Promotions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -20,6 +22,12 @@ public class NavBar extends WebComponent {
 
   @FindBy(css = ".navigation-menu__item.menu-item:nth-child(2) .navigation-submenu")
   private WebElement promAndDiscountsSubMenu;
+
+  @FindBy(css = ".navigation-menu__item.menu-item:nth-child(2) .navigation-submenu__item:nth-child(1) a")
+  private WebElement promotionsLink;
+
+  @FindBy(css = ".navigation-menu__item.menu-item:nth-child(2) .navigation-submenu__item:nth-child(2) a")
+  private WebElement discountsLink;
 
   @FindBy(css = ".navigation-menu__item.menu-item:nth-child(3) a")
   private WebElement aboutUsButton;
@@ -101,10 +109,24 @@ public class NavBar extends WebComponent {
     return new Login();
   }
 
-  public ProductsMenu clickProducts (){
+  public ProductsMenu clickProducts() {
     click(productsButton);
     return new ProductsMenu();
   }
 
+  public NavBar clickPromotionsAndDiscounts() {
+    click(promAndDiscountsButton);
+    return this;
+  }
+
+  public Promotions clickPromotions() {
+    click(promotionsLink);
+    return new Promotions();
+  }
+
+  public Discounts clickDiscounts() {
+    click(discountsLink);
+    return new Discounts();
+  }
 
 }

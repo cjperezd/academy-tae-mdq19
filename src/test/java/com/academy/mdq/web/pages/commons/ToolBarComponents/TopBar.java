@@ -1,6 +1,8 @@
 package com.academy.mdq.web.pages.commons.ToolBarComponents;
 
 import com.academy.mdq.page.web.WebComponent;
+import com.academy.mdq.web.pages.contactus.ContactUs;
+import com.academy.mdq.web.pages.urgenthelp.UrgentHelp;
 import com.academy.mdq.web.pages.home.Home;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,8 +11,14 @@ import static com.academy.mdq.waits.Waits.isVisible;
 
 public class TopBar extends WebComponent {
 
+  @FindBy(className = "icon-ayuda-urgente")
+  private WebElement helpIcon;
+
   @FindBy(css = ".openbank-topbar__utility__item:nth-child(1) a")
   private WebElement helpButton;
+
+  @FindBy(className = "icon-especialista")
+  private WebElement contactUsIcon;
 
   @FindBy(css = ".openbank-topbar__utility__item:nth-child(2) a")
   private WebElement contactUsButton;
@@ -48,7 +56,17 @@ public class TopBar extends WebComponent {
     return new Home();
   }
 
-  public boolean isHelpButtonVisible() { return isVisible(helpButton).isDisplayed(); }
+  public boolean isHelpIconVisible(){
+    return helpIcon.isDisplayed();
+  }
+
+  public boolean isHelpButtonVisible() {
+    return isVisible(helpButton).isDisplayed();
+  }
+
+  public boolean isContactUsIconVisible(){
+    return contactUsIcon.isDisplayed();
+  }
 
   public boolean isContactUsButtonVisible() {
     return isVisible(contactUsButton).isDisplayed();
@@ -66,16 +84,19 @@ public class TopBar extends WebComponent {
     return isVisible(languageButton).isDisplayed();
   }
 
-
-  public boolean isHelpButtonEnabled() { return helpButton.isEnabled(); }
+  public boolean isHelpButtonEnabled() {
+    return helpButton.isEnabled();
+  }
 
   public boolean isContactUsButtonEnabled() {
     return contactUsButton.isEnabled();
   }
 
-  public boolean isFaqButtonEnabled() { return faqButton.isEnabled(); }
+  public boolean isFaqButtonEnabled() {
+    return faqButton.isEnabled();
+  }
 
-  public boolean isAtmsButtonEnabled( ) {
+  public boolean isAtmsButtonEnabled() {
     return atmsButton.isEnabled();
   }
 
@@ -83,12 +104,17 @@ public class TopBar extends WebComponent {
     return languageButton.isEnabled();
   }
 
+  public String getHelpButtonUrl() {
+    return helpButton.getAttribute("href");
+  }
 
-  public String getHelpButtonUrl (){ return helpButton.getAttribute("href"); }
+  public String getContactUsButtonUrl() {
+    return contactUsButton.getAttribute("href");
+  }
 
-  public String getContactUsButtonUrl (){ return contactUsButton.getAttribute("href"); }
-
-  public String getFaqButtonUrl (){ return faqButton.getAttribute("href"); }
+  public String getFaqButtonUrl() {
+    return faqButton.getAttribute("href");
+  }
 
   public String getAtmsButtonUrl() {
     return atmsButton.getAttribute("href");
@@ -97,6 +123,16 @@ public class TopBar extends WebComponent {
   public boolean isLanguageButtonExpandable() {
     click(languageButton);
     return languageSubMenu.isDisplayed();
+  }
+
+  public UrgentHelp clickUrgentHelp() {
+    click(helpButton);
+    return new UrgentHelp();
+  }
+
+  public ContactUs clickContactUs() {
+    click(contactUsButton);
+    return new ContactUs();
   }
 
 }
