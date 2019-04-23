@@ -33,19 +33,23 @@ public abstract class CommonOperations {
   }
 
   protected String getWebElementName(WebElement webEl) {
+    String name = null;
     Field[] fields = this.getClass().getDeclaredFields();
     for (Field field : fields) {
       field.setAccessible(true);
       try {
         Object fieldValue = field.get(this);
         if (fieldValue != null && fieldValue == webEl) {
-          return field.getName();
+          name = field.getName();
         }
       } catch (IllegalAccessException e) {
         e.printStackTrace();
       }
     }
-    return "";
+    if (name == null) {
+      name = webEl.getText();
+    }
+    return name;
   }
 
   /**

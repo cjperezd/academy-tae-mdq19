@@ -1,6 +1,7 @@
 package com.academy.mdq.web.pages.commons.ToolBarComponents;
 
 import com.academy.mdq.page.web.WebComponent;
+import com.academy.mdq.web.pages.commons.ToolBarComponents.products.ProductsMenu;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -100,10 +101,10 @@ public class NavBar extends WebComponent {
     return new Login();
   }
 
-//  public ProductsMenu clickProducts (){
-//    click(productsButton);
-//    return new ProductsMenu(productsSubMenu);
-//  }
+  public ProductsMenu clickProducts (){
+    click(productsButton);
+    return new ProductsMenu();
+  }
 
 
 }
